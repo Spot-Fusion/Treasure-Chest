@@ -11,6 +11,7 @@ import BottomTabNavigator from './navigation/BottomTabNavigator';
 import useLinking from './navigation/useLinking';
 import LinksScreen from './screens/LinksScreen';
 import HomeScreen from './screens/HomeScreen';
+import CreateListingScreen from './screens/CreateListingScreen'
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -63,7 +64,7 @@ export default function App(props) {
           <Drawer.Navigator>
             <Drawer.Screen name="Root" component={StackScreen} />
             <Drawer.Screen name="Home" component={HomeScreen} />
-            <Drawer.Screen name="Links" component={LinksScreen} />
+            <Drawer.Screen name="CreateListing" component={CreateListingScreen} />
           </Drawer.Navigator>
         </NavigationContainer>
       </View>

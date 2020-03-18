@@ -1,25 +1,30 @@
 const Koa = require('koa');
 const cors = require('koa-cors');
-const Router = require('koa-router');
 const Logger = require('koa-logger');
+const { router } = require('./api/index');
+const { pool } = require('./db/connection.js');
 
 const app = new Koa();
-const router = new Router();
-
-// Response to the World to the GET requests
-router.get('/', async (ctx) => {
-  ctx.body = 'Hello, World!\n';
-  console.log(ctx.body);
-});
 
 // Development logging
 app.use(Logger());
 
+//enable cors
 app.use(cors());
-// Add routes and response to the OPTIONS requests
-app.use(router.routes()).use(router.allowedMethods());
+
+//apiRouter
+app.use(router());
+
+//connect to db
+pool.connect()
+  .then(() => {
+    console.log('Database connected!');
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 // Listen the port
-app.listen(3000, () => {
+app.listen(8080, () => {
   console.log('Server running on port 8080');
 });

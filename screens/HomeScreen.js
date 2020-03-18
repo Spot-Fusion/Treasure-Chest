@@ -9,7 +9,7 @@ export default function HomeScreen({navigation}) {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-        <Button title="Go to Links" onPress={() => navigation.navigate('Links')} />
+        <Button title="Go to Listings" onPress={() => navigation.navigate('CreateListing')} />
         <View style={styles.welcomeContainer}>
           <Image
             source={

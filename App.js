@@ -5,16 +5,15 @@ import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+// import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import BottomTabNavigator from './navigation/BottomTabNavigator';
+import DrawerNavigator from './navigation/DrawerNavigator'
 import useLinking from './navigation/useLinking';
-import LinksScreen from './screens/LinksScreen';
-import HomeScreen from './screens/HomeScreen';
-import CreateListingScreen from './screens/CreateListingScreen'
+// import HomeScreen from './screens/HomeScreen';
+// import CreateListingScreen from './screens/CreateListingScreen'
 
 const Stack = createStackNavigator();
-const Drawer = createDrawerNavigator();
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
@@ -50,6 +49,7 @@ export default function App(props) {
 
   const StackScreen = () => (
     <Stack.Navigator>
+      <Stack.Screen name="Drawer" component={DrawerNavigator} />
       <Stack.Screen name="Root" component={BottomTabNavigator} />
     </Stack.Navigator>
   )
@@ -61,11 +61,7 @@ export default function App(props) {
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
-          <Drawer.Navigator>
-            <Drawer.Screen name="Root" component={StackScreen} />
-            <Drawer.Screen name="Home" component={HomeScreen} />
-            <Drawer.Screen name="CreateListing" component={CreateListingScreen} />
-          </Drawer.Navigator>
+          <StackScreen />
         </NavigationContainer>
       </View>
     );

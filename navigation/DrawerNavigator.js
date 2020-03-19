@@ -1,22 +1,22 @@
 import * as React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { SplashScreen } from 'expo';
-import * as Font from 'expo-font';
-import { Ionicons } from '@expo/vector-icons';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+// import TabBarIcon from '../components/TabBarIcon';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import BottomTabNavigator from './navigation/BottomTabNavigator';
-import useLinking from './navigation/useLinking';
-import LinksScreen from './screens/LinksScreen';
-import HomeScreen from './screens/HomeScreen';
-import CreateListingScreen from './screens/CreateListingScreen'
+
+import HomeScreen from '../screens/HomeScreen';
+import CreateListingScreen from '../screens/CreateListingScreen'
+import MessagesScreen from '../screens/MessagesScreen'
 
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
-
+    return (
+        <Drawer.Navigator>
+            <Drawer.Screen name="Home" component={HomeScreen} />
+            <Drawer.Screen name="CreateListing" component={CreateListingScreen} />
+            <Drawer.Screen name="Messages" component={MessagesScreen} />
+        </Drawer.Navigator>
+    )
 }
 
 export default DrawerNavigator;

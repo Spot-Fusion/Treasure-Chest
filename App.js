@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, Button } from 'react-native';
 import { SplashScreen } from 'expo';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
@@ -15,7 +15,7 @@ import useLinking from './navigation/useLinking';
 
 const Stack = createStackNavigator();
 
-export default function App(props) {
+export default function App(props, { navigation }) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
   const [initialNavigationState, setInitialNavigationState] = React.useState();
   const containerRef = React.useRef();
@@ -54,18 +54,16 @@ export default function App(props) {
     </Stack.Navigator>
   )
 
-  if (!isLoadingComplete && !props.skipLoadingScreen) {
-    return null;
-  } else {
+  if (!isLoadingComplete && !props.skipLoadingScreen) { return null; } 
     return (
       <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}        
         <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
           <StackScreen />
         </NavigationContainer>
       </View>
     );
-  }
+  
 }
 
 const styles = StyleSheet.create({

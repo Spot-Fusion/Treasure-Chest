@@ -1,16 +1,17 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, View, TextInput, Text, Button } from 'react-native';
+// import { Text, Button } from 'native-base'
 import { Ionicons } from '@expo/vector-icons';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 
  const CreateListingScreen = ({navigation}) => {
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+      <Button title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} />
       <View style={styles.view}>
           <Text style={styles.text}>Create Listing Screen Here</Text>
           {/* <TextInput /> */}
       </View>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
     </ScrollView>
   );
 }

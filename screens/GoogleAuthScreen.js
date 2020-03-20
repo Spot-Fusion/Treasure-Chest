@@ -2,15 +2,12 @@ import * as React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
-import GoogleAuthScreen from './GoogleAuthScreen'
-import { setWorldOriginAsync } from 'expo/build/AR';
 
- const LogInScreen = ({navigation}) => {
-   const [login, setLogin] = React.useState(false) 
-  return (    
+ const GoogleAuthScreen = ({navigation}) => {
+  return (   
       <View style={styles.view}>
         <Text style={styles.text}>LogIn Screen Here</Text>
-        <Button title="Sign in with Google" onPress={() => navigation.navigate('Drawer')} />
+        <Button title="Login with Google" onPress={() => navigation.navigate('Home')} />
       </View>
   );
 }
@@ -47,4 +44,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LogInScreen;
+export default GoogleAuthScreen
+;

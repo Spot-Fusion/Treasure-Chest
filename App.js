@@ -1,35 +1,30 @@
 import * as React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, Button } from 'react-native';
 import { SplashScreen } from 'expo';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import BottomTabNavigator from './navigation/BottomTabNavigator';
+import DrawerNavigator from './navigation/DrawerNavigator'
 import useLinking from './navigation/useLinking';
-import LinksScreen from './screens/LinksScreen';
-import HomeScreen from './screens/HomeScreen';
+import LogInScreen from './screens/LogInScreen'
 
 const Stack = createStackNavigator();
-const Drawer = createDrawerNavigator();
 
-export default function App(props) {
+export default function App(props, { navigation }) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
   const [initialNavigationState, setInitialNavigationState] = React.useState();
   const containerRef = React.useRef();
-  const { getInitialState } = useLinking(containerRef);
 
   // Load any resources or data that we need prior to rendering the app
   React.useEffect(() => {
     async function loadResourcesAndDataAsync() {
       try {
         SplashScreen.preventAutoHide();
-
         // Load our initial navigation state
         setInitialNavigationState(await getInitialState());
-
         // Load fonts
         await Font.loadAsync({
           ...Ionicons.font,
@@ -43,32 +38,27 @@ export default function App(props) {
         SplashScreen.hide();
       }
     }
-
     loadResourcesAndDataAsync();
   }, []);
 
   const StackScreen = () => (
-    <Stack.Navigator>
+    <Stack.Navigator headerMode='none'>
+      <Stack.Screen name="Login" component={LogInScreen} />
+      <Stack.Screen name="Drawer" component={DrawerNavigator} />
       <Stack.Screen name="Root" component={BottomTabNavigator} />
     </Stack.Navigator>
   )
 
-  if (!isLoadingComplete && !props.skipLoadingScreen) {
-    return null;
-  } else {
+  if (!isLoadingComplete && !props.skipLoadingScreen) { return null; } 
     return (
       <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
-          <Drawer.Navigator>
-            <Drawer.Screen name="Root" component={StackScreen} />
-            <Drawer.Screen name="Home" component={HomeScreen} />
-            <Drawer.Screen name="Links" component={LinksScreen} />
-          </Drawer.Navigator>
+        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}        
+        <NavigationContainer /*ref={containerRef} initialState={initialNavigationState}*/ >
+          <StackScreen />          
         </NavigationContainer>
       </View>
     );
-  }
+  
 }
 
 const styles = StyleSheet.create({

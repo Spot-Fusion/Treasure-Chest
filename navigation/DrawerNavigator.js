@@ -4,6 +4,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 
 import HomeScreen from '../screens/HomeScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 import CreateListingScreen from '../screens/CreateListingScreen'
 import MessagesScreen from '../screens/MessagesScreen'
 
@@ -13,6 +14,7 @@ const DrawerNavigator = () => {
     return (
         <Drawer.Navigator>
             <Drawer.Screen name="Home" component={HomeScreen} />
+            <Drawer.Screen name="Profile" component={ProfileScreen} />
             <Drawer.Screen name="CreateListing" component={CreateListingScreen} />
             <Drawer.Screen name="Messages" component={MessagesScreen} />
         </Drawer.Navigator>

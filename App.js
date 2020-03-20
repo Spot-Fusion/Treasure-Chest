@@ -5,13 +5,11 @@ import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-// import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import DrawerNavigator from './navigation/DrawerNavigator'
 import useLinking from './navigation/useLinking';
-// import HomeScreen from './screens/HomeScreen';
-// import CreateListingScreen from './screens/CreateListingScreen'
+import LogInScreen from './screens/LogInScreen'
 
 const Stack = createStackNavigator();
 
@@ -19,17 +17,14 @@ export default function App(props, { navigation }) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
   const [initialNavigationState, setInitialNavigationState] = React.useState();
   const containerRef = React.useRef();
-  const { getInitialState } = useLinking(containerRef);
 
   // Load any resources or data that we need prior to rendering the app
   React.useEffect(() => {
     async function loadResourcesAndDataAsync() {
       try {
         SplashScreen.preventAutoHide();
-
         // Load our initial navigation state
         setInitialNavigationState(await getInitialState());
-
         // Load fonts
         await Font.loadAsync({
           ...Ionicons.font,
@@ -43,12 +38,12 @@ export default function App(props, { navigation }) {
         SplashScreen.hide();
       }
     }
-
     loadResourcesAndDataAsync();
   }, []);
 
   const StackScreen = () => (
-    <Stack.Navigator>
+    <Stack.Navigator headerMode='none'>
+      <Stack.Screen name="Login" component={LogInScreen} />
       <Stack.Screen name="Drawer" component={DrawerNavigator} />
       <Stack.Screen name="Root" component={BottomTabNavigator} />
     </Stack.Navigator>
@@ -58,8 +53,8 @@ export default function App(props, { navigation }) {
     return (
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}        
-        <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
-          <StackScreen />
+        <NavigationContainer /*ref={containerRef} initialState={initialNavigationState}*/ >
+          <StackScreen />          
         </NavigationContainer>
       </View>
     );

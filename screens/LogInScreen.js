@@ -2,15 +2,16 @@ import * as React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
+import GoogleAuthScreen from './GoogleAuthScreen'
+import { setWorldOriginAsync } from 'expo/build/AR';
 
  const LogInScreen = ({navigation}) => {
-  return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+   const [login, setLogin] = React.useState(false) 
+  return (    
       <View style={styles.view}>
-          <Text style={styles.text}>LogIn Screen Here</Text>
+        <Text style={styles.text}>LogIn Screen Here</Text>
+        <Button title="Sign in with Google" onPress={() => navigation.navigate('Drawer')} />
       </View>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-    </ScrollView>
   );
 }
 
@@ -26,13 +27,15 @@ const styles = StyleSheet.create({
   optionIconContainer: {
     marginRight: 12,
   },
-  View: {
+  view: {
     backgroundColor: '#fdfdfd',
     paddingHorizontal: 15,
     paddingVertical: 15,
     borderWidth: StyleSheet.hairlineWidth,
     borderBottomWidth: 0,
     borderColor: '#ededed',
+    justifyContent: 'center',
+    alignContent: 'center'
   },
   lastOption: {
     borderBottomWidth: StyleSheet.hairlineWidth,

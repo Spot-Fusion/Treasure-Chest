@@ -11,10 +11,10 @@ import ExpoCamera from '../components/ExpoCamera'
    const [price, setPrice] = React.useState(0)
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+    
+      <View style={styles.view}style={styles.container} contentContainerStyle={styles.contentContainer}>
       <Button title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} />
-      <View style={styles.view}>
-        <ExpoCamera />
+        {/* <ExpoCamera /> */}
           <Text style={styles.text}>Create Listing Screen Here</Text>
           <Text>Title: {title}</Text>
           <TextInput
@@ -36,9 +36,8 @@ import ExpoCamera from '../components/ExpoCamera'
             onChangeText={(text) => setPrice(text)}
             placeholder='Input Price...'
           />
-          <Button title="Create Listing" onPress={() => Alert.alert('Todo')} />
+          <Button title="Create Listing" onPress={() => navigation.navigate('ShowListing', { title, description, price })} />
       </View>
-    </ScrollView>
   );
 }
 

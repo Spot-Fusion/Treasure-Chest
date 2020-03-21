@@ -45,7 +45,7 @@ export default function App(props, { navigation }) {
     return (
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}     
-        <NavigationContainer /*ref={containerRef} initialState={initialNavigationState}*/ >
+        <NavigationContainer>
           <StackNavigator />          
         </NavigationContainer>
       </View>

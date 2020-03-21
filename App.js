@@ -4,14 +4,13 @@ import { SplashScreen } from 'expo';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
 import BottomTabNavigator from './navigation/BottomTabNavigator';
-import DrawerNavigator from './navigation/DrawerNavigator'
+import DrawerNavigator from './navigation/DrawerNavigator';
 import useLinking from './navigation/useLinking';
-import LogInScreen from './screens/LogInScreen'
+import StackNavigator from './navigation/StackNavigator';
 
-const Stack = createStackNavigator();
+
 
 export default function App(props, { navigation }) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
@@ -41,20 +40,13 @@ export default function App(props, { navigation }) {
     loadResourcesAndDataAsync();
   }, []);
 
-  const StackScreen = () => (
-    <Stack.Navigator headerMode='none'>
-      <Stack.Screen name="Login" component={LogInScreen} />
-      <Stack.Screen name="Drawer" component={DrawerNavigator} />
-      <Stack.Screen name="Root" component={BottomTabNavigator} />
-    </Stack.Navigator>
-  )
-
+  
   if (!isLoadingComplete && !props.skipLoadingScreen) { return null; } 
     return (
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}     
         <NavigationContainer /*ref={containerRef} initialState={initialNavigationState}*/ >
-          <StackScreen />          
+          <StackNavigator />          
         </NavigationContainer>
       </View>
     );
@@ -65,5 +57,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignContent: 'center'
   },
 });

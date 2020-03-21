@@ -7,7 +7,7 @@ import ExpoCamera from '../components/ExpoCamera'
 
  const ShowListingScreen = ({ navigation, route }) => {
    const defaultParams = {title: 'Jordans', description: 'Gunmetal Blue\nSize 13', price: 200.00}
-   const { title, description, price } = route.params ? route.params : defaultParams;
+   const { title, description, price } = !route.params ? defaultParams  : route.params ;
  
   return (
     <View style={styles.view} style={styles.container} contentContainerStyle={styles.contentContainer}>

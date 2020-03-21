@@ -14,18 +14,7 @@ import TabBarIcon from '../components/TabBarIcon';
 
 const Drawer = createDrawerNavigator();
 const DrawerStack  = createStackNavigator()
-//    { BottomTabNavigator: BottomTabNavigator
-//   },
-//   {
-//     defaultNavigationOptions: ({ navigation }) => {
-//       return {
-//         headerLeft: (
-        //   <TabBarIcon name="md-menu" onPress={() => navigation.openDrawer()} />
-//         )
-//       };
-//     }
-//   }
-// );
+
 const DrawerStackNavigator = () => (
     <DrawerStack.Navigator>
         <DrawerStack.Screen name="Tabs" component={BottomTabNavigator} options={{headerTitle: null, headerLeft: ({navigation}) => <TabBarIcon name="md-menu" onPress={() => navigation.toggleDrawer()} />}} />

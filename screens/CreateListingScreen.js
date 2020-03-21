@@ -14,7 +14,7 @@ import ExpoCamera from '../components/ExpoCamera'
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       <Button title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} />
       <View style={styles.view}>
-        {/* <ExpoCamera /> */}
+        <ExpoCamera />
           <Text style={styles.text}>Create Listing Screen Here</Text>
           <Text>Title: {title}</Text>
           <TextInput

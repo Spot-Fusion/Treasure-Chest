@@ -4,6 +4,7 @@ import * as WebBrowser from 'expo-web-browser';
 import { NavigationContainer } from '@react-navigation/native';
 import TabBarIcon from '../components/TabBarIcon'
 import BottomTabNavigator from '../navigation/BottomTabNavigator'
+import Expo from 'expo';
 
 const DATA = [
   { key: <TabBarIcon name="md-image"/>, id: 1 },

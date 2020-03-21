@@ -5,17 +5,18 @@ import { Ionicons } from '@expo/vector-icons';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import ExpoCamera from '../components/ExpoCamera'
 
- const CreateListingScreen = ({navigation}) => {
+ const ShowListingScreen = ({navigation}) => {
    const [title, setTitle] = React.useState('');
    const [description, setDescription] = React.useState('')
    const [price, setPrice] = React.useState(0)
+
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       <Button title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} />
       <View style={styles.view}>
-        <ExpoCamera />
-          <Text style={styles.text}>Create Listing Screen Here</Text>
+        {/* <ExpoCamera /> */}
+          <Text style={styles.text}> Listing Image </Text>
           <Text>Title: {title}</Text>
           <TextInput
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
@@ -74,4 +75,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CreateListingScreen;
+export default ShowListingScreen;

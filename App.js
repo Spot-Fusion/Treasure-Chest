@@ -52,7 +52,7 @@ export default function App(props, { navigation }) {
   if (!isLoadingComplete && !props.skipLoadingScreen) { return null; } 
     return (
       <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}        
+        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}     
         <NavigationContainer /*ref={containerRef} initialState={initialNavigationState}*/ >
           <StackScreen />          
         </NavigationContainer>

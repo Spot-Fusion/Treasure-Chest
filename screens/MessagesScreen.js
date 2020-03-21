@@ -1,32 +1,32 @@
 import * as React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import * as WebBrowser from 'expo-web-browser';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
+import ChatScreen from './ChatScreen'
 
- const MessagesScreen = ({navigation}) => {
+ const MessagesScreen = ({ id, navigation}) => {
+   const [users, setUsers] = React.useState([
+     {user: 'ben', message: 'Wadup, dude?', created_at: '2/3/20'},
+     {user: 'jill', message: 'Hello', created_at: '2/12/20'},
+     {user: 'steve', message: 'What?', created_at: '2/29/20'}, 
+   ]);
+
+   const getUsers = async (id) => {
+    axios.get({app})
+   }
+
+   React.useEffect(() => {
+
+   }, [])
+
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       <Button title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} />
-      <OptionButton
+      {users.map((user) => (<OptionButton
         icon="md-contact"
-        label="Latest thread with Jimmy"
-        // onPress={() => WebBrowser.openBrowserAsync('https://docs.expo.io')}
-      />
-
-      <OptionButton
-        icon="md-contact"
-        label="Latest thread with Sara"
-        // onPress={() => WebBrowser.openBrowserAsync('https://reactnavigation.org')}
-      />
-
-      <OptionButton
-        icon="md-contact"
-        label="Latest thead with Pat"
-        // onPress={() => WebBrowser.openBrowserAsync('https://forums.expo.io')}
-        isLastOption
-      />
-      
+        label={`${user.user} ${user.message} ${user.created_at}`}
+        onPress={() => navigation.navigate(ChatScreen)}
+      />))}     
     </ScrollView>
   );
 }

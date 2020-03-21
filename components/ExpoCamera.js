@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
+import * as Permissions from 'expo-permissions';
 
 const ExpoCamera =() => {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
 
+const getPermission = async () => {
+  const { status } = await Permissions.getAsync(Permissions.CAMERA);
+  // const { status } = await Camera.requestPermissionsAsync();
+  setHasPermission(status);
+};
+
   useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
-    })();
+    getPermission();
   }, []);
 
   if (hasPermission === null) {

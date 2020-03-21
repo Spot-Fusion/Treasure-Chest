@@ -6,21 +6,19 @@ import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import ExpoCamera from '../components/ExpoCamera'
 
  const ShowListingScreen = ({ navigation, route }) => {
-  //  const [title, setTitle] = React.useState('');
-  //  const [description, setDescription] = React.useState('')
-  //  const [price, setPrice] = React.useState(0)
-
-
+   const defaultParams = {title: 'Jordans', description: 'Gunmetal Blue\nSize 13', price: 200.00}
+   const { title, description, price } = route.params ? route.params : defaultParams;
+ 
   return (
     <View style={styles.view} style={styles.container} contentContainerStyle={styles.contentContainer}>
       <Button title="Go Home" onPress={() => navigation.navigate('Home')} />
         {/* <ExpoCamera /> */}
           <Text style={styles.text}> Listing Image </Text>
-          <Text>Title: {route.params.title}</Text>
+          <Text>Title: {title}</Text>
          
-          <Text>Description: {route.params.description}</Text>
+          <Text>Description: {description}</Text>
           
-          <Text>Price: ${route.params.price}</Text>
+          <Text>Price: ${price}</Text>
           
     </View>
   );

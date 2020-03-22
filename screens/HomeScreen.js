@@ -5,24 +5,25 @@ import { NavigationContainer } from '@react-navigation/native';
 import TabBarIcon from '../components/TabBarIcon'
 import BottomTabNavigator from '../navigation/BottomTabNavigator'
 import Expo from 'expo';
+import { Ionicons } from '@expo/vector-icons';
 
 const DATA = [
-  { key: <TabBarIcon name="md-image"/>, id: 1 },
-  { key: <TabBarIcon name="md-image"/>, id: 2 },
-  { key: <TabBarIcon name="md-image"/>, id: 3 },
-  { key: <TabBarIcon name="md-image"/>, id: 4 },
-  { key: <TabBarIcon name="md-image"/>, id: 5 },
-  { key: <TabBarIcon name="md-image"/>, id: 6 },
-  { key: <TabBarIcon name="md-image"/>, id: 7 },
-  { key: <TabBarIcon name="md-image"/>, id: 8 },
-  { key: <TabBarIcon name="md-image"/>, id: 9 },
-  { key: <TabBarIcon name="md-image"/>, id: 10 },
+  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 1 },
+  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 2 },
+  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 3 },
+  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 4 },
+  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 5 },
+  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 6 },
+  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 7 },
+  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 8 },
+  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 9 },
+  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 10 },
   ];
 
 const HomeScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <Button title={<TabBarIcon name="md-menu"/>} onPress={() => navigation.toggleDrawer()} />
+      <Button title= 'Menu' onPress={() => navigation.toggleDrawer()} />
         <Button title="Go to Create Listings" onPress={() => navigation.navigate('Create Listing')} />
         <View style={styles.container}>
         <FlatList

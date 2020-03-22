@@ -25,7 +25,7 @@ import ChatScreen from './ChatScreen'
       {users.map((user) => (<OptionButton
         icon="md-contact"
         label={`${user.user} ${user.message} ${user.created_at}`}
-        onPress={() => navigation.navigate(ChatScreen)}
+        onPress={() => navigation.navigate(ChatScreen, {users, id})}
       />))}     
     </ScrollView>
   );

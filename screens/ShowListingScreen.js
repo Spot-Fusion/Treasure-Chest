@@ -5,41 +5,22 @@ import { Ionicons } from '@expo/vector-icons';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import ExpoCamera from '../components/ExpoCamera'
 
- const ShowListingScreen = ({navigation}) => {
-   const [title, setTitle] = React.useState('');
-   const [description, setDescription] = React.useState('')
-   const [price, setPrice] = React.useState(0)
-
-
+ const ShowListingScreen = ({ navigation, route }) => {
+   const defaultParams = {title: 'Jordans', description: 'Gunmetal Blue\nSize 13', price: 200.00}
+   const { title, description, price } = !route.params ? defaultParams  : route.params ;
+ 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      <Button title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} />
-      <View style={styles.view}>
+    <View style={styles.view} style={styles.container} contentContainerStyle={styles.contentContainer}>
+      <Button title="Go Home" onPress={() => navigation.navigate('Home')} />
         {/* <ExpoCamera /> */}
           <Text style={styles.text}> Listing Image </Text>
           <Text>Title: {title}</Text>
-          <TextInput
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            onChangeText={(text) => setTitle(text)}
-            placeholder='Input Title...'
-          />
+         
           <Text>Description: {description}</Text>
-          <TextInput
-            multiline
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            onChangeText={(text) => setDescription(text)}
-            placeholder='Input Description...'
-          />
+          
           <Text>Price: ${price}</Text>
-          <TextInput
-            keyboardType={"number-pad"}
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            onChangeText={(text) => setPrice(text)}
-            placeholder='Input Price...'
-          />
-          <Button title="Create Listing" onPress={() => Alert.alert('Todo')} />
-      </View>
-    </ScrollView>
+          
+    </View>
   );
 }
 
@@ -49,7 +30,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fafafa',
     alignContent: 'center',
-    // justifyContent: 'center'
+    justifyContent: 'center'
   },
   contentContainer: {
     paddingTop: 15,

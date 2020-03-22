@@ -18,7 +18,7 @@ const DrawerStack  = createStackNavigator()
 
 const DrawerStackNavigator = () => (
     <DrawerStack.Navigator>
-        <DrawerStack.Screen name="Tabs" component={BottomTabNavigator} options={{headerTitle: null, headerLeft: ({navigation}) => <TabBarIcon name="md-menu" onPress={() => navigation.toggleDrawer()} />}} />
+        <DrawerStack.Screen name="Tabs" component={BottomTabNavigator} />
     </DrawerStack.Navigator>
 )
 const DrawerNavigator = () =>  (

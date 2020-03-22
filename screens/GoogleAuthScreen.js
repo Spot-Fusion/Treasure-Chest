@@ -6,8 +6,11 @@ import * as Google from 'expo-google-app-auth';
 import HomeScreen from './HomeScreen';
 
 const GoogleAuthScreen = ({ navigation }) => {
-  const test = () => {
-    return async function signInWithGoogleAsync() {
+  const [name, setName] = React.useState('');
+  const [photoUrl, setPhotoUrl] = React.useState('');
+  const [result, setResult] = React.useState({})
+  // const test = () => {
+  const signInWithGoogleAsync = async () => {
     try {
       const result = await Google.logInAsync({
         androidClientId: "684227107653-acg78a8aheolp70sn26ssh3hqc5nqa5d.apps.googleusercontent.com",
@@ -16,22 +19,28 @@ const GoogleAuthScreen = ({ navigation }) => {
       });
 
       if (result.type === 'success') {
-        this.props.navigation.navigate('Home')
-        return result.accessToken;
+        // navigation.navigate('Home')
+        console.log(result);
+       setName(result.user.name);
+       setPhotoUrl(result.user.photoUrl)
+       setResult(result);
+        // return result.accessToken;
       } else {
         return { cancelled: true };
       }
     } catch (e) {
       //return { error: true };
-      console.log('user not valid', e)
+      console.error('user not valid', e)
       //return { error: true };
     }
   }
-}
+  React.useEffect(() => { signInWithGoogleAsync() }, []);
+// }
+console.log(result);
   return (
     <View style={styles.view}>
-      <Text style={styles.text}>LogIn Screen Here</Text>
-      <Button title="Login with Google" onPress={test()} />
+      <Text style={styles.text}>Welcome Back {name}</Text>
+      <Button title="Go to Home" onPress={() => navigation.navigate('Home', {name, photoUrl, result})} />
     </View>
   );
 }

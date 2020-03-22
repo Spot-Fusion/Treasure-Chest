@@ -3,8 +3,10 @@ import { Image, Platform, StyleSheet, TouchableOpacity, View, Text, Button, Flat
 import * as WebBrowser from 'expo-web-browser';
 import { NavigationContainer } from '@react-navigation/native';
 import TabBarIcon from '../components/TabBarIcon'
-import BottomTabNavigator from '../navigation/BottomTabNavigator'
+import BottomTabNavigator from '../navigation/BottomTabNavigator';
+import Expo from 'expo';
 import { Ionicons } from '@expo/vector-icons';
+
 
 const DATA = [
   { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 1 },

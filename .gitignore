@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+node_modules
+=======
 node_modules/**/*
 .expo/*
 npm-debug.*
@@ -12,3 +15,4 @@ web-report/
 
 # macOS
 .DS_Store
+>>>>>>> 0b4a7275e6fbeada101e9e178d9f9af352baf30e

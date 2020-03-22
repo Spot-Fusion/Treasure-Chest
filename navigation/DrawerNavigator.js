@@ -11,6 +11,7 @@ import LogInScreen from '../screens/LogInScreen'
 import BottomTabNavigator from './BottomTabNavigator';
 import { createStackNavigator } from '@react-navigation/stack';
 import TabBarIcon from '../components/TabBarIcon';
+import GoogleAuthScreen from '../screens/GoogleAuthScreen';
 
 const Drawer = createDrawerNavigator();
 const DrawerStack  = createStackNavigator()
@@ -22,6 +23,7 @@ const DrawerStackNavigator = () => (
 )
 const DrawerNavigator = () =>  (
         <Drawer.Navigator>
+            <Drawer.Screen name="GOAuth" component={GoogleAuthScreen} />
             <Drawer.Screen name="Home" component={HomeScreen} />
             <Drawer.Screen name="Profile" component={ProfileScreen} />
             <Drawer.Screen name="Create Listing" component={CreateListingScreen} />

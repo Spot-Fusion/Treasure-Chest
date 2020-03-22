@@ -24,7 +24,7 @@ const DATA = [
 const HomeScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <Button title={<TabBarIcon name="md-menu"/>} onPress={() => navigation.toggleDrawer()} />
+      <Button title= 'Menu' onPress={() => navigation.toggleDrawer()} />
         <Button title="Go to Create Listings" onPress={() => navigation.navigate('Create Listing')} />
         <View style={styles.container}>
         <FlatList

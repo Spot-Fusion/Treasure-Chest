@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import DrawerNavigator from './DrawerNavigator';
+import GoogleAuthScreen from '../screens/GoogleAuthScreen';
+import HomeScrene from '../screens/HomeScreen';
+
 import TabBarIcon from '../components/TabBarIcon'
 import LogInScreen from '../screens/LogInScreen';
 import ChatScreen from '../screens/ChatScreen';

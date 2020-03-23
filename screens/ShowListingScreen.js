@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fafafa',
     alignContent: 'center',
-    justifyContent: 'center'
+    
   },
   contentContainer: {
     paddingTop: 15,
@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     alignSelf: 'flex-start',
     marginTop: 1,
+    justifyContent: 'center',
   },
 });
 

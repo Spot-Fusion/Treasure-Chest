@@ -21,6 +21,7 @@ const GoogleAuthScreen = ({ navigation }) => {
     setId(user.data.id);
     setName(name);
     setPhotoUrl(icon);
+    global.id = user.data.id || 0;
   }
 
   const signInWithGoogleAsync = async () => {
@@ -34,9 +35,6 @@ const GoogleAuthScreen = ({ navigation }) => {
       if (result.type === 'success') {
         // navigation.navigate('Home')
         console.log(result);
-        // setName(result.user.name);
-        // setPhotoUrl(result.user.photoUrl)
-        // setResult(result);
         adduser(result.user.name, result.user.email, result.user.photoUrl);
         getUser(result.user.name, result.user.email, result.user.photoUrl)
         // return result.accessToken;

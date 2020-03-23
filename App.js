@@ -10,6 +10,7 @@ import DrawerNavigator from './navigation/DrawerNavigator';
 import useLinking from './navigation/useLinking';
 import StackNavigator from './navigation/StackNavigator';
 import MenuButton from './components/MenuButton';
+import './screens/GoogleAuthScreen';
 
 
 
@@ -46,7 +47,7 @@ export default function App(props, { navigation }) {
     return (
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <MenuButton navigation={navigation}/>     
+        {/* <MenuButton navigation={navigation}/>      */}
         <NavigationContainer>
           <StackNavigator />          
         </NavigationContainer>

@@ -4,8 +4,9 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 
-const MessagesScreen = ({ id, navigation }) => {
+const MessagesScreen = ({ navigation }) => {
   const [users, setUsers] = React.useState([]);
+  console.log(global.id);
 
   const getUsers = async (id) => {
     let users = await axios.get(`http://10.0.2.2:8080/message/users/${id}`)
@@ -23,8 +24,7 @@ const MessagesScreen = ({ id, navigation }) => {
   }
 
   React.useEffect(() => {
-    // replace with id
-    getUsers(1);
+    getUsers(global.id);
   }, []);
 
   return (

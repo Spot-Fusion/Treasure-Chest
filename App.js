@@ -9,6 +9,7 @@ import BottomTabNavigator from './navigation/BottomTabNavigator';
 import DrawerNavigator from './navigation/DrawerNavigator';
 import useLinking from './navigation/useLinking';
 import StackNavigator from './navigation/StackNavigator';
+import './screens/GoogleAuthScreen';
 
 
 

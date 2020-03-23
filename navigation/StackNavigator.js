@@ -4,28 +4,22 @@ import DrawerNavigator from './DrawerNavigator';
 import GoogleAuthScreen from '../screens/GoogleAuthScreen';
 import HomeScrene from '../screens/HomeScreen';
 
-import TabBarIcon from '../components/TabBarIcon'
 import LogInScreen from '../screens/LogInScreen';
 import ChatScreen from '../screens/ChatScreen';
 import ShowListingScreen from '../screens/ShowListingScreen';
+import MenuButton from '../components/MenuButton';
 
 const Stack = createStackNavigator();
 
 const options={ headerTitle: null, 
-  headerLeft: () => <TabBarIcon 
-  name="md-menu" 
-  size={30}
-  style={{ marginBottom: -3 }}
-  onPress={() => navigation.toggleDrawer()} />}
+  headerLeft: () => <MenuButton />}
 
-const StackNavigator = (navigation) => (
-    <Stack.Navigator>
+const StackNavigator = ({navigation}) => (
+    <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Login" component={LogInScreen} />
-      <Stack.Screen name="Drawer" component={DrawerNavigator} 
-      //  options={options} 
-       />
-        <Stack.Screen name="ChatScreen" component={ChatScreen} />
-        <Stack.Screen name="ShowListing" component={ShowListingScreen} />
+      <Stack.Screen name="Drawer" component={DrawerNavigator} />
+        {/* <Stack.Screen name="ChatScreen" component={ChatScreen} />
+        <Stack.Screen name="ShowListing" component={ShowListingScreen} /> */}
     </Stack.Navigator>
   )
 

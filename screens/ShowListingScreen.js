@@ -3,7 +3,8 @@ import { StyleSheet, View, TextInput, Text, Button, Alert } from 'react-native';
 // import { Text, Button } from 'native-base'
 import { Ionicons } from '@expo/vector-icons';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
-import ExpoCamera from '../components/ExpoCamera'
+import ExpoCamera from '../components/ExpoCamera';
+import CustomHeader from '../components/CustomHeader';
 
  const ShowListingScreen = ({ navigation, route }) => {
    const defaultParams = {name: 'Jordans', description: 'Gunmetal Blue\nSize 13', price: 200.00, zipcode: 70116, negotiable: true }
@@ -11,6 +12,7 @@ import ExpoCamera from '../components/ExpoCamera'
  
   return (
     <View style={styles.view} style={styles.container} contentContainerStyle={styles.contentContainer}>
+    <CustomHeader navigation={navigation} title="Listing" />
       <Button title="Go Home" onPress={() => navigation.navigate('Home')} />
         {/* <ExpoCamera /> */}
           <Text style={styles.text}> Listing Image </Text>

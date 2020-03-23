@@ -5,6 +5,7 @@ import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import ExpoCamera from '../components/ExpoCamera';
 import CheckBox from 'react-native-check-box'
 import CategoryPicker from '../components/CategoryPicker';
+import CustomHeader from '../components/CustomHeader';
 
  const CreateListingScreen = ({navigation}) => {
    const [idCategory, setIdCategory] = React.useState(1);
@@ -20,38 +21,39 @@ import CategoryPicker from '../components/CategoryPicker';
 
   return (    
       <View style={styles.view}style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <CustomHeader navigation={navigation} title="Create Listing" />
       <Button title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} />
         {/* <ExpoCamera /> */}
           <Text style={styles.text}>Create Listing Screen Here</Text>
           {/* <CategoryPicker onClick={(v) => setIdCategory(v.id)}/> */}
-          <Text>Name: {name}</Text>
+          <Text>Name</Text>
           <TextInput
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
             onChangeText={(text) => setName(text)}
             placeholder='Input Title...'
           />
-          <Text>Description: {description}</Text>
+          <Text>Description</Text>
           <TextInput
             multiline
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
             onChangeText={(text) => setDescription(text)}
             placeholder='Input Description...'
           />
-          <Text>Price: ${price}</Text>
+          <Text>Price</Text>
           <TextInput
             keyboardType={"number-pad"}
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
             onChangeText={(num) => setPrice(num)}
             placeholder='Input Price...'
           />
-          <Text>ZipCode: {zipcode}</Text>
+          <Text>ZipCode</Text>
           <TextInput
             keyboardType={"number-pad"}
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
             onChangeText={(num) => setZipcode(num)}
             placeholder='Input Price...'
           />
-          <Text>Negotiable: { negotiable ? "yes" : "no" }</Text>
+          {/* <Text>Negotiable</Text> */}
           <CheckBox style={{flex: 1, padding: 10}}
             onClick={()=> setNegotialbe(true)}
             isChecked={negotiable}

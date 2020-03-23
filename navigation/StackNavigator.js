@@ -14,12 +14,12 @@ const Stack = createStackNavigator();
 const options={ headerTitle: null, 
   headerLeft: () => <MenuButton />}
 
-const StackNavigator = ({navigation}) => (
+const StackNavigator = () => (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Login" component={LogInScreen} />
       <Stack.Screen name="Drawer" component={DrawerNavigator} />
-        {/* <Stack.Screen name="ChatScreen" component={ChatScreen} />
-        <Stack.Screen name="ShowListing" component={ShowListingScreen} /> */}
+      <Stack.Screen name="ChatScreen" component={ChatScreen} />
+      <Stack.Screen name="ShowListing" component={ShowListingScreen} />
     </Stack.Navigator>
   )
 

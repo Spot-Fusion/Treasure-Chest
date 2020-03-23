@@ -1,4 +1,5 @@
 import * as React from 'react';
+import axios from 'axios';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
@@ -8,8 +9,20 @@ import HomeScreen from './HomeScreen';
 const GoogleAuthScreen = ({ navigation }) => {
   const [name, setName] = React.useState('');
   const [photoUrl, setPhotoUrl] = React.useState('');
-  const [result, setResult] = React.useState({})
-  // const test = () => {
+  const [id, setId] = React.useState(0);
+  const [result, setResult] = React.useState({});
+
+  const adduser = async (name, email, icon) => {
+    await axios.post(`http://10.0.2.2:8080/user/`, { name, email, icon, bio: '' });
+  }
+
+  const getUser = async (name, email, icon) => {
+    let user = await axios.get(`http://10.0.2.2:8080/user/${email}`);
+    setId(user.data.id);
+    setName(name);
+    setPhotoUrl(icon);
+  }
+
   const signInWithGoogleAsync = async () => {
     try {
       const result = await Google.logInAsync({
@@ -21,9 +34,11 @@ const GoogleAuthScreen = ({ navigation }) => {
       if (result.type === 'success') {
         // navigation.navigate('Home')
         console.log(result);
-       setName(result.user.name);
-       setPhotoUrl(result.user.photoUrl)
-       setResult(result);
+        // setName(result.user.name);
+        // setPhotoUrl(result.user.photoUrl)
+        // setResult(result);
+        adduser(result.user.name, result.user.email, result.user.photoUrl);
+        getUser(result.user.name, result.user.email, result.user.photoUrl)
         // return result.accessToken;
       } else {
         return { cancelled: true };
@@ -34,13 +49,14 @@ const GoogleAuthScreen = ({ navigation }) => {
       //return { error: true };
     }
   }
+  
   React.useEffect(() => { signInWithGoogleAsync() }, []);
-// }
-console.log(result);
+  // }
+  // console.log(result);
   return (
     <View style={styles.view}>
       <Text style={styles.text}>Welcome Back {name}</Text>
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home', {name, photoUrl, result})} />
+      <Button title="Go to Home" onPress={() => navigation.navigate('Home', { name, photoUrl, id })} />
     </View>
   );
 }

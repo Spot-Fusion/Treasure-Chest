@@ -1,25 +1,33 @@
 import * as React from 'react';
 import { StyleSheet, View, TextInput, Text, Button, Alert } from 'react-native';
-// import { Text, Button } from 'native-base'
 import { Ionicons } from '@expo/vector-icons';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
-import ExpoCamera from '../components/ExpoCamera'
+import ExpoCamera from '../components/ExpoCamera';
+import CheckBox from 'react-native-check-box'
+import CategoryPicker from '../components/CategoryPicker';
 
  const CreateListingScreen = ({navigation}) => {
-   const [title, setTitle] = React.useState('');
+   const [idCategory, setIdCategory] = React.useState(1);
+   const [name, setName] = React.useState('');
    const [description, setDescription] = React.useState('')
-   const [price, setPrice] = React.useState(0)
+   const [price, setPrice] = React.useState(0);
+   const [zipcode, setZipcode] = React.useState(0);
+   const [negotiable, setNegotialbe] = React.useState(false);   
 
-  return (
-    
+   const addPost = async (name, description, price, zipcode, negotiable) => {
+    await axios.post(`http://10.0.2.2:8080/user/`, {id_seller: 5, id_category: 1, name, description, price, zipcode, negotiable });
+  }
+
+  return (    
       <View style={styles.view}style={styles.container} contentContainerStyle={styles.contentContainer}>
       <Button title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} />
         {/* <ExpoCamera /> */}
           <Text style={styles.text}>Create Listing Screen Here</Text>
-          <Text>Title: {title}</Text>
+          {/* <CategoryPicker onClick={(v) => setIdCategory(v.id)}/> */}
+          <Text>Name: {name}</Text>
           <TextInput
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            onChangeText={(text) => setTitle(text)}
+            onChangeText={(text) => setName(text)}
             placeholder='Input Title...'
           />
           <Text>Description: {description}</Text>
@@ -33,10 +41,25 @@ import ExpoCamera from '../components/ExpoCamera'
           <TextInput
             keyboardType={"number-pad"}
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            onChangeText={(text) => setPrice(text)}
+            onChangeText={(num) => setPrice(num)}
             placeholder='Input Price...'
           />
-          <Button title="Create Listing" onPress={() => navigation.navigate('ShowListing', { title, description, price })} />
+          <Text>ZipCode: {zipcode}</Text>
+          <TextInput
+            keyboardType={"number-pad"}
+            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            onChangeText={(num) => setZipcode(num)}
+            placeholder='Input Price...'
+          />
+          <Text>Negotiable: { negotiable ? "yes" : "no" }</Text>
+          <CheckBox style={{flex: 1, padding: 10}}
+            onClick={()=> setNegotialbe(true)}
+            isChecked={negotiable}
+            leftText={"Negotiable?"}
+          />
+          <Button title="Create Listing" onPress={() => {
+            // addPost(name, description, price, zipcode, negotiable);
+            navigation.navigate('ShowListing', { name, description, price, zipcode, negotiable })}} />
       </View>
   );
 }

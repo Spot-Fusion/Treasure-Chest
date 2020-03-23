@@ -21,7 +21,7 @@ const DATA = [
   { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 10 },
   ];
 
-const HomeScreen = ({ route, navigation}) => {
+const HomeScreen = ({ route, navigation }) => {
   console.log(route.params);
   return (
     <View style={styles.container}>

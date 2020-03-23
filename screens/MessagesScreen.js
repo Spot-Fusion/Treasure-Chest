@@ -6,21 +6,20 @@ import { RectButton, ScrollView } from 'react-native-gesture-handler';
 
 const MessagesScreen = ({ navigation }) => {
   const [users, setUsers] = React.useState([]);
-  console.log(global.id);
 
   const getUsers = async (id) => {
     let users = await axios.get(`http://10.0.2.2:8080/message/users/${id}`)
-    console.log(users);
     setUsers(users.data);
   }
 
-  const getId = async (name) => {
-    let user = await axios.get(`http://10.0.2.2:8080/user/${name}`)
+  const getId = async (email) => {
+    let user = await axios.get(`http://10.0.2.2:8080/user/${email}`)
+    console.log('id:',user.data.id);
     return user.data.id
   }
 
-  const navigate = async (name) => {
-    await navigation.navigate('ChatScreen', { id_recipient: await getId(name) })
+  const navigate = async (email) => {
+    await navigation.navigate('ChatScreen', { id_recipient: await getId(email) })
   }
 
   React.useEffect(() => {
@@ -34,7 +33,7 @@ const MessagesScreen = ({ navigation }) => {
         key={user.id_message}
         icon="md-contact"
         label={`${user.name} ${user.text}`}
-        onPress={() => navigate(user.name)}
+        onPress={() => navigate(user.email)}
       />))}
     </ScrollView>
   );

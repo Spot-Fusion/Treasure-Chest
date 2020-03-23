@@ -1,32 +1,41 @@
 import * as React from 'react';
+import axios from 'axios';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
-import ChatScreen from './ChatScreen'
 
- const MessagesScreen = ({ id, navigation}) => {
-   const [users, setUsers] = React.useState([
-     {user: 'ben', message: 'Wadup, dude?', created_at: '2/3/20'},
-     {user: 'jill', message: 'Hello', created_at: '2/12/20'},
-     {user: 'steve', message: 'What?', created_at: '2/29/20'}, 
-   ]);
+const MessagesScreen = ({ id, navigation }) => {
+  const [users, setUsers] = React.useState([]);
 
-   const getUsers = async (id) => {
-    axios.get({app})
-   }
+  const getUsers = async (id) => {
+    let users = await axios.get(`http://10.0.2.2:8080/message/users/${id}`)
+    console.log(users);
+    setUsers(users.data);
+  }
 
-   React.useEffect(() => {
+  const getId = async (name) => {
+    let user = await axios.get(`http://10.0.2.2:8080/user/${name}`)
+    return user.data.id
+  }
 
-   }, [])
+  const navigate = async (name) => {
+    await navigation.navigate('ChatScreen', { id_recipient: await getId(name) })
+  }
+
+  React.useEffect(() => {
+    // replace with id
+    getUsers(1);
+  }, []);
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       <Button title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} />
-      {users.map((user) => (<OptionButton
+      {!!users.length && users.map((user) => (<OptionButton
+        key={user.id_message}
         icon="md-contact"
-        label={`${user.user} ${user.message} ${user.created_at}`}
-        onPress={() => navigation.navigate(ChatScreen, {users, id})}
-      />))}     
+        label={`${user.name} ${user.text}`}
+        onPress={() => navigate(user.name)}
+      />))}
     </ScrollView>
   );
 }

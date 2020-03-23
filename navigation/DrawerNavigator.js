@@ -44,7 +44,7 @@ const DrawerNavigator = () =>  (
             <Drawer.Screen name="Profile" component={ProfileScreen} />
             <Drawer.Screen name="Create Listing" component={CreateListingScreen} />
             <Drawer.Screen name="Messages" component={MessagesScreen} />
-            <Drawer.Screen name="Tabs" component={DrawerStackNavigator} />
+            <Drawer.Screen name="Tabs" component={BottomTabNavigator} />
             <Drawer.Screen name="Log Out" component={LogInScreen} />
         {/* </DrawerContentScrollView> */}
     </Drawer.Navigator>

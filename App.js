@@ -9,6 +9,7 @@ import BottomTabNavigator from './navigation/BottomTabNavigator';
 import DrawerNavigator from './navigation/DrawerNavigator';
 import useLinking from './navigation/useLinking';
 import StackNavigator from './navigation/StackNavigator';
+import MenuButton from './components/MenuButton';
 
 
 
@@ -44,7 +45,8 @@ export default function App(props, { navigation }) {
   if (!isLoadingComplete && !props.skipLoadingScreen) { return null; } 
     return (
       <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}     
+        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+        <MenuButton navigation={navigation}/>     
         <NavigationContainer>
           <StackNavigator />          
         </NavigationContainer>

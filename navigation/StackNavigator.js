@@ -11,16 +11,19 @@ import ShowListingScreen from '../screens/ShowListingScreen';
 
 const Stack = createStackNavigator();
 
+const options={ headerTitle: null, 
+  headerLeft: () => <TabBarIcon 
+  name="md-menu" 
+  size={30}
+  style={{ marginBottom: -3 }}
+  onPress={() => navigation.toggleDrawer()} />}
+
 const StackNavigator = (navigation) => (
     <Stack.Navigator>
       <Stack.Screen name="Login" component={LogInScreen} />
       <Stack.Screen name="Drawer" component={DrawerNavigator} 
-        options={{ headerTitle: null, 
-        headerLeft: () => <TabBarIcon 
-        name="md-menu" 
-        size={30}
-        style={{ marginBottom: -3 }}
-        onPress={() => navigation.toggleDrawer()} />}}/>
+      //  options={options} 
+       />
         <Stack.Screen name="ChatScreen" component={ChatScreen} />
         <Stack.Screen name="ShowListing" component={ShowListingScreen} />
     </Stack.Navigator>

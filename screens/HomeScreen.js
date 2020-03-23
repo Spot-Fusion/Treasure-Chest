@@ -21,7 +21,8 @@ const DATA = [
   { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 10 },
   ];
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({ route, navigation}) => {
+  console.log(route.params);
   return (
     <View style={styles.container}>
       <Button title= 'Menu' onPress={() => navigation.toggleDrawer()} />

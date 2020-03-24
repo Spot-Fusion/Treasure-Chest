@@ -8,7 +8,8 @@ import Expo from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import {Container, Content, Header, Left, Right, Icon} from 'native-base';
 import { render } from 'react-dom';
-//import FAIcon from 'react-nativ'
+import FAIcon from 'react-native-vector-icons/FontAwesome'
+import { black } from 'color-name';
 // const DATA = [
 //   { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 1 },
 //   { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 2 },
@@ -29,10 +30,24 @@ const HomeScreen = ({ route, navigation}) => {
     <Container>
       <Header style={{ backgroundColor: '#3a455c', 
       height: 90, borderBottomColor: '#757575'}}>
-        <Left>
-          <Icon name = "md-menu" style = {{color: 'white'}}></Icon>
+        <Left style = {{flexDirection: 'row'}}>
+          <Icon name = "md-menu" style = {{color: 'white', marginRight: 15}}></Icon>
+        <FAIcon name='amazon' style={{ fontSize: 32, color: 'white' }}></FAIcon>
         </Left>
+        <Right>
+          <Icon name = 'md-cart' style = {{ color: 'white'}}></Icon>
+        </Right>
       </Header>
+      <View
+      style = {{position: 'absolute', left: 0, right:0, top:90, height:70, backgroundColor: '#3a455c', flexDirection: 'row', alignItems: 'center', paddingHorizontal: 5}}>
+        <TouchableOpacity>
+          <View
+          style = {{width: 100, backgroundColor: '#e7e7eb', height: 50, borderRadius: 4, padding: 10 }}>
+            <Text style = {{fontSize: 12}}>SHOP BY</Text>
+            <Text style = {{fontWeight:'bold'}}> Category</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     </Container>
     // <View style={styles.container}>
     //   <Button title= 'Menu' onPress={() => navigation.toggleDrawer()} />

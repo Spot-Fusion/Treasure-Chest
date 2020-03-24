@@ -6,7 +6,7 @@ import TabBarIcon from '../components/TabBarIcon'
 import BottomTabNavigator from '../navigation/BottomTabNavigator';
 import Expo from 'expo';
 import { Ionicons } from '@expo/vector-icons';
-import {Container, Content, Header, Left, Right, Icon} from 'native-base';
+import {Container, Content, Header, Left, Right, Icon, Item, Input} from 'native-base';
 import { render } from 'react-dom';
 import FAIcon from 'react-native-vector-icons/FontAwesome'
 import { black } from 'color-name';
@@ -47,6 +47,12 @@ const HomeScreen = ({ route, navigation}) => {
             <Text style = {{fontWeight:'bold'}}> Category</Text>
           </View>
         </TouchableOpacity>
+        <View style = {{flex:1, height: '100%', marginLeft: 5, justifyContent: 'center'}}></View>
+        <Item style = {{backgroundColor: 'white', paddingHorizontal: 10, borderRadius: 4}}>
+          <Icon name = 'search' style = {{
+            fontSize: 20, paddingTop:5 }} ></Icon>
+            <Input placeholder = "Search"></Input>
+        </Item>
       </View>
     </Container>
     // <View style={styles.container}>

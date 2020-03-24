@@ -3,6 +3,7 @@ import axios from 'axios';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
+import CustomHeadet from '../components/customHeader';
 
 const MessagesScreen = ({ navigation }) => {
   const [users, setUsers] = React.useState([]);
@@ -23,11 +24,14 @@ const MessagesScreen = ({ navigation }) => {
   }
 
   React.useEffect(() => {
-    getUsers(global.id);
+    getUsers(global.id)
+    let interval = setInterval(() => { getUsers(global.id) }, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+      <CustomHeader navigation={navigation} title="Messages" />
       <Button title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} />
       {!!users.length && users.map((user) => (<OptionButton
         key={user.id_message}

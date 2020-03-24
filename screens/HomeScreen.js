@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Image, Platform, StyleSheet, TouchableOpacity, View, Text, Button, FlatList } from 'react-native';
+import { Image, Platform, StyleSheet, TouchableOpacity, View, Text, Button, FlatList, ScrollView } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import { NavigationContainer } from '@react-navigation/native';
 import TabBarIcon from '../components/TabBarIcon'
@@ -28,11 +28,28 @@ const HomeScreen = ({ route, navigation}) => {
       <Button title= 'Menu' onPress={() => navigation.toggleDrawer()} />
         <Button title="Go to Create Listings" onPress={() => navigation.navigate('Create Listing')} />
         <View style={styles.container}>
-        <FlatList
+    <ScrollView scrollEventThrottle= {16}>
+          <View style={{ flex: 1, backgroundColor: 'white', paddingHorizontal: 20}}>
+              <Text style = {{fontSize: 24, fontWeight: '700', paddingHorizontal: 20}} > Wassup shopper</Text>
+              <View style = {{height:130, marginTop: 20}}>
+                <ScrollView>
+                  <View style = {{height: 130, height:130}}>
+                    <View style = {{flex:2}}>
+                    
+                    </View>
+                    <View style = {{flex:1}}>
+
+                    </View>
+                  </View>
+                </ScrollView>
+              </View>
+          </View>
+    </ScrollView>
+        {/* <FlatList
           data={DATA}
           renderItem={({ item }) => <TouchableOpacity style={{justifyContent: 'center'}}>{item.key}</TouchableOpacity>}
           keyExtractor={item => item.id.toString()}
-        />
+        /> */}
       </View>
     </View>
   );

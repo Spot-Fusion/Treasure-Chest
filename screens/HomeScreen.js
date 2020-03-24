@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Image, Platform, StyleSheet, TouchableOpacity, View, Text, Button, FlatList, ScrollView, StatusBar } from 'react-native';
 //import { ViewPager} from 'react-native-viewpager'
+import RecommendedCardItems from '../components/recommendedCardItems';
 import ViewPagerAndroid from "@react-native-community/viewpager";
 import * as WebBrowser from 'expo-web-browser';
 import { NavigationContainer } from '@react-navigation/native';
@@ -8,7 +9,7 @@ import TabBarIcon from '../components/TabBarIcon'
 import BottomTabNavigator from '../navigation/BottomTabNavigator';
 import Expo from 'expo';
 import { Ionicons } from '@expo/vector-icons';
-import {Container, Content, Header, Left, Right, Icon, Item, Input} from 'native-base';
+import {Container, Content, Header, Left, Right, Icon, Item, Input, Card, CardItem} from 'native-base';
 import { render } from 'react-dom';
 import FAIcon from 'react-native-vector-icons/FontAwesome'
 import Swiper from 'react-native-swiper';
@@ -78,6 +79,20 @@ const HomeScreen = ({ route, navigation}) => {
             <Image style={{ flex: 1, height: null, width: null, resizeMode: 'contain' }} source={require('../assets/images/robot-dev.png')}></Image>
               </View>
         </ViewPagerAndroid>
+        <Card>
+          <CardItem
+           header>
+             <Text> Your Recommendations</Text>
+           </CardItem>
+          <RecommendedCardItems
+          itemName ="You Cna heal your life"
+          itemCreator = "Louise Hay"
+          itemPrice ="$10"
+          savings = "2.5"
+          imageUrl = {require('../assets/images/robot-prod.png')}
+          ratings = {5} >
+          </RecommendedCardItems>
+        </Card>
       </Content>
       
     </Container>

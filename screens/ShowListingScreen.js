@@ -5,11 +5,26 @@ import { Ionicons } from '@expo/vector-icons';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import ExpoCamera from '../components/ExpoCamera';
 import CustomHeader from '../components/CustomHeader';
+import axios from 'axios'
 
  const ShowListingScreen = ({ navigation, route }) => {
-   const defaultParams = {name: 'Jordans', description: 'Gunmetal Blue\nSize 13', price: 200.00, zipcode: 70116, negotiable: true }
-   const { name, description, price, zipcode, negotiable } = !route.params ? defaultParams  : route.params ;
- 
+   const defaultParams = {name: 'Jordans', description: 'Gunmetal Blue\nSize 13', price: 200.00, zipcode: 70116, negotiable: true, id: 14 }
+   const { /*name, description, price, zipcode, negotiable,*/ idListing } = !route.params ? defaultParams  : route.params ;
+   const [post, setPost] = React.useState({})
+   console.log(idListing);
+
+ const getListing = async (id) => {
+  await axios.get(`http://localhost:8080/listing/${id}`)
+    .then(post => setPost(post))
+    .catch(e => console.error(e));
+ }
+
+React.useEffect(() =>{
+  getListing(idListing)
+}, [])
+
+console.log(post);
+const { name, description, price, zipcode, negotiable } = post;
   return (
     <View style={styles.view} style={styles.container} contentContainerStyle={styles.contentContainer}>
     <CustomHeader navigation={navigation} title="Listing" />

@@ -7,6 +7,7 @@ import CheckBox from 'react-native-check-box'
 import CategoryPicker from '../components/CategoryPicker';
 import CustomHeader from '../components/CustomHeader';
 import ExpoImagePicker from '../components/ExpoImagePicker';
+import axios from 'axios';
 
  const CreateListingScreen = ({navigation}) => {
    const [idCategory, setIdCategory] = React.useState(1);
@@ -14,10 +15,13 @@ import ExpoImagePicker from '../components/ExpoImagePicker';
    const [description, setDescription] = React.useState('')
    const [price, setPrice] = React.useState(0);
    const [zipcode, setZipcode] = React.useState(0);
-   const [negotiable, setNegotialbe] = React.useState(false);   
+   const [negotiable, setNegotialbe] = React.useState(0);   
+   const [idListing, setIdListing] = React.useState(0);
 
    const addPost = async (name, description, price, zipcode, negotiable) => {
-    await axios.post(`http://10.0.2.2:8080/user/`, {id_seller: 5, id_category: 1, name, description, price, zipcode, negotiable });
+    await axios.post(`http://localhost:8080/listing/`, {id_seller: 1, id_category: 1, name, description, price, zipcode, negotiable })
+    .then(id => setIdListing(id.data))
+    .catch(e => console.error(e));
   }
 
   return (    
@@ -55,15 +59,18 @@ import ExpoImagePicker from '../components/ExpoImagePicker';
             onChangeText={(num) => setZipcode(num)}
             placeholder='Input Price...'
           />
-          {/* <Text>Negotiable</Text> */}
+          <Text>Negotiable: {negotiable === 1 ? 'yes' : 'no'}</Text>
           <CheckBox style={{flex: 1, padding: 10}}
-            onClick={()=> setNegotialbe(true)}
+            onClick={()=> setNegotialbe(1)}
             isChecked={negotiable}
             leftText={"Negotiable?"}
           />
           <Button title="Create Listing" onPress={() => {
-            // addPost(name, description, price, zipcode, negotiable);
-            navigation.navigate('ShowListing', { name, description, price, zipcode, negotiable })}} />
+            addPost(name, description, price, zipcode, negotiable);
+            console.log("listing created")
+          /*navigation.navigate('ShowListing', { name, description, price, zipcode, negotiable, idListing })*/}} />
+            <Button title="Show Listing" onPress={() => {
+            navigation.navigate('ShowListing', { /*name, description, price, zipcode, negotiable,*/ idListing })}} />
       </View>
   );
 }

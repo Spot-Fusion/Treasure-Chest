@@ -54,6 +54,16 @@ const HomeScreen = ({ route, navigation}) => {
             <Input placeholder = "Search"></Input>
         </Item>
       </View>
+      <Content style = {{backgroundColor: '#d5d5d6', marginTop: 70}}>
+        <View style={{ height: 50, backgroundColor: 'white', flexDirection: 'row', paddingHorizontal: 5, alignItems: 'center', justifyContent: 'space-between'}}>
+              <Text>Hello, Mr.Johnson</Text>
+              <View style = {{flexDirection: 'row'}}>
+                <Text>Your Account </Text>
+                <Icon name = 'arrow-forward' style = {{fontSize:18}}></Icon>
+              </View>
+            </View>
+      </Content>
+      
     </Container>
     // <View style={styles.container}>
     //   <Button title= 'Menu' onPress={() => navigation.toggleDrawer()} />

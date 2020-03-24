@@ -54,6 +54,7 @@
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "babel-preset-expo": "~8.0.0",
+    "gradle": "^1.0.9",
     "jest-expo": "~36.0.1"
   },
   "private": true

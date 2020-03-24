@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Image, Platform, StyleSheet, TouchableOpacity, View, Text, Button, FlatList, ScrollView, StatusBar } from 'react-native';
-//import {Image} from 'react-native-viewpager'
+//import { ViewPager} from 'react-native-viewpager'
+import ViewPagerAndroid from "@react-native-community/viewpager";
 import * as WebBrowser from 'expo-web-browser';
 import { NavigationContainer } from '@react-navigation/native';
 import TabBarIcon from '../components/TabBarIcon'
@@ -64,7 +65,7 @@ const HomeScreen = ({ route, navigation}) => {
                 <Icon name = 'arrow-forward' style = {{fontSize:18}}></Icon>
               </View>
             </View>
-        <ScrollView
+        <ViewPagerAndroid
             autoplay = {true}
             style = {{height:100}}>
               <View style = {{flex:1}}>
@@ -76,7 +77,7 @@ const HomeScreen = ({ route, navigation}) => {
               <View style={{ flex: 1 }}>
             <Image style={{ flex: 1, height: null, width: null, resizeMode: 'contain' }} source={require('../assets/images/robot-dev.png')}></Image>
               </View>
-            </ScrollView>
+        </ViewPagerAndroid>
       </Content>
       
     </Container>

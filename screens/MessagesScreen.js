@@ -23,7 +23,9 @@ const MessagesScreen = ({ navigation }) => {
   }
 
   React.useEffect(() => {
-    getUsers(global.id);
+    getUsers(global.id)
+    let interval = setInterval(() => { getUsers(global.id) }, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   return (

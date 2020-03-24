@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Image, Platform, StyleSheet, TouchableOpacity, View, Text, Button, FlatList, ScrollView } from 'react-native';
+import {Image, Platform, StyleSheet, TouchableOpacity, View, Text, Button, FlatList, ScrollView, StatusBar } from 'react-native';
+//import {Image} from 'react-native-viewpager'
 import * as WebBrowser from 'expo-web-browser';
 import { NavigationContainer } from '@react-navigation/native';
 import TabBarIcon from '../components/TabBarIcon'
@@ -9,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import {Container, Content, Header, Left, Right, Icon, Item, Input} from 'native-base';
 import { render } from 'react-dom';
 import FAIcon from 'react-native-vector-icons/FontAwesome'
+import Swiper from 'react-native-swiper';
 import { black } from 'color-name';
 // const DATA = [
 //   { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 1 },
@@ -28,8 +30,8 @@ const HomeScreen = ({ route, navigation}) => {
   
   return (
     <Container>
-      <Header style={{ backgroundColor: '#3a455c', 
-      height: 90, borderBottomColor: '#757575'}}>
+      <Header style={[{ backgroundColor: '#3a455c', 
+      height: 90, borderBottomColor: '#757575'}, styles.androidHeader]}>
         <Left style = {{flexDirection: 'row'}}>
           <Icon name = "md-menu" style = {{color: 'white', marginRight: 15}}></Icon>
         <FAIcon name='amazon' style={{ fontSize: 32, color: 'white' }}></FAIcon>
@@ -62,6 +64,19 @@ const HomeScreen = ({ route, navigation}) => {
                 <Icon name = 'arrow-forward' style = {{fontSize:18}}></Icon>
               </View>
             </View>
+        <ScrollView
+            autoplay = {true}
+            style = {{height:100}}>
+              <View style = {{flex:1}}>
+            <Image style={{ flex: 1, height: null, width: null, resizeMode: 'contain' }} source={require('../assets/images/robot-dev.png')}></Image>
+              </View>
+              <View style={{ flex: 1 }}>
+            <Image style={{ flex: 1, height: null, width: null, resizeMode: 'contain' }} source={require('../assets/images/robot-dev.png')}></Image>
+              </View>
+              <View style={{ flex: 1 }}>
+            <Image style={{ flex: 1, height: null, width: null, resizeMode: 'contain' }} source={require('../assets/images/robot-dev.png')}></Image>
+              </View>
+            </ScrollView>
       </Content>
       
     </Container>
@@ -106,6 +121,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'center',
     alignContent: 'center'
+  },
+  androidHeader: {
+    ...Platform.select({
+      android: {
+        paddingTop: StatusBar.currentHeight,
+      }
+    })
   },
   text: {
     marginBottom: 20,

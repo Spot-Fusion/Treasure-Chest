@@ -23,7 +23,7 @@ const DrawerStackNavigator = () => (
 )
 const DrawerNavigator = () =>  (
         <Drawer.Navigator>
-            <Drawer.Screen name="GOAuth" component={GoogleAuthScreen} />
+            {/* <Drawer.Screen name="GOAuth" component={GoogleAuthScreen} /> */}
             <Drawer.Screen name="Home" component={HomeScreen} />
             <Drawer.Screen name="Profile" component={ProfileScreen} />
             <Drawer.Screen name="Create Listing" component={CreateListingScreen} />

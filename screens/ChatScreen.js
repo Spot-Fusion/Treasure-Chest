@@ -11,7 +11,6 @@ const ChatScreen = ({ route, navigation }) => {
 
   const getMessages = async (id_user, id_recipient) => {
     let messages = await axios.get(`http://10.0.2.2:8080/message/${id_user}/${id_recipient}`)
-    console.log(messages.data);
     setMessages(messages.data);
   }
 
@@ -22,7 +21,6 @@ const ChatScreen = ({ route, navigation }) => {
   }
   
   React.useEffect(() => {
-    // replace with id_user, id_recipient
     getMessages(global.id, id_recipient)
     let interval = setInterval(() => { getMessages(global.id, id_recipient) }, 1000);
     return () => clearInterval(interval);
@@ -40,7 +38,6 @@ const ChatScreen = ({ route, navigation }) => {
       </View>
       <TextInput
         style={styles.input}
-        placeholder
         onChangeText={(val) => setInput(val)}
         onSubmitEditing={() => sendMessage(global.id, id_recipient, input)}
       />

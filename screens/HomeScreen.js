@@ -5,10 +5,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import TabBarIcon from '../components/TabBarIcon'
 import BottomTabNavigator from '../navigation/BottomTabNavigator';
 import Expo from 'expo';
-//import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import {Container, Content, Header, Left, Right, Icon} from 'native-base';
 import { render } from 'react-dom';
-
+//import FAIcon from 'react-nativ'
 // const DATA = [
 //   { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 1 },
 //   { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 2 },
@@ -27,8 +27,11 @@ const HomeScreen = ({ route, navigation}) => {
   
   return (
     <Container>
-      <Header style={{ backgroundColor: '#3a455c', height: 90, borderBottomColor: '#757575'}}>
-        
+      <Header style={{ backgroundColor: '#3a455c', 
+      height: 90, borderBottomColor: '#757575'}}>
+        <Left>
+          <Icon name = "md-menu" style = {{color: 'white'}}></Icon>
+        </Left>
       </Header>
     </Container>
     // <View style={styles.container}>
@@ -62,9 +65,9 @@ const HomeScreen = ({ route, navigation}) => {
   );
 
 }
-HomeScreen.navigationOptions = {
-  header: null,
-};
+// HomeScreen.navigationOptions = {
+//   header: null,
+// };
 
 const styles = StyleSheet.create({
   container: {

@@ -6,6 +6,7 @@ import ExpoCamera from '../components/ExpoCamera';
 import CheckBox from 'react-native-check-box'
 import CategoryPicker from '../components/CategoryPicker';
 import CustomHeader from '../components/CustomHeader';
+import ExpoImagePicker from '../components/ExpoImagePicker';
 
  const CreateListingScreen = ({navigation}) => {
    const [idCategory, setIdCategory] = React.useState(1);
@@ -24,6 +25,7 @@ import CustomHeader from '../components/CustomHeader';
         <CustomHeader navigation={navigation} title="Create Listing" />
       <Button title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} />
         {/* <ExpoCamera /> */}
+        <ExpoImagePicker />
           <Text style={styles.text}>Create Listing Screen Here</Text>
           {/* <CategoryPicker onClick={(v) => setIdCategory(v.id)}/> */}
           <Text>Name</Text>

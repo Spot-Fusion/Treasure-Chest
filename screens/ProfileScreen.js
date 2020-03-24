@@ -5,6 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
 import ExpoCamera from '../components/ExpoCamera'
 import CustomHeader from '../components/CustomHeader';
+import ExpoImagePicker from '../components/ExpoImagePicker';
 
  const CreateListingScreen = ({navigation}) => {
    const [userName, setUserName] = React.useState('');
@@ -17,6 +18,7 @@ import CustomHeader from '../components/CustomHeader';
       <View style={styles.view}>
       <Button title="Edit Profile" onPress={() => Alert.alert('Todo')} />
         {/* <ExpoCamera /> */}
+        <ExpoImagePicker />
           <Text style={styles.text}>Create Listing Screen Here</Text>
           <Text>Title: {userName}</Text>
           <TextInput

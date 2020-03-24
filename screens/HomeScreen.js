@@ -6,6 +6,8 @@ import TabBarIcon from '../components/TabBarIcon'
 import BottomTabNavigator from '../navigation/BottomTabNavigator';
 import Expo from 'expo';
 import { Ionicons } from '@expo/vector-icons';
+import CustomHeader from '../components/CustomHeader';
+
 
 const DATA = [
   { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 1 },
@@ -24,7 +26,8 @@ const HomeScreen = ({ route, navigation }) => {
   console.log(route.params);
   return (
     <View style={styles.container}>
-      <Button title= 'Menu' onPress={() => navigation.toggleDrawer()} />
+    <CustomHeader navigation={navigation} title="Home"/>
+      {/* <Button title= 'Menu' onPress={() => navigation.toggleDrawer()} /> */}
         <Button title="Go to Create Listings" onPress={() => navigation.navigate('Create Listing')} />
         <View style={styles.container}>
         <FlatList

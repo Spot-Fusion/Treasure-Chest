@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import * as React from 'react';
 import { Platform, StatusBar, StyleSheet, View, Button } from 'react-native';
 import { SplashScreen } from 'expo';
@@ -9,6 +10,7 @@ import BottomTabNavigator from './navigation/BottomTabNavigator';
 import DrawerNavigator from './navigation/DrawerNavigator';
 import useLinking from './navigation/useLinking';
 import StackNavigator from './navigation/StackNavigator';
+import MenuButton from './components/MenuButton';
 import './screens/GoogleAuthScreen';
 
 
@@ -45,7 +47,8 @@ export default function App(props, { navigation }) {
   if (!isLoadingComplete && !props.skipLoadingScreen) { return null; } 
     return (
       <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}     
+        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+        {/* <MenuButton navigation={navigation}/>      */}
         <NavigationContainer>
           <StackNavigator />          
         </NavigationContainer>

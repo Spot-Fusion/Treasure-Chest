@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { StyleSheet, View, TextInput, Text, Button, Alert } from 'react-native';
-// import { Text, Button } from 'native-base'
 import { Ionicons } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
 import ExpoCamera from '../components/ExpoCamera'
+import CustomHeader from '../components/CustomHeader';
+import ExpoImagePicker from '../components/ExpoImagePicker';
 
  const CreateListingScreen = ({navigation}) => {
    const [userName, setUserName] = React.useState('');
@@ -11,10 +12,12 @@ import ExpoCamera from '../components/ExpoCamera'
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+    <CustomHeader navigation={navigation} title="Profile" />
       <Button title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} />
       <View style={styles.view}>
       <Button title="Edit Profile" onPress={() => Alert.alert('Todo')} />
         {/* <ExpoCamera /> */}
+        <ExpoImagePicker />
           <Text style={styles.text}>Create Listing Screen Here</Text>
           <Text>Title: {userName}</Text>
           <TextInput

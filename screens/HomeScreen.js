@@ -7,7 +7,6 @@ import BottomTabNavigator from '../navigation/BottomTabNavigator';
 import Expo from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 
-
 const DATA = [
   { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 1 },
   { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 2 },

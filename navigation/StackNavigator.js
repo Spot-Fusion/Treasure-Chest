@@ -17,9 +17,11 @@ const options={ headerTitle: null,
 const StackNavigator = () => (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Login" component={LogInScreen} />
-      <Stack.Screen name="Drawer" component={DrawerNavigator} />
-      <Stack.Screen name="ChatScreen" component={ChatScreen} />
-      <Stack.Screen name="ShowListing" component={ShowListingScreen} />
+      <Stack.Screen name="Drawer" component={DrawerNavigator} 
+      options={{ headerTitle: null, 
+        }}/>
+        <Stack.Screen name="ChatScreen" component={ChatScreen} />
+        <Stack.Screen name="ShowListing" component={ShowListingScreen} />
     </Stack.Navigator>
   )
 

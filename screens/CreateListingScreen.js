@@ -68,10 +68,9 @@ import axios from 'axios';
           />
           <Button title="Create Listing" onPress={() => {
             addPost(name, description, price, zipcode, negotiable);
-            console.log("listing created")
-          /*navigation.navigate('ShowListing', { name, description, price, zipcode, negotiable, idListing })*/}} />
+            console.log("listing created")}} />
             <Button title="Show Listing" onPress={() => {
-            navigation.navigate('ShowListing', { /*name, description, price, zipcode, negotiable,*/ idListing })}} />
+            navigation.navigate('ShowListing', { idListing })}} />
       </View>
   );
 }

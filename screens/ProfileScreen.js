@@ -2,13 +2,13 @@ import * as React from 'react';
 import { StyleSheet, View, TextInput, Text, Button, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
-import ExpoCamera from '../components/ExpoCamera'
 import CustomHeader from '../components/CustomHeader';
 import ExpoImagePicker from '../components/ExpoImagePicker';
 
  const CreateListingScreen = ({navigation}) => {
-   const [userName, setUserName] = React.useState('');
-   const [description, setDescription] = React.useState('')
+   const [userName, setUserName] = React.useState(global.name);
+   const [email, setEmail] = React.useState(global.email)
+   const [description, setDescription] = React.useState(global.image)
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -16,14 +16,19 @@ import ExpoImagePicker from '../components/ExpoImagePicker';
       <Button title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} />
       <View style={styles.view}>
       <Button title="Edit Profile" onPress={() => Alert.alert('Todo')} />
-        {/* <ExpoCamera /> */}
         <ExpoImagePicker />
           <Text style={styles.text}>Create Listing Screen Here</Text>
-          <Text>Title: {userName}</Text>
+          <Text>User Name: {userName}</Text>
           <TextInput
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
             onChangeText={(text) => setUserName(text)}
-            placeholder='Input Title...'
+            placeholder='Input User Name...'
+          />
+          <Text>Email: {email}</Text>
+          <TextInput
+            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            onChangeText={(text) => setEmail(text)}
+            placeholder='Input Email...'
           />
           <Text>Description: {description}</Text>
           <TextInput

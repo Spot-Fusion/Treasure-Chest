@@ -8,24 +8,21 @@ const ChatScreen = ({ route, navigation }) => {
   const { id_recipient } = route.params;
   const [messages, setMessages] = React.useState([]);
   const [input, setInput] = React.useState('');
-  // const a = setInterval(() => { getMessages(1, id_recipient) }, 1000);
 
   const getMessages = async (id_user, id_recipient) => {
     let messages = await axios.get(`http://10.0.2.2:8080/message/${id_user}/${id_recipient}`)
-    console.log(messages.data);
     setMessages(messages.data);
   }
 
   const sendMessage = async (id_user, id_recipient, text) => {
     await axios.post(`http://10.0.2.2:8080/message/${id_user}/${id_recipient}`, { text });
     await getMessages(id_user, id_recipient);
-    await setInput('');
+    setInput('');
   }
   
   React.useEffect(() => {
-    //replace with id_user, id_recipient
-    getMessages(1, id_recipient)
-    let interval = setInterval(() => { getMessages(1, id_recipient) }, 1000);
+    getMessages(global.id, id_recipient)
+    let interval = setInterval(() => { getMessages(global.id, id_recipient) }, 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -41,9 +38,8 @@ const ChatScreen = ({ route, navigation }) => {
       </View>
       <TextInput
         style={styles.input}
-        placeholder
         onChangeText={(val) => setInput(val)}
-        onSubmitEditing={() => sendMessage(1, id_recipient, input)}
+        onSubmitEditing={() => sendMessage(global.id, id_recipient, input)}
       />
     </ScrollView>
   );

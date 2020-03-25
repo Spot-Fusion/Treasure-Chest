@@ -21,7 +21,8 @@ const GoogleAuthScreen = ({ navigation }) => {
     setId(user.data.id);
     setName(name);
     setPhotoUrl(icon);
-    global.id = user.data.id || 0;
+    global.id = user.data.id || 1;
+    
   }
 
   const signInWithGoogleAsync = async () => {

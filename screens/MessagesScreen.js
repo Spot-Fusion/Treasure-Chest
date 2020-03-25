@@ -31,7 +31,7 @@ const MessagesScreen = ({ navigation }) => {
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      <CustomHeader navigation={navigation} title="Messages" />
+      <CustomHeader navigation={navigation} title="Home"/>
       <Button title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} />
       {!!users.length && users.map((user) => (<OptionButton
         key={user.id_message}

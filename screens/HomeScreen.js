@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {Image, Platform, StyleSheet, TouchableOpacity, View, Text, Button, FlatList, ScrollView, StatusBar } from 'react-native';
-//import { ViewPager} from 'react-native-viewpager'
 import RecommendedCardItems from '../components/recommendedCardItems';
 import ViewPagerAndroid from "@react-native-community/viewpager";
 import * as WebBrowser from 'expo-web-browser';
@@ -14,18 +13,6 @@ import { render } from 'react-dom';
 import FAIcon from 'react-native-vector-icons/FontAwesome'
 import Swiper from 'react-native-swiper';
 import { black } from 'color-name';
-// const DATA = [
-//   { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 1 },
-//   { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 2 },
-//   { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 3 },
-//   { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 4 },
-//   { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 5 },
-//   { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 6 },
-//   { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 7 },
-//   { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 8 },
-//   { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 9 },
-//   { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 10 },
-//   ];
 
 const HomeScreen = ({ route, navigation}) => {
   console.log(route.params);
@@ -96,40 +83,11 @@ const HomeScreen = ({ route, navigation}) => {
       </Content>
       
     </Container>
-    // <View style={styles.container}>
-    //   <Button title= 'Menu' onPress={() => navigation.toggleDrawer()} />
-    //     <Button title="Go to Create Listings" onPress={() => navigation.navigate('Create Listing')} />
-    //     <View style={styles.container}>
-    // <ScrollView scrollEventThrottle= {16}>
-    //       <View style={{ flex: 1, backgroundColor: 'white', paddingHorizontal: 20}}>
-    //           <Text style = {{fontSize: 24, fontWeight: '700', paddingHorizontal: 20}} > Wassup shopper</Text>
-    //           <View style = {{height:130, marginTop: 20}}>
-    //             <ScrollView>
-    //               <View style = {{height: 130, height:130}}>
-    //                 <View style = {{flex:2}}>
-                    
-    //                 </View>
-    //                 <View style = {{flex:1}}>
-
-    //                 </View>
-    //               </View>
-    //             </ScrollView>
-    //           </View>
-    //       </View>
-    // </ScrollView>
-    //     <FlatList
-    //       data={DATA}
-    //       renderItem={({ item }) => <TouchableOpacity style={{justifyContent: 'center'}}>{item.key}</TouchableOpacity>}
-    //       keyExtractor={item => item.id.toString()}
-    //     /> 
-    //   </View>
-    // </View>
+    
   );
 
 }
-// HomeScreen.navigationOptions = {
-//   header: null,
-// };
+
 
 const styles = StyleSheet.create({
   container: {

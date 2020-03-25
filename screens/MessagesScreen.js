@@ -3,7 +3,7 @@ import axios from 'axios';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
-import CustomHeader from '../components/customHeader';
+import { CustomHeader } from '../components/CustomHeader';
 
 const MessagesScreen = ({ navigation }) => {
   const [users, setUsers] = React.useState([]);

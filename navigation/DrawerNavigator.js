@@ -38,7 +38,7 @@ const DrawerContent = (props) => (
         </Text>
       </View>
       )}
-      style={{ backgroundColor: "#3fb984" }} />
+      style={{ backgroundColor: "#223843" }} />
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
       <DrawerItem label="Tabs" onPress={() => props.navigation.navigate('Tabs')} />

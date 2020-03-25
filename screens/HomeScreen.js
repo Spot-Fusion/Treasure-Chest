@@ -1,45 +1,86 @@
 import * as React from 'react';
-import { Image, Platform, StyleSheet, TouchableOpacity, View, Text, Button, FlatList } from 'react-native';
-import * as WebBrowser from 'expo-web-browser';
-import { NavigationContainer } from '@react-navigation/native';
-import TabBarIcon from '../components/TabBarIcon'
-import BottomTabNavigator from '../navigation/BottomTabNavigator';
-import Expo from 'expo';
-import { Ionicons } from '@expo/vector-icons';
+import {Image, Platform, StyleSheet, TouchableOpacity, View, Text, Button, FlatList, ScrollView, StatusBar } from 'react-native';
+import RecommendedCardItems from '../components/recommendedCardItems';
+import ViewPagerAndroid from "@react-native-community/viewpager";
+import {Container, Content, Header, Left, Right, Icon, Item, Input, Card, CardItem} from 'native-base';
+import FAIcon from 'react-native-vector-icons/FontAwesome'
+// import Swiper from 'react-native-swiper';
 
-const DATA = [
-  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 1 },
-  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 2 },
-  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 3 },
-  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 4 },
-  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 5 },
-  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 6 },
-  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 7 },
-  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 8 },
-  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 9 },
-  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 10 },
-  ];
 
 const HomeScreen = ({ route, navigation }) => {
   console.log(route.params);
+  
   return (
-    <View style={styles.container}>
-      <Button title= 'Menu' onPress={() => navigation.toggleDrawer()} />
-        <Button title="Go to Create Listings" onPress={() => navigation.navigate('Create Listing')} />
-        <View style={styles.container}>
-        <FlatList
-          data={DATA}
-          renderItem={({ item }) => <TouchableOpacity style={{justifyContent: 'center'}}>{item.key}</TouchableOpacity>}
-          keyExtractor={item => item.id.toString()}
-        />
+    <Container>
+      <Header style={[{ backgroundColor: '#3a455c', 
+      height: 90, borderBottomColor: '#757575'}, styles.androidHeader]}>
+        <Left style = {{flexDirection: 'row'}}>
+          <Icon name = "md-menu" style = {{color: 'white', marginRight: 15}}></Icon>
+        <FAIcon name='amazon' style={{ fontSize: 32, color: 'white' }}></FAIcon>
+        </Left>
+        <Right>
+          <Icon name = 'md-cart' style = {{ color: 'white'}}></Icon>
+        </Right>
+      </Header>
+      <View
+      style = {{position: 'absolute', left: 0, right:0, top:90, height:70, backgroundColor: '#3a455c', flexDirection: 'row', alignItems: 'center', paddingHorizontal: 5}}>
+        <TouchableOpacity>
+          <View
+          style = {{width: 100, backgroundColor: '#e7e7eb', height: 50, borderRadius: 4, padding: 10 }}>
+            <Text style = {{fontSize: 12}}>SHOP BY</Text>
+            <Text style = {{fontWeight:'bold'}}> Category</Text>
+          </View>
+        </TouchableOpacity>
+        <View style = {{flex:1, height: '100%', marginLeft: 5, justifyContent: 'center'}}></View>
+        <Item style = {{backgroundColor: 'white', paddingHorizontal: 10, borderRadius: 4}}>
+          <Icon name = 'search' style = {{
+            fontSize: 20, paddingTop:5 }} ></Icon>
+            <Input placeholder = "Search"></Input>
+        </Item>
       </View>
-    </View>
+      <Content style = {{backgroundColor: '#d5d5d6', marginTop: 70}}>
+        <View style={{ height: 50, backgroundColor: 'white', flexDirection: 'row', paddingHorizontal: 5, alignItems: 'center', justifyContent: 'space-between'}}>
+              <Text>Hello, Mr.Johnson</Text>
+              <View style = {{flexDirection: 'row'}}>
+                <Text>Your Account </Text>
+                <Icon name = 'arrow-forward' style = {{fontSize:18}}></Icon>
+              </View>
+            </View>
+        <ViewPagerAndroid
+            autoplay = {true}
+            style = {{height:100}}>
+              <View style = {{flex:1}}>
+            <Image style={{ flex: 1, height: null, width: null, resizeMode: 'contain' }} source={require('../assets/images/robot-dev.png')}></Image>
+              </View>
+              <View style={{ flex: 1 }}>
+            <Image style={{ flex: 1, height: null, width: null, resizeMode: 'contain' }} source={require('../assets/images/robot-dev.png')}></Image>
+              </View>
+              <View style={{ flex: 1 }}>
+            <Image style={{ flex: 1, height: null, width: null, resizeMode: 'contain' }} source={require('../assets/images/robot-dev.png')}></Image>
+              </View>
+        </ViewPagerAndroid>
+        <Card>
+          <CardItem
+           header>
+             <Text> Your Recommendations</Text>
+           </CardItem>
+          <RecommendedCardItems
+          itemName ="You Cna heal your life"
+          itemCreator = "Louise Hay"
+          itemPrice ="$10"
+          savings = "2.5"
+          imageUrl = {require('../assets/images/robot-prod.png')}
+          ratings = {5} >
+          </RecommendedCardItems>
+        </Card>
+      </Content>
+      
+    </Container>
+    
   );
+
 }
 
-HomeScreen.navigationOptions = {
-  header: null,
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -47,6 +88,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'center',
     alignContent: 'center'
+  },
+  androidHeader: {
+    ...Platform.select({
+      android: {
+        paddingTop: StatusBar.currentHeight,
+      }
+    })
   },
   text: {
     marginBottom: 20,

@@ -15,7 +15,7 @@ import axios from 'axios'
 
  const getListing = async (id) => {
   await axios.get(`http://localhost:8080/listing/${id}`)
-    .then(post => setPost(post))
+    .then(post => setPost(post.data))
     .catch(e => console.error(e));
  }
 

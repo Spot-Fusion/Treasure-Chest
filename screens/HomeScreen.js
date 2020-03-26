@@ -16,10 +16,7 @@ const HomeScreen = ({ route, navigation }) => {
   let url = 'localhost' || '10.0.2.2';
   const getAllListings = async () => {
     await axios.get(`http://${url}:8080/listing/`)
-      .then(post => { 
-        // console.log(post);
-        setListings(post.data);
-      })
+      .then(post => setListings(post.data))
       .catch(e => console.error(e));
    }
 

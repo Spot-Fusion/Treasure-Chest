@@ -10,7 +10,7 @@ import { setWorldOriginAsync } from 'expo/build/AR';
   return (    
       <View style={styles.view}>
         <Text style={styles.text}>LogIn Screen Here</Text>
-        <Button title="Sign in with Google" onPress={() => navigation.navigate('Drawer')} />
+        <Button title="Sign in with Google" onPress={() => navigation.navigate('GoogleAuth')} />
       </View>
   );
 }

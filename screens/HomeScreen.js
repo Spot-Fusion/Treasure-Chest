@@ -32,13 +32,13 @@ const HomeScreen = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <CustomHeader navigation={navigation} title="Home"/>
-      {/* <Button title= 'Menu' onPress={() => navigation.toggleDrawer()} /> */}
         <Button title="Go to Create Listings" onPress={() => navigation.navigate('Create Listing')} />
         <View style={styles.container}>
         <FlatList
           data={listings}
-          renderItem={({ item }) => <TouchableOpacity style={{justifyContent: 'center'}} 
+          renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center'}} 
           onPress={() => navigation.navigate('ShowListing', { idListing: item.id })}>
+            <Ionicons name="md-image" size={50} color='gray' />
             <Text>{item.name}</Text>
             </TouchableOpacity>}
           keyExtractor={item => item.id.toString()}

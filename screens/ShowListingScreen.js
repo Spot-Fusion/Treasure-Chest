@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { StyleSheet, View, TextInput, Text, Button, Alert } from 'react-native';
-// import { Text, Button } from 'native-base'
 import { Ionicons } from '@expo/vector-icons';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import ExpoCamera from '../components/ExpoCamera';
@@ -13,11 +12,13 @@ import axios from 'axios'
    const [post, setPost] = React.useState({})
    console.log(idListing);
 
- const getListing = async (id) => {
-  await axios.get(`http://localhost:8080/listing/${id}`)
-    .then(post => setPost(post.data))
-    .catch(e => console.error(e));
- }
+   let url = 'localhost' || '10.0.2.2';
+
+  const getListing = async (id) => {
+    await axios.get(`http://${url}:8080/listing/${id}`)
+      .then(post => setPost(post.data))
+      .catch(e => console.error(e));
+  }
 
 React.useEffect(() =>{
   getListing(idListing)

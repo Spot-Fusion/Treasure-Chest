@@ -9,25 +9,13 @@ import { Ionicons } from '@expo/vector-icons';
 import CustomHeader from '../components/CustomHeader';
 import axios from 'axios';
 
-const DATA = [
-  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 1 },
-  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 2 },
-  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 3 },
-  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 4 },
-  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 5 },
-  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 6 },
-  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 7 },
-  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 8 },
-  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 9 },
-  { key: <Ionicons name="md-image" size={100} style={{ marginBottom: -3 }}/>, id: 10 },
-  ];
-
 const HomeScreen = ({ route, navigation }) => {
   const [listings, setListings] = React.useState([])
   console.log(route.params);
 
+  let url = 'localhost' || '10.0.2.2';
   const getAllListings = async () => {
-    await axios.get(`http://localhost:8080/listing/`)
+    await axios.get(`http://${url}:8080/listing/`)
       .then(post => { 
         // console.log(post);
         setListings(post.data);

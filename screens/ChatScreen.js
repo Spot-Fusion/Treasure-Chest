@@ -9,20 +9,23 @@ const ChatScreen = ({ route, navigation }) => {
   const [messages, setMessages] = React.useState([]);
   const [input, setInput] = React.useState('');
 
+  let url = 'localhost' || '10.0.2.2';
+
   const getMessages = async (id_user, id_recipient) => {
-    let messages = await axios.get(`http://10.0.2.2:8080/message/${id_user}/${id_recipient}`)
+    let messages = await axios.get(`http://${url}:8080/message/${id_user}/${id_recipient}`)
     setMessages(messages.data);
   }
 
   const sendMessage = async (id_user, id_recipient, text) => {
-    await axios.post(`http://10.0.2.2:8080/message/${id_user}/${id_recipient}`, { text });
+    await axios.post(`http://${url}:8080/message/${id_user}/${id_recipient}`, { text });
     await getMessages(id_user, id_recipient);
     setInput('');
   }
   
+  let idUser = global.id || 1;
   React.useEffect(() => {
-    getMessages(global.id, id_recipient)
-    let interval = setInterval(() => { getMessages(global.id, id_recipient) }, 1000);
+    getMessages(idUser, id_recipient)
+    let interval = setInterval(() => { getMessages(idUser, id_recipient) }, 1000);
     return () => clearInterval(interval);
   }, []);
 

@@ -28,7 +28,7 @@ console.log(post);
 const { name, description, price, zipcode, negotiable } = post;
   return (
     <View style={styles.view} style={styles.container} contentContainerStyle={styles.contentContainer}>
-    <CustomHeader navigation={navigation} title="Listing" />
+    {/* <CustomHeader navigation={navigation} title="Listing" /> */}
       <Button title="Go Home" onPress={() => navigation.navigate('Home')} />
         {/* <ExpoCamera /> */}
           <Text style={styles.text}> Listing Image </Text>

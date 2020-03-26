@@ -8,6 +8,7 @@ import LogInScreen from '../screens/LogInScreen';
 import ChatScreen from '../screens/ChatScreen';
 import ShowListingScreen from '../screens/ShowListingScreen';
 import MenuButton from '../components/MenuButton';
+import HomeScreen from '../screens/HomeScreen';
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,7 @@ const StackNavigator = () => (
         }}/>
         <Stack.Screen name="ChatScreen" component={ChatScreen} />
         <Stack.Screen name="ShowListing" component={ShowListingScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} />
     </Stack.Navigator>
   )
 

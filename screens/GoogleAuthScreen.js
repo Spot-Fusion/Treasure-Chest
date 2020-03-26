@@ -55,7 +55,7 @@ const GoogleAuthScreen = ({ navigation }) => {
   return (
     <View style={styles.view}>
       <Text style={styles.text}>Welcome Back {name}</Text>
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home', { name, photoUrl, id })} />
+      <Button title="Go to Home" onPress={() => navigation.navigate('Drawer', { name, photoUrl, id })} />
     </View>
   );
 }

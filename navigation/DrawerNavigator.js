@@ -14,11 +14,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import TabBarIcon from '../components/TabBarIcon';
 import GoogleAuthScreen from '../screens/GoogleAuthScreen';
 import { Ionicons } from '@expo/vector-icons';
+import ShowListingScreen from '../screens/ShowListingScreen';
 
 const Drawer = createDrawerNavigator();
 const DrawerStack  = createStackNavigator()
 
-const DrawerStackNavigator = () => (
+const DrawerStackNavigator = ({ navigation }) => (
     <DrawerStack.Navigator>
         <DrawerStack.Screen name="Tabs" component={BottomTabNavigator} />
     </DrawerStack.Navigator>
@@ -46,14 +47,13 @@ const DrawerContent = (props) => (
   </SafeAreaView>
   )
 
-const DrawerNavigator = () =>  (
+const DrawerNavigator = ({ navigation }) =>  (
     <Drawer.Navigator drawerContent={(props) => DrawerContent(props)}>       
-      <Drawer.Screen name="GOAuth" component={GoogleAuthScreen} />
       <Drawer.Screen name="Home" component={HomeScreen} />
       <Drawer.Screen name="Profile" component={ProfileScreen} />
       <Drawer.Screen name="Create Listing" component={CreateListingScreen} />
       <Drawer.Screen name="Messages" component={MessagesScreen} />
-      <Drawer.Screen name="Tabs" component={BottomTabNavigator} />
+      <Drawer.Screen name="Tabs" component={DrawerStackNavigator} />
       <Drawer.Screen name="Log Out" component={LogInScreen} />
     </Drawer.Navigator>
     )

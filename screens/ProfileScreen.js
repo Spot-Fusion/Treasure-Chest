@@ -5,11 +5,13 @@ import { ScrollView } from 'react-native-gesture-handler';
 import CustomHeader from '../components/CustomHeader';
 import ExpoImagePicker from '../components/ExpoImagePicker';
 
- const CreateListingScreen = ({navigation}) => {
+ const ProfileScreen = ({navigation}) => {
    const [userName, setUserName] = React.useState(global.name);
    const [email, setEmail] = React.useState(global.email)
    const [description, setDescription] = React.useState(global.image)
 
+   let url = 'localhost' || '10.0.2.2';
+   
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
     <CustomHeader navigation={navigation} title="Profile" />
@@ -74,4 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CreateListingScreen;
+export default ProfileScreen;

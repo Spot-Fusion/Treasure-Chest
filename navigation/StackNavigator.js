@@ -17,6 +17,7 @@ const options={ headerTitle: null,
 const StackNavigator = () => (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Login" component={LogInScreen} />
+      <Stack.Screen name="GoogleAuth" component={GoogleAuthScreen} />
       <Stack.Screen name="Drawer" component={DrawerNavigator} 
       options={{ headerTitle: null, 
         }}/>

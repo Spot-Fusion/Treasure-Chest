@@ -20,7 +20,7 @@ const Drawer = createDrawerNavigator();
 const DrawerStack  = createStackNavigator()
 
 const DrawerStackNavigator = ({ navigation }) => (
-    <DrawerStack.Navigator>
+    <DrawerStack.Navigator screenOptions={{headerShown: false}}>
         <DrawerStack.Screen name="Tabs" component={BottomTabNavigator} />
     </DrawerStack.Navigator>
 )

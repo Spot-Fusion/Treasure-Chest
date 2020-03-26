@@ -9,8 +9,9 @@ import { setWorldOriginAsync } from 'expo/build/AR';
    const [login, setLogin] = React.useState(false) 
   return (    
       <View style={styles.view}>
-        <Text style={styles.text}>LogIn Screen Here</Text>
-        <Button title="Sign in with Google" onPress={() => navigation.navigate('GoogleAuth')} />
+        <Ionicons name="md-cart" size={60} style={{justifyContent: 'flex-start'}} />
+        <Text style={styles.text}>Treasure-Chest</Text>
+        <Button title="Sign in with Google" onPress={() => navigation.navigate('GoogleAuth')} style={{justifyContent: 'flex-end'}} />
       </View>
   );
 }

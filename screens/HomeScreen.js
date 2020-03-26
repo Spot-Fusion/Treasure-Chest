@@ -29,7 +29,10 @@ const HomeScreen = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <CustomHeader navigation={navigation} title="Home"/>
-        <Button title="Go to Create Listings" onPress={() => navigation.navigate('Create Listing')} />
+      <TouchableOpacity onPress={() => navigation.navigate('Create Listing')}>
+        <Text style={{fontSize: 20, alignContent: 'center'}}>Go to Create Listing</Text>
+      </TouchableOpacity>
+        {/* <Button title="Go to Create Listings" onPress={() => navigation.navigate('Create Listing')} /> */}
         <View style={styles.container}>
         <FlatList
           data={listings}

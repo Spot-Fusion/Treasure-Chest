@@ -42,7 +42,7 @@ const ChatScreen = ({ route, navigation }) => {
       <TextInput
         style={styles.input}
         onChangeText={(val) => setInput(val)}
-        onSubmitEditing={() => sendMessage(global.id, id_recipient, input)}
+        onSubmitEditing={() => sendMessage(idUser, id_recipient, input)}
       />
     </ScrollView>
   );

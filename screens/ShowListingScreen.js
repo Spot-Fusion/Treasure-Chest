@@ -42,14 +42,14 @@ const styles = StyleSheet.create({
 
 const { name, description, price, zipcode} = post;
 console.log(zipcode)
-let map = <Text></Text>
+let map = <Text></Text>;
 if(zipcode){
   map = <StaticMap zip={zipcode}></StaticMap>;
 }
   return (
     // <View style={styles.compartment}>
     <ScrollView style={styles.compartment}>
-      <Image style={styles.image} source={require('../images/ThumbnailImage.png')}/>
+      <Image style={styles.image} source={require('../images/ThumbnailImage1.png')}/>
       <View style={{marginVertical: 15, marginHorizontal: 15, flexDirection: 'row'}}>
         <Text style={styles.info}>{name}</Text>
         <Text style={styles.info}>{`$${price}`}</Text>

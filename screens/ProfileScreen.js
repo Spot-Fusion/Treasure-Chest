@@ -9,8 +9,6 @@ import ExpoImagePicker from '../components/ExpoImagePicker';
    const [userName, setUserName] = React.useState(global.name);
    const [email, setEmail] = React.useState(global.email)
    const [description, setDescription] = React.useState(global.image)
-
-   let url = 'localhost' || '10.0.2.2';
    
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>

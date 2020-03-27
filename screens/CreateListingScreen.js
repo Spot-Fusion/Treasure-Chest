@@ -22,7 +22,7 @@ import axios from 'axios';
    let url = 'localhost' || '10.0.2.2';
 
    const addPost = async (name, description, price, zipcode, negotiable) => {
-    await axios.post(`http://${url}:8080/listing/`, {id_seller: idSeller, id_category: 1, name, description, price, zipcode, negotiable })
+    await axios.post(`http://10.0.2.2:8080/listing/`, {id_seller: idSeller, id_category: 1, name, description, price, zipcode, negotiable })
     .then(id => setIdListing(id.data))
     .catch(e => console.error(e));
   }

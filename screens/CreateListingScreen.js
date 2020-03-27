@@ -28,7 +28,7 @@ import axios from 'axios';
   }
 
   return (    
-      <View style={styles.view}style={styles.container} contentContainerStyle={styles.contentContainer}>
+      <View style={styles.view} /*style={styles.container} contentContainerStyle={styles.contentContainer}*/>
         <CustomHeader navigation={navigation} title="Create Listing" />
       <Button title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} />
         {/* <ExpoCamera /> */}
@@ -37,6 +37,7 @@ import axios from 'axios';
           {/* <CategoryPicker onClick={(v) => setIdCategory(v.id)}/> */}
           <Text>Name</Text>
           <TextInput
+            value={name}
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
             onChangeText={(text) => setName(text)}
             placeholder='Input Title...'
@@ -44,6 +45,7 @@ import axios from 'axios';
           <Text>Description</Text>
           <TextInput
             multiline
+            value={description}
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
             onChangeText={(text) => setDescription(text)}
             placeholder='Input Description...'
@@ -51,6 +53,7 @@ import axios from 'axios';
           <Text>Price</Text>
           <TextInput
             keyboardType={"number-pad"}
+            value={price}
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
             onChangeText={(num) => setPrice(num)}
             placeholder='Input Price...'
@@ -58,20 +61,27 @@ import axios from 'axios';
           <Text>ZipCode</Text>
           <TextInput
             keyboardType={"number-pad"}
+            value={zipcode}
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
             onChangeText={(num) => setZipcode(num)}
             placeholder='Input Price...'
           />
           <Text>Negotiable: {negotiable === 1 ? 'yes' : 'no'}</Text>
           <CheckBox style={{flex: 1, padding: 10}}
+            value={negotiable}
             onClick={()=> setNegotialbe(1)}
             isChecked={negotiable}
             leftText={"Negotiable?"}
           />
           <Button title="Create Listing" onPress={() => {
             addPost(name, description, price, zipcode, negotiable);
+            setName('');
+            setDescription('');
+            setPrice(0);
+            setZipcode(0);
+            setNegotialbe(0);
             console.log("listing created")}} />
-            <Button title="Show Listing" onPress={() => {
+          <Button title="Show Listing" onPress={() => {
             navigation.navigate('ShowListing', { idListing })}} />
       </View>
   );

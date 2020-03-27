@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Geocoder from 'react-native-geocoding';
 import GoogleStaticMap, {Marker} from 'react-native-google-static-map';
 import { Text } from 'react-native';
+import { googlKey } from '../config';
 
 export default class StaticMap extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ export default class StaticMap extends Component {
   }
 
   test () {
-    Geocoder.init("AIzaSyA8ir6Fp244pQxaXhw3A6yxa9lkpQBndXs");
+    Geocoder.init(googlKey);
     console.log(this.props.zip)
     Geocoder.from(`${this.props.zip}`)
       .then(json => {
@@ -44,7 +45,7 @@ export default class StaticMap extends Component {
           longitude={lng}
           zoom={13}
           size={{ width: 350, height: 350 }}
-          apiKey={'AIzaSyA8ir6Fp244pQxaXhw3A6yxa9lkpQBndXs'}
+          apiKey={googlKey}
       />
     );
   }

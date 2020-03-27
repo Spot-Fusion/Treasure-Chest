@@ -12,10 +12,8 @@ import axios from 'axios'
    const [post, setPost] = React.useState({})
    console.log(idListing);
 
-   let url = 'localhost' || '10.0.2.2';
-
   const getListing = async (id) => {
-    await axios.get(`http://${url}:8080/listing/${id}`)
+    await axios.get(`http://10.0.2.2:8080/listing/${id}`)
       .then(post => setPost(post.data))
       .catch(e => console.error(e));
   }

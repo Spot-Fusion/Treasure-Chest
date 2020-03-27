@@ -13,9 +13,8 @@ const HomeScreen = ({ route, navigation }) => {
   const [listings, setListings] = React.useState([])
   console.log(route.params);
 
-  let url = 'localhost' || '10.0.2.2';
   const getAllListings = async () => {
-    await axios.get(`http://${url}:8080/listing/`)
+    await axios.get(`http://10.0.2.2:8080/listing/`)
       .then(post => setListings(post.data))
       .catch(e => console.error(e));
    }

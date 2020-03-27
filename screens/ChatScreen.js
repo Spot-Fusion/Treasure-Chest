@@ -41,6 +41,7 @@ const ChatScreen = ({ route, navigation }) => {
         />))}
       </View>
       <TextInput
+        autoCorrect={false}
         style={styles.input}
         value={input}
         onChangeText={(val) => setInput(val)}

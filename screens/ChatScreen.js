@@ -22,7 +22,7 @@ const ChatScreen = ({ route, navigation }) => {
     setInput('');
   }
   
-  let idUser = global.id || 1;
+  let idUser = global.id || 2;
   React.useEffect(() => {
     getMessages(idUser, id_recipient)
     let interval = setInterval(() => { getMessages(idUser, id_recipient) }, 1000);
@@ -43,8 +43,10 @@ const ChatScreen = ({ route, navigation }) => {
         />))}
       </View>
       <TextInput
+        autoCorrect={false}
         style={styles.input}
         value={input}
+        clearButtonMode="always"
         onChangeText={(val) => setInput(val)}
         onSubmitEditing={() => {
           sendMessage(idUser, id_recipient, input);

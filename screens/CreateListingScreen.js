@@ -19,8 +19,6 @@ import axios from 'axios';
    const [negotiable, setNegotialbe] = React.useState(0);   
    const [idListing, setIdListing] = React.useState(0);
 
-   let url = 'localhost' || '10.0.2.2';
-
    const addPost = async (name, description, price, zipcode, negotiable) => {
     await axios.post(`http://10.0.2.2:8080/listing/`, {id_seller: idSeller, id_category: 1, name, description, price, zipcode, negotiable })
     .then(id => setIdListing(id.data))

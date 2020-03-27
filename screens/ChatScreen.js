@@ -2,7 +2,7 @@ import * as React from 'react';
 import axios from 'axios';
 import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { RectButton, ScrollView } from 'react-native-gesture-handler';
+import { RectButton, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 
 const ChatScreen = ({ route, navigation }) => {
   const { id_recipient } = route.params;
@@ -31,7 +31,10 @@ const ChatScreen = ({ route, navigation }) => {
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <Text style={{fontSize: 20}}>Go Back</Text>
+      </TouchableOpacity>
+      {/* <Button title="Go back" onPress={() => navigation.goBack()} /> */}
       <View style={styles.view}>
         {messages.map((message) => (<OptionButton
           key={message.id_message}
@@ -41,8 +44,12 @@ const ChatScreen = ({ route, navigation }) => {
       </View>
       <TextInput
         style={styles.input}
+        value={input}
         onChangeText={(val) => setInput(val)}
-        onSubmitEditing={() => sendMessage(global.id, id_recipient, input)}
+        onSubmitEditing={() => {
+          sendMessage(idUser, id_recipient, input);
+          setInput('');
+        }}
       />
     </ScrollView>
   );

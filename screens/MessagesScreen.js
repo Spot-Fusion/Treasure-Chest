@@ -9,12 +9,12 @@ const MessagesScreen = ({ navigation }) => {
   const [users, setUsers] = React.useState([]);
 
   const getUsers = async (id) => {
-    let users = await axios.get(`http://'10.0.2.2':8080/message/users/${id}`)
+    let users = await axios.get(`http://10.0.2.2:8080/message/users/${id}`)
     setUsers(users.data);
   }
 
   const getId = async (email) => {
-    let user = await axios.get(`http://'10.0.2.2':8080/user/${email}`)
+    let user = await axios.get(`http://10.0.2.2:8080/user/${email}`)
     console.log('id:',user.data.id);
     return user.data.id
   }
@@ -26,8 +26,8 @@ const MessagesScreen = ({ navigation }) => {
   let idUser = global.id || 1
   React.useEffect(() => {
     getUsers(idUser)
-    let interval = setInterval(() => { getUsers(idUser) }, 1000);
-    return () => clearInterval(interval);
+    // let interval = setInterval(() => { getUsers(idUser) }, 1000);
+    // return () => clearInterval(interval);
   }, []);
 
   return (

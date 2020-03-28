@@ -23,8 +23,8 @@ const ChatScreen = ({ route, navigation }) => {
   let idUser = global.id || 1;
   React.useEffect(() => {
     getMessages(idUser, id_recipient)
-    let interval = setInterval(() => { getMessages(idUser, id_recipient) }, 1000);
-    return () => clearInterval(interval);
+    // let interval = setInterval(() => { getMessages(idUser, id_recipient) }, 1000);
+    // return () => clearInterval(interval);
   }, []);
 
   return (
@@ -47,6 +47,7 @@ const ChatScreen = ({ route, navigation }) => {
         onChangeText={(val) => setInput(val)}
         onSubmitEditing={() => {
           sendMessage(idUser, id_recipient, input);
+          getMessages(idUser, id_recipient)
           setInput('');
         }}
       />

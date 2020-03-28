@@ -19,11 +19,11 @@ import axios from 'axios';
    const [negotiable, setNegotialbe] = React.useState(0);   
    const [idListing, setIdListing] = React.useState(0);
 
-   let url = 'localhost' || '10.0.2.2';
+   let url = '10.0.2.2';
 
    const addPost = async (name, description, price, zipcode, negotiable) => {
-    await axios.post(`http://10.0.2.2:8080/listing/`, {id_seller: idSeller, id_category: 1, name, description, price, zipcode, negotiable })
-    .then(id => setIdListing(id.data))
+    await axios.post(`http://${url}:8080/listing/`, {id_seller: idSeller, id_category: 1, name, description, price, zipcode, negotiable })
+    .then(body => navigation.navigate('ShowListing', {idListing: body.data}))
     .catch(e => console.error(e));
   }
 
@@ -74,15 +74,15 @@ import axios from 'axios';
             leftText={"Negotiable?"}
           />
           <Button title="Create Listing" onPress={() => {
-            addPost(name, description, price, zipcode, negotiable);
+            addPost(name, description, price, zipcode, negotiable)
             setName('');
             setDescription('');
             setPrice(0);
             setZipcode(0);
             setNegotialbe(0);
-            console.log("listing created")}} />
-          <Button title="Show Listing" onPress={() => {
-            navigation.navigate('ShowListing', { idListing })}} />
+            console.log("listing created")}}
+            />
+          {/* <Button title="Show Listing" onPress={() => navigation.navigate('ShowListing', { idListing })} /> */}
       </View>
   );
 }

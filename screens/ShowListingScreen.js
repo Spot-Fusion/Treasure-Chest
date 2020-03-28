@@ -1,80 +1,67 @@
 import * as React from 'react';
-import { StyleSheet, View, TextInput, Text, Button, Alert } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { RectButton, ScrollView } from 'react-native-gesture-handler';
-import ExpoCamera from '../components/ExpoCamera';
-import CustomHeader from '../components/CustomHeader';
+import { StyleSheet, View, TextInput, Text, Button, Image, TouchableOpacity, ScrollView } from 'react-native';
 import axios from 'axios'
-
+import StaticMap from './StaticMap';
  const ShowListingScreen = ({ navigation, route }) => {
    const defaultParams = {name: 'Jordans', description: 'Gunmetal Blue\nSize 13', price: 200.00, zipcode: 70116, negotiable: true, id: 14 }
    const { idListing } = !route.params ? defaultParams  : route.params ;
    const [post, setPost] = React.useState({})
-   console.log(idListing);
-
   const getListing = async (id) => {
     await axios.get(`http://10.0.2.2:8080/listing/${id}`)
       .then(post => setPost(post.data))
       .catch(e => console.error(e));
   }
-
 React.useEffect(() =>{
   getListing(idListing)
 }, [])
-
-console.log(post);
-const { name, description, price, zipcode, negotiable } = post;
+const styles = StyleSheet.create({
+  compartment:{
+    marginVertical: 25,
+  },
+  image:{
+    alignSelf: 'center',
+    height: 200,
+    width: 200,
+  },
+  info:{
+    fontSize: 26,
+    marginRight: '35%'
+  },
+  buttons:{
+    width: 125,
+    height: 35,
+    borderRadius: 5,
+    backgroundColor: '#3FC184',
+    marginRight: 15,
+  }
+});
+const { name, description, price, zipcode} = post;
+console.log(zipcode)
+let map = <Text></Text>;
+if(zipcode){
+  map = <StaticMap zip={zipcode}></StaticMap>;
+}
   return (
-    <View style={styles.view} style={styles.container} contentContainerStyle={styles.contentContainer}>
-    {/* <CustomHeader navigation={navigation} title="Listing" /> */}
-      <Button title="Go Back" onPress={() => navigation.navigate('Drawer')} />
-        {/* <ExpoCamera /> */}
-          <Text style={styles.text}> Listing Image </Text>
-          <Text>Title: {name}</Text>
-         
-          <Text>Description: {description}</Text>
-          
-          <Text>Price: ${price}</Text>
-
-          <Text>ZipCode: {zipcode}</Text>
-
-          <Text>Negotiable: {negotiable ? 'yes' : 'no'}</Text>
-
-    </View>
+    // <View style={styles.compartment}>
+    <ScrollView style={styles.compartment}>
+      <Image style={styles.image} source={require('../images/ThumbnailImage1.png')}/>
+      <View style={{marginVertical: 15, marginHorizontal: 15, flexDirection: 'row'}}>
+        <Text style={styles.info}>{name}</Text>
+        <Text style={styles.info}>{`$${price}`}</Text>
+      </View>
+      <View style={{marginHorizontal: '15%', flexDirection: 'row',}}>
+        <TouchableOpacity style={styles.buttons}>
+          <Text style={{alignSelf:'center', marginTop:6 }}>Favorite</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.buttons}>
+          <Text style={{alignSelf:'center', marginTop:6 }}>Message</Text>
+        </TouchableOpacity>
+      </View>
+        <Text style={{marginHorizontal: 30, marginVertical: 30, fontSize: 17}}>{description}</Text>
+        <View style={{alignItems: 'center'}}>
+          {map}
+        </View>
+    </ScrollView>
   );
 }
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fafafa',
-    alignContent: 'center',
-    
-  },
-  contentContainer: {
-    paddingTop: 15,
-  },
-  optionIconContainer: {
-    marginRight: 12,
-  },
-  View: {
-    backgroundColor: '#fdfdfd',
-    paddingHorizontal: 15,
-    paddingVertical: 15,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderBottomWidth: 0,
-    borderColor: '#ededed',
-  },
-  lastOption: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-  text: {
-    fontSize: 15,
-    alignSelf: 'flex-start',
-    marginTop: 1,
-    justifyContent: 'center',
-  },
-});
-
 export default ShowListingScreen;

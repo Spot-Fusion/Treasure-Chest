@@ -64,4 +64,5 @@ if(zipcode){
     </ScrollView>
   );
 }
-export default ShowListingScreen;
+
+export default ShowListingScreen; 

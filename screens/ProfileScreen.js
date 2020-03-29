@@ -6,9 +6,9 @@ import CustomHeader from '../components/CustomHeader';
 import ExpoImagePicker from '../components/ExpoImagePicker';
 import axios from 'axios';
 
- const ProfileScreen = ({navigation}) => {
+ const ProfileScreen = ({navigation, route}) => {
    const [userName, setUserName] = React.useState(global.name);
-   const [email, setEmail] = React.useState(global.email);
+  //  const [email, setEmail] = React.useState(global.email);
    const [description, setDescription] = React.useState(global.image);
    const [image, setImage] = React.useState('');
    const [edit, setEdit] = React.useState(false);
@@ -18,7 +18,7 @@ import axios from 'axios';
       .then(post => {
         console.log(post);
         setUserName(post.data.name)
-        setEmail(post.data.email)
+        // setEmail(post.data.email)
         setDescription(post.data.bio)
         setImage(post.data.icon)
       })
@@ -27,12 +27,17 @@ import axios from 'axios';
   const patchProfile = async (id, name, bio, icon) => {
    let post = await axios.post(`http://10.0.2.2:8080/user/update/${id}`, { name, bio, icon, id})
    setUserName(post.data.name)
-   setEmail(post.data.email)
+  //  setEmail(post.data.email)
    setDescription(post.data.bio)
    setImage(post.data.icon)
   }
 
-  let idUser = global.id;
+  const chooseImage = (img) => {
+    setImage('' + img);
+    console.log(`This is chosen: ${img}`);
+  };
+
+  let idUser = route.params === undefined ? global.id || 1 : route.params.id;
   React.useEffect(() =>{
     getProfile(idUser)
   }, [])
@@ -42,11 +47,12 @@ import axios from 'axios';
     <CustomHeader navigation={navigation} title="Profile" />
       <Button title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} />
       <Image
-          style={{ height: 70, width: 70, borderRadius: 35, resizeMode: "contain" }}
+          style={{padding: 10, height: 70, width: 70, borderRadius: 35, resizeMode: "contain" }}
           source={{ uri: image === '' ? "http://pngimg.com/uploads/tiger/tiger_PNG23245.png" : image }} />
       <View style={styles.view}>
-      <Button title="Edit Profile" onPress={() => setEdit(!edit)} />
-        <ExpoImagePicker />
+      {route.params ? <Button title="Message" onPress={() => navigation.navigate('ChatScreen', { id_recipient: route.params.id })} /> : 
+      <Button title="Edit Profile" onPress={() => setEdit(!edit)} />}
+        {edit ? <ExpoImagePicker chooseImage={chooseImage}/> : null}
           <Text style={styles.text}>Profile</Text>
           <Text>User Name: {userName}</Text>
           { edit ? <TextInput
@@ -70,13 +76,13 @@ import axios from 'axios';
             onChangeText={(text) => setDescription(text)}
             placeholder='Input Description...'
           /> : null}          
-          <TouchableOpacity onPress={() => {
+          {edit ? <TouchableOpacity onPress={() => {
             patchProfile(idUser, userName, description, image);
             // getProfile(idUser);
             setEdit(false);
           }}>
             <Text>Update Profile</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> : null}
       </View>
     </ScrollView>
   );

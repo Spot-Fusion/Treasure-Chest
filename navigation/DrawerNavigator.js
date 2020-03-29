@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleSheet, View, TextInput, Text, Button, Alert, Image, SafeAreaView, ScrollView } from 'react-native';
 // import TabBarIcon from '../components/TabBarIcon';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
-
+import axios from 'axios';
 
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen';
@@ -25,17 +25,19 @@ const DrawerStackNavigator = ({ navigation }) => (
     </DrawerStack.Navigator>
 )
 
-const DrawerContent = (props) => (
+const DrawerContent = (props, {user}) => {
+ 
+  return (
   <SafeAreaView style={{flex: 1}}>    
     <DrawerItem name="top" label={() => (
       <View style={{ flex: 1, flexDirection: "row" }}>
         <Image
           style={{ height: 70, width: 70, borderRadius: 35, resizeMode: "contain" }}
           source={{
-            uri: "http://pngimg.com/uploads/tiger/tiger_PNG23245.png"
+            uri: !user ? "http://pngimg.com/uploads/tiger/tiger_PNG23245.png" : user.icon
           }} />
         <Text style={{ color: "#E5EBEA", alignSelf: "flex-end", fontSize: 16 }} >
-          Coach O
+          {!user ? "Coach O" : user.name}
         </Text>
       </View>
       )}
@@ -47,9 +49,26 @@ const DrawerContent = (props) => (
     </DrawerContentScrollView>
   </SafeAreaView>
   )
+}
 
-const DrawerNavigator = ({ navigation }) =>  (
-    <Drawer.Navigator drawerContent={(props) => DrawerContent(props)}>       
+const DrawerNavigator = ({ navigation }) =>  {
+  const [user, setUser] = React.useState({})
+
+  const getProfile = async (id) => {
+    await axios.get(`http://10.0.2.2:8080/user/id/${id}`)
+      .then(post => setUser(post.data))
+      .catch(e => console.error(e));
+  }
+
+  let idUser = global.id;
+  React.useEffect(() =>{
+    getProfile(idUser)
+  }, [])
+ 
+  // console.log(user);
+
+  return (
+    <Drawer.Navigator drawerContent={(props) => DrawerContent(props, {user})}>       
       <Drawer.Screen name="Home" component={HomeScreen} />
       <Drawer.Screen name="Profile" component={ProfileScreen} />
       <Drawer.Screen name="Create Listing" component={CreateListingScreen} />
@@ -59,6 +78,7 @@ const DrawerNavigator = ({ navigation }) =>  (
       <Drawer.Screen name="ShowListing" component={ShowListingScreen} options={{drawerLabel: () => null, title: null, }}/>
     </Drawer.Navigator>
     )
+}
 
 
 export default DrawerNavigator;

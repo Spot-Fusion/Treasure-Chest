@@ -10,7 +10,7 @@ import ExpoImagePicker from '../components/ExpoImagePicker';
 import axios from 'axios';
 
  const CreateListingScreen = ({navigation}) => {
-   const [idSeller, setIdSeller] = React.useState(1);
+   const [idSeller, setIdSeller] = React.useState(global.id);
    const [idCategory, setIdCategory] = React.useState(1);
    const [name, setName] = React.useState('');
    const [description, setDescription] = React.useState('')
@@ -22,11 +22,24 @@ import axios from 'axios';
 
    let url = '10.0.2.2';
 
+   const addImage = async (id, image) => {
+    await axios.post(`http://${url}:8080/listing/${id}`, { image })
+    .then(body => {
+      console.log(body.data);
+      navigation.navigate('ShowListing', { idListing });
+    })
+    .catch(e => console.error(e))
+   }
+
    const addPost = async (name, description, price, zipcode, negotiable) => {
     await axios.post(`http://${url}:8080/listing/`, {id_seller: idSeller, id_category: 1, name, description, price, zipcode, negotiable })
-    .then(body => navigation.navigate('ShowListing', {idListing: body.data}))
+    .then(body => {
+      addImage(body.data, image)
+      setIdListing(body.data);
+    })
     .catch(e => console.error(e));
   }
+
 
   const chooseImage = (img) => {
     setImage('' + img);
@@ -89,6 +102,7 @@ import axios from 'axios';
             setPrice(0);
             setZipcode(0);
             setNegotialbe(0);
+            setImage('')
             console.log("listing created")}}
             />
           {/* <Button title="Show Listing" onPress={() => navigation.navigate('ShowListing', { idListing })} /> */}

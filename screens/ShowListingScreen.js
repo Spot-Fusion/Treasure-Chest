@@ -2,10 +2,13 @@ import * as React from 'react';
 import { StyleSheet, View, TextInput, Text, Button, Image, TouchableOpacity, ScrollView } from 'react-native';
 import axios from 'axios'
 import StaticMap from './StaticMap';
+import CustomHeader from '../components/CustomHeader';
+
  const ShowListingScreen = ({ navigation, route }) => {
    const defaultParams = {name: 'Jordans', description: 'Gunmetal Blue\nSize 13', price: 200.00, zipcode: 70116, negotiable: true, id: 14 }
    const { idListing } = !route.params ? defaultParams  : route.params ;
    const [post, setPost] = React.useState({})
+
   const getListing = async (id) => {
     await axios.get(`http://10.0.2.2:8080/listing/${id}`)
       .then(post => setPost(post.data))
@@ -41,9 +44,13 @@ let map = <Text></Text>;
 if(zipcode){
   map = <StaticMap zip={zipcode}></StaticMap>;
 }
+
+console.log(navigation);
+
   return (
     // <View style={styles.compartment}>
     <ScrollView style={styles.compartment}>
+      <CustomHeader navigation={navigation} title="Listing" />
       <Image style={styles.image} source={require('../images/ThumbnailImage1.png')}/>
       <View style={{marginVertical: 15, marginHorizontal: 15, flexDirection: 'row'}}>
         <Text style={styles.info}>{name}</Text>

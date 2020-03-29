@@ -56,7 +56,7 @@ const DrawerNavigator = ({ navigation }) =>  (
       <Drawer.Screen name="Messages" component={MessagesScreen} />
       <Drawer.Screen name="Tabs" component={DrawerStackNavigator} />
       {/* <Drawer.Screen name="Log Out" component={LogInScreen} /> */}
-      <Drawer.Screen name="ShowListing" component={ShowListingScreen} />
+      <Drawer.Screen name="ShowListing" component={ShowListingScreen} options={{drawerLabel: () => null, title: null, }}/>
     </Drawer.Navigator>
     )
 

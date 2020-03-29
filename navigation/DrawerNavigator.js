@@ -42,7 +42,8 @@ const DrawerContent = (props) => (
       style={{ backgroundColor: "#223843" }} />
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
-      <DrawerItem label="Tabs" onPress={() => props.navigation.navigate('Tabs')} />
+      <DrawerItem label="Log Out" onPress={() => props.navigation.navigate('Login')} />
+
     </DrawerContentScrollView>
   </SafeAreaView>
   )
@@ -54,7 +55,8 @@ const DrawerNavigator = ({ navigation }) =>  (
       <Drawer.Screen name="Create Listing" component={CreateListingScreen} />
       <Drawer.Screen name="Messages" component={MessagesScreen} />
       <Drawer.Screen name="Tabs" component={DrawerStackNavigator} />
-      <Drawer.Screen name="Log Out" component={LogInScreen} />
+      {/* <Drawer.Screen name="Log Out" component={LogInScreen} /> */}
+      <Drawer.Screen name="ShowListing" component={ShowListingScreen} />
     </Drawer.Navigator>
     )
 

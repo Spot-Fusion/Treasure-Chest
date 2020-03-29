@@ -8,14 +8,24 @@ import CustomHeader from '../components/CustomHeader';
    const defaultParams = {name: 'Jordans', description: 'Gunmetal Blue\nSize 13', price: 200.00, zipcode: 70116, negotiable: true, id: 14 }
    const { idListing } = !route.params ? defaultParams  : route.params ;
    const [post, setPost] = React.useState({})
+   const [image, setImage] = React.useState('');
 
   const getListing = async (id) => {
     await axios.get(`http://10.0.2.2:8080/listing/${id}`)
       .then(post => setPost(post.data))
       .catch(e => console.error(e));
   }
+  const getImage = async (id) => {
+    await axios.get(`http://10.0.2.2:8080/listing/${id}/images`)
+      .then(post => {
+        console.log(post.data);
+        setImage(''  + post.data[0].image);
+      })
+      .catch(e => console.error(e));
+  }
 React.useEffect(() =>{
   getListing(idListing)
+  getImage(idListing)
 }, [])
 const styles = StyleSheet.create({
   compartment:{
@@ -39,19 +49,19 @@ const styles = StyleSheet.create({
   }
 });
 const { name, description, price, zipcode} = post;
-console.log(zipcode)
+// console.log(zipcode)
 let map = <Text></Text>;
 if(zipcode){
   map = <StaticMap zip={zipcode}></StaticMap>;
 }
 
-console.log(navigation);
+// console.log(navigation);
 
   return (
     // <View style={styles.compartment}>
     <ScrollView style={styles.compartment}>
       <CustomHeader navigation={navigation} title="Listing" />
-      <Image style={styles.image} source={require('../images/ThumbnailImage1.png')}/>
+      <Image style={styles.image} source={{ uri: image === '' ? "http://pngimg.com/uploads/tiger/tiger_PNG23245.png" : image }}/>
       <View style={{marginVertical: 15, marginHorizontal: 15, flexDirection: 'row'}}>
         <Text style={styles.info}>{name}</Text>
         <Text style={styles.info}>{`$${price}`}</Text>

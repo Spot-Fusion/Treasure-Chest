@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, TextInput, Text, Button, Alert } from 'react-native';
+import { StyleSheet, View, TextInput, Text, Button, Alert, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import ExpoCamera from '../components/ExpoCamera';
@@ -16,7 +16,8 @@ import axios from 'axios';
    const [description, setDescription] = React.useState('')
    const [price, setPrice] = React.useState(0);
    const [zipcode, setZipcode] = React.useState(0);
-   const [negotiable, setNegotialbe] = React.useState(0);   
+   const [negotiable, setNegotialbe] = React.useState(0);
+   const [image, setImage] = React.useState('');
    const [idListing, setIdListing] = React.useState(0);
 
    let url = '10.0.2.2';
@@ -27,12 +28,20 @@ import axios from 'axios';
     .catch(e => console.error(e));
   }
 
+  const chooseImage = (img) => {
+    setImage('' + img);
+    console.log(`This is chosen: ${img}`);
+  };
+
   return (    
       <View style={styles.view} /*style={styles.container} contentContainerStyle={styles.contentContainer}*/>
         <CustomHeader navigation={navigation} title="Create Listing" />
       <Button title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} />
         {/* <ExpoCamera /> */}
-        <ExpoImagePicker />
+        <Image
+          style={{padding: 10, height: 70, width: 70, borderRadius: 35, resizeMode: "contain" }}
+          source={{ uri: image === '' ? "http://pngimg.com/uploads/tiger/tiger_PNG23245.png" : image }} />
+        <ExpoImagePicker chooseImage={chooseImage}/>
           <Text style={styles.text}>Create Listing Screen Here</Text>
           {/* <CategoryPicker onClick={(v) => setIdCategory(v.id)}/> */}
           <Text>Name</Text>

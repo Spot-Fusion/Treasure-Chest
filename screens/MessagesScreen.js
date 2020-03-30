@@ -14,7 +14,7 @@ const MessagesScreen = ({ navigation }) => {
   }
 
   const getId = async (email) => {
-    let user = await axios.get(`http://'10.0.2.2':8080/user/${email}`)
+    let user = await axios.get(`http://10.0.2.2:8080/user/${email}`)
     console.log('id:',user.data.id);
     return user.data.id
   }

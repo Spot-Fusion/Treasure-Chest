@@ -12,9 +12,11 @@ import axios from 'axios';
    const [description, setDescription] = React.useState(global.image);
    const [image, setImage] = React.useState('');
    const [edit, setEdit] = React.useState(false);
+
+   let url = '10.0.2.2'; 
   
    const getProfile = async (id) => {
-    await axios.get(`http://10.0.2.2:8080/user/id/${id}`)
+    await axios.get(`http://${url}:8080/user/id/${id}`)
       .then(post => {
         console.log(post);
         setUserName(post.data.name)
@@ -25,7 +27,7 @@ import axios from 'axios';
       .catch(e => console.error(e));
   }
   const patchProfile = async (id, name, bio, icon) => {
-   let post = await axios.post(`http://10.0.2.2:8080/user/update/${id}`, { name, bio, icon, id})
+   let post = await axios.post(`http://${url}:8080/user/update/${id}`, { name, bio, icon, id})
    setUserName(post.data.name)
   //  setEmail(post.data.email)
    setDescription(post.data.bio)
@@ -37,7 +39,7 @@ import axios from 'axios';
     console.log(`This is chosen: ${img}`);
   };
 
-  let idUser = route.params === undefined ? global.id || 1 : route.params.id;
+  let idUser = route.params === undefined ? global.id : route.params.id;
   React.useEffect(() =>{
     getProfile(idUser)
   }, [])

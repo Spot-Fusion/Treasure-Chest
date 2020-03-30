@@ -50,14 +50,8 @@ const GoogleAuthScreen = ({ navigation }) => {
   }
   
   React.useEffect(() => { signInWithGoogleAsync() }, []);
-  // }
-  // console.log(result);
-  return (
-    <View style={styles.view}>
-      <Text style={styles.text}>Welcome Back {name}</Text>
-      <Button title="Go to Home" onPress={() => navigation.navigate('Drawer', { name, photoUrl, id })} />
-    </View>
-  );
+  navigation.navigate('Drawer', { name, photoUrl, id });
+  return null;
 }
 
 

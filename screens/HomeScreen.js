@@ -13,8 +13,10 @@ const HomeScreen = ({ route, navigation }) => {
   const [listings, setListings] = React.useState([])
   console.log(route.params);
 
+  let url = '10.0.2.2';
+
   const getAllListings = async () => {
-    await axios.get(`http://10.0.2.2:8080/listing/`)
+    await axios.get(`http://${url}:8080/listing/`)
       .then(post => setListings(post.data))
       .catch(e => console.error(e));
    }
@@ -32,17 +34,19 @@ const HomeScreen = ({ route, navigation }) => {
         <Text style={{fontSize: 20, alignContent: 'center'}}>Go to Create Listing</Text>
       </TouchableOpacity>
         {/* <Button title="Go to Create Listings" onPress={() => navigation.navigate('Create Listing')} /> */}
-        <View style={styles.container}>
+      <View style={styles.container}>
         <FlatList
           data={listings}
           renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center'}} 
           onPress={() => navigation.navigate('ShowListing', { idListing: item.id })}>
-            <Ionicons name="md-image" size={50} color='gray' />
+            {/* <Ionicons name="md-image" size={50} color='gray' /> */}
+            <Image style={{padding: 10, height: 80, width: 80, resizeMode: "contain" }} source={{ uri: item.image }}/>
             <Text>{item.name}</Text>
             </TouchableOpacity>}
           keyExtractor={item => item.id.toString()}
         />
       </View>
+      {/* <BottomTabNavigator /> */}
     </View>
   );
 }

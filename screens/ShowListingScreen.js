@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
   info:{
     fontSize: 26,
-    marginRight: '35%'
+    marginRight: '10%'
   },
   buttons:{
     width: 125,
@@ -51,18 +51,15 @@ const styles = StyleSheet.create({
   }
 });
 const { name, description, price, zipcode} = post;
-// console.log(zipcode)
 let map = <Text></Text>;
 if(zipcode){
   map = <StaticMap zip={zipcode}></StaticMap>;
 }
 
-// console.log(navigation);
-
   return (
     // <View style={styles.compartment}>
     <ScrollView style={styles.compartment}>
-      <CustomHeader navigation={navigation} title="Listing" />
+      {/* <CustomHeader navigation={navigation} title="Listing" /> */}
       {/* <TouchableOpacity onPress={() => navigation.goBack()}><Text>Go Back</Text></TouchableOpacity> */}
       <Image style={styles.image} source={{ uri: image }}/>
       <View style={{marginVertical: 15, marginHorizontal: 15, flexDirection: 'row'}}>
@@ -70,7 +67,7 @@ if(zipcode){
         <Text style={styles.info}>{`$${price}`}</Text>
       </View>
       <View style={{marginHorizontal: '15%', flexDirection: 'row',}}>
-        <TouchableOpacity style={styles.buttons}>
+        <TouchableOpacity onPress={() => {console.log('clicked')}} style={styles.buttons}>
           <Text style={{alignSelf:'center', marginTop:6 }}>Favorite</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttons}>

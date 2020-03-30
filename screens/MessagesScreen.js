@@ -1,21 +1,24 @@
 import * as React from 'react';
 import axios from 'axios';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { RectButton, ScrollView } from 'react-native-gesture-handler';
+import { RectButton, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import CustomHeader from '../components/CustomHeader';
 
 const MessagesScreen = ({ navigation }) => {
   const [users, setUsers] = React.useState([]);
 
+  let url = '10.0.2.2';
+
   const getUsers = async (id) => {
-    let users = await axios.get(`http://10.0.2.2:8080/message/users/${id}`)
+    let users = await axios.get(`http://${url}:8080/message/users/${id}`)
+    // console.log(users.data);
     setUsers(users.data);
   }
 
   const getId = async (email) => {
-    let user = await axios.get(`http://10.0.2.2:8080/user/${email}`)
-    console.log('id:',user.data.id);
+    let user = await axios.get(`http://${url}:8080/user/${email}`)
+    console.log('id:', user.data);
     return user.data.id
   }
 
@@ -35,8 +38,10 @@ const MessagesScreen = ({ navigation }) => {
       <CustomHeader navigation={navigation} title="Messages"/>
       <Button title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} />
       {!!users.length && users.map((user) => (<OptionButton
+        navigation={navigation}
         key={user.id_message}
-        icon="md-contact"
+        idUser={user.id}
+        icon={user.icon}
         label={`${user.name} ${user.text}`}
         onPress={() => navigate(user.email)}
       />))}
@@ -44,12 +49,17 @@ const MessagesScreen = ({ navigation }) => {
   );
 }
 
-function OptionButton({ icon, label, onPress, isLastOption }) {
+function OptionButton({ icon, label, onPress, isLastOption, idUser, navigation }) {
   return (
     <RectButton style={[styles.option, isLastOption && styles.lastOption]} onPress={onPress}>
       <View style={{ flexDirection: 'row' }}>
         <View style={styles.optionIconContainer}>
-          <Ionicons name={icon} size={22} color="rgba(0,0,0,0.35)" />
+          {/* <Ionicons name={icon} size={22} color="rgba(0,0,0,0.35)" /> */}
+          {/* <TouchableOpacity onPress={() => navigation.navigate('Profile', {id: idUser})}> */}
+          <Image
+          style={{padding: 10, height: 30, width: 30, borderRadius: 15, resizeMode: "contain" }}
+          source={{ uri: icon === '' ? "http://pngimg.com/uploads/tiger/tiger_PNG23245.png" : icon }} />
+          {/* </TouchableOpacity> */}
         </View>
         <View style={styles.optionTextContainer}>
           <Text style={styles.optionText}>{label}</Text>

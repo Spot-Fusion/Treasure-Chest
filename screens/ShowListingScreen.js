@@ -10,13 +10,15 @@ import CustomHeader from '../components/CustomHeader';
    const [post, setPost] = React.useState({})
    const [image, setImage] = React.useState('');
 
+   let url = '10.0.2.2';
+
   const getListing = async (id) => {
-    await axios.get(`http://10.0.2.2:8080/listing/${id}`)
+    await axios.get(`http://${url}:8080/listing/${id}`)
       .then(post => setPost(post.data))
       .catch(e => console.error(e));
   }
   const getImage = async (id) => {
-    await axios.get(`http://10.0.2.2:8080/listing/${id}/images`)
+    await axios.get(`http://${url}:8080/listing/${id}/images`)
       .then(post => {
         console.log(post.data);
         setImage(''  + post.data[0].image);
@@ -61,7 +63,8 @@ if(zipcode){
     // <View style={styles.compartment}>
     <ScrollView style={styles.compartment}>
       <CustomHeader navigation={navigation} title="Listing" />
-      <Image style={styles.image} source={{ uri: image === '' ? "http://pngimg.com/uploads/tiger/tiger_PNG23245.png" : image }}/>
+      {/* <TouchableOpacity onPress={() => navigation.goBack()}><Text>Go Back</Text></TouchableOpacity> */}
+      <Image style={styles.image} source={{ uri: image }}/>
       <View style={{marginVertical: 15, marginHorizontal: 15, flexDirection: 'row'}}>
         <Text style={styles.info}>{name}</Text>
         <Text style={styles.info}>{`$${price}`}</Text>

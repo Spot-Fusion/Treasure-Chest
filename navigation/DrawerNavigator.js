@@ -41,7 +41,7 @@ const DrawerContent = (props, {user}) => {
         </Text>
       </View>
       )}
-      style={{ backgroundColor: "#223843" }} />
+      style={{ marginTop: 25 ,backgroundColor: "#223843", paddingTop: 15, paddingBottom: 65}} />
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
       <DrawerItem label="Log Out" onPress={() => props.navigation.navigate('Login')} />
@@ -60,7 +60,7 @@ const DrawerNavigator = ({ navigation }) =>  {
       .catch(e => console.error(e));
   }
 
-  let idUser = global.id;
+  let idUser = global.id || 1;
   React.useEffect(() =>{
     getProfile(idUser)
   }, [])

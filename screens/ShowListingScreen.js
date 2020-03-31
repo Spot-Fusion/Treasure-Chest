@@ -57,10 +57,7 @@ if(zipcode){
 }
 
   return (
-    // <View style={styles.compartment}>
     <ScrollView style={styles.compartment}>
-      {/* <CustomHeader navigation={navigation} title="Listing" /> */}
-      {/* <TouchableOpacity onPress={() => navigation.goBack()}><Text>Go Back</Text></TouchableOpacity> */}
       <Image style={styles.image} source={{ uri: image }}/>
       <View style={{marginVertical: 15, marginHorizontal: 15, flexDirection: 'row'}}>
         <Text style={styles.info}>{name}</Text>

@@ -54,8 +54,10 @@ const DrawerContent = (props, {user}) => {
 const DrawerNavigator = ({ navigation }) =>  {
   const [user, setUser] = React.useState({})
 
+  let url = '10.0.2.2'
+
   const getProfile = async (id) => {
-    await axios.get(`http://10.0.2.2:8080/user/id/${id}`)
+    await axios.get(`http://${url}:8080/user/id/${id}`)
       .then(post => setUser(post.data))
       .catch(e => console.error(e));
   }

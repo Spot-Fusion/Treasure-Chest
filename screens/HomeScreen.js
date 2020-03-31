@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Image, Platform, StyleSheet, TouchableOpacity, View, Text, Button, FlatList } from 'react-native';
+import { Image, Platform, StyleSheet, TouchableOpacity, View, Text, Button, FlatList, ImageBackground } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import { NavigationContainer } from '@react-navigation/native';
 import TabBarIcon from '../components/TabBarIcon'
@@ -40,8 +40,9 @@ const HomeScreen = ({ route, navigation }) => {
           renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center'}} 
           onPress={() => navigation.navigate('ShowListing', { idListing: item.id })}>
             {/* <Ionicons name="md-image" size={50} color='gray' /> */}
-            <Image style={{padding: 10, height: 80, width: 80, resizeMode: "contain" }} source={{ uri: item.image }}/>
-            <Text>{item.name}</Text>
+            <ImageBackground style={{padding: 10, height: 100, width: 100, position: 'relative'}} source={{ uri: item.image }}>
+              <Text style={{ position: 'absolute', bottom: 0, left: 0, backgroundColor: 'gray', color: '#F1F3F5', }}>{`$${item.price}`}</Text>
+            </ImageBackground>
             </TouchableOpacity>}
           keyExtractor={item => item.id.toString()}
         />

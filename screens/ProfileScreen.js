@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, TextInput, Text, Button, Alert, Image } from 'react-native';
+import { StyleSheet, View, TextInput, Text, Button, Alert, Image, FlatList, ImageBackground } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import CustomHeader from '../components/CustomHeader';
@@ -12,6 +12,7 @@ import axios from 'axios';
    const [description, setDescription] = React.useState(global.image);
    const [image, setImage] = React.useState('');
    const [edit, setEdit] = React.useState(false);
+   const [listings, setListings] = React.useState([]);
 
    let url = '10.0.2.2'; 
   
@@ -34,6 +35,12 @@ import axios from 'axios';
    setImage(post.data.icon)
   }
 
+  const getAllListings = async () => {
+    await axios.get(`http://${url}:8080/listing/`)
+      .then(post => setListings(post.data))
+      .catch(e => console.error(e));
+   }
+
   const chooseImage = (img) => {
     setImage('' + img);
     console.log(`This is chosen: ${img}`);
@@ -42,7 +49,10 @@ import axios from 'axios';
   let idUser = route.params === undefined ? global.id : route.params.id;
   React.useEffect(() =>{
     getProfile(idUser)
+    getAllListings()
   }, [])
+
+  let sellList = listings.filter((e, i, a) => e.seller === userName); 
    
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -86,6 +96,22 @@ import axios from 'axios';
             <Text>Update Profile</Text>
           </TouchableOpacity> : null}
       </View>
+      <View style={{marginHorizontal: '10%', flexDirection: 'row',}}>
+        <TouchableOpacity onPress={() => Alert.alert('todo')} style={{padding: 20}}><Text>Selling</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => Alert.alert('todo')} style={{padding: 20}}><Text>Sold</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => Alert.alert('todo')} style={{padding: 20}}><Text>Favorites</Text></TouchableOpacity>
+      </View>
+      <FlatList
+          data={sellList}
+          renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center'}} 
+          onPress={() => navigation.navigate('ShowListing', { idListing: item.id })}>
+            {/* <Ionicons name="md-image" size={50} color='gray' /> */}
+            <ImageBackground style={{padding: 10, height: 100, width: 100, position: 'relative'}} source={{ uri: item.image }}>
+              <Text style={{ position: 'absolute', bottom: 0, left: 0, backgroundColor: 'gray', color: '#F1F3F5', }}>{`$${item.price}`}</Text>
+            </ImageBackground>
+            </TouchableOpacity>}
+          keyExtractor={item => item.id.toString()}
+        />
     </ScrollView>
   );
 }

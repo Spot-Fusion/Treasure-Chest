@@ -9,25 +9,65 @@ import CustomHeader from '../components/CustomHeader';
    const { idListing } = !route.params ? defaultParams  : route.params ;
    const [post, setPost] = React.useState({})
    const [image, setImage] = React.useState('');
+   const [favorited, setFavorited] = React.useState(true);
+   const [favBtnColor, setBtnColor] = React.useState('#3FC184');
+   const [favBtnText, setBtnText] = React.useState('Favorite');
 
    let url = '10.0.2.2';
-
   const getListing = async (id) => {
     await axios.get(`http://${url}:8080/listing/${id}`)
       .then(post => setPost(post.data))
       .catch(e => console.error(e));
   }
+
   const getImage = async (id) => {
     await axios.get(`http://${url}:8080/listing/${id}/images`)
       .then(post => {
-        console.log(post.data);
         setImage(''  + post.data[0].image);
       })
       .catch(e => console.error(e));
   }
+
+  const checkFavoriteListing = async (id) => {
+    await axios.get(`http://${url}:8080/favorite/${global.id}/${id}`)
+      .then(res => {
+          setFavorited(res.data);
+          if(res.data){
+            setBtnColor('#ff5959');
+            setBtnText('Unfavorite');
+          }else{
+            setBtnColor('#3FC184');
+            setBtnText('Favorite');
+          }
+      })
+      .catch(e => console.log(e));
+  }
+
+  const favoriteListing = async (id) => {
+    if(favorited){
+      await axios.delete(`http://${url}:8080/favorite/${global.id}/${id}`)
+      .then(res => {
+          setBtnColor('#3FC184');
+          setBtnText('Favorite');
+          checkFavoriteListing(idListing);
+      })
+      .catch(e => console.log(e));
+    }else{
+      await axios.post(`http://${url}:8080/favorite/${global.id}/${id}`)
+      .then(res => {
+          setBtnColor('#ff5959');
+          setBtnText('Unfavorite');
+          checkFavoriteListing(idListing);
+      })
+      .catch(e => console.log(e));
+    }
+  }
+
 React.useEffect(() =>{
   getListing(idListing)
   getImage(idListing)
+  checkFavoriteListing(idListing);
+
 }, [])
 const styles = StyleSheet.create({
   compartment:{
@@ -42,7 +82,14 @@ const styles = StyleSheet.create({
     fontSize: 26,
     marginRight: '10%'
   },
-  buttons:{
+  button1:{
+    width: 125,
+    height: 35,
+    borderRadius: 5,
+    backgroundColor: favBtnColor,
+    marginRight: 15,
+  },
+  button2:{
     width: 125,
     height: 35,
     borderRadius: 5,
@@ -64,10 +111,10 @@ if(zipcode){
         <Text style={styles.info}>{`$${price}`}</Text>
       </View>
       <View style={{marginHorizontal: '15%', flexDirection: 'row',}}>
-        <TouchableOpacity onPress={() => {console.log('clicked')}} style={styles.buttons}>
-          <Text style={{alignSelf:'center', marginTop:6 }}>Favorite</Text>
+        <TouchableOpacity onPress={() => {favoriteListing(idListing)}} style={styles.button1}>
+          <Text style={{alignSelf:'center', marginTop:6 }}>{favBtnText}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttons}>
+        <TouchableOpacity style={styles.button2}>
           <Text style={{alignSelf:'center', marginTop:6 }}>Message</Text>
         </TouchableOpacity>
       </View>
@@ -79,4 +126,4 @@ if(zipcode){
   );
 }
 
-export default ShowListingScreen; 
+export default ShowListingScreen;

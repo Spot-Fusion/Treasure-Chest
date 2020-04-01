@@ -54,7 +54,7 @@ const ChatScreen = ({ route, navigation }) => {
           idRecipient={recipient.id}
           idSender={message.id_sender}
           icon={recipient.icon}
-          label={`${message.sender} ${message.text}`}
+          label={`${message.text}`}
         />))}
       </View>
       <TextInput
@@ -75,17 +75,22 @@ const ChatScreen = ({ route, navigation }) => {
 function OptionButton({ icon, label, onPress, isLastOption, idRecipient, idSender, navigation }) {
   return (
     <RectButton style={[styles.option, isLastOption && styles.lastOption]} onPress={onPress}>
-      <View style={{ flexDirection: 'row' }}>
-        <View style={styles.optionIconContainer}>
+      <View style={{ flexDirection: 'row' }}>        
           {/* <Ionicons name={icon} size={22} color="rgba(0,0,0,0.35)" /> */}
-          {idRecipient === idSender ? <TouchableOpacity onPress={() => navigation.navigate('Profile', {id: idRecipient})} ><Image
-          style={{padding: 10, height: 30, width: 30, borderRadius: 15, resizeMode: "contain" }}
-          source={{ uri: icon }} />
-          </TouchableOpacity> : null}
-        </View>
-        <View style={styles.optionTextContainer}>
-          <Text style={styles.optionText}>{label}</Text>
-        </View>
+          {idRecipient === idSender ? 
+          <View style={styles.optionIconContainer} >
+            <TouchableOpacity onPress={() => navigation.navigate('Profile', {id: idRecipient})} >
+              <Image
+              style={{padding: 10, height: 30, width: 30, borderRadius: 15, resizeMode: "contain" }}
+              source={{ uri: icon }} />
+            </TouchableOpacity> 
+          {/* </View>
+          <View style={styles.optionTextContainer}> */}
+            <Text style={[styles.text, {backgroundColor: '#B4EDD2', marginLeft: 10}]}>{label}</Text>
+          </View> 
+          : <View style={[styles.optionTextContainer, {flex: 1, flexDirection: 'row-reverse'}]}>
+        <Text style={[styles.text, {backgroundColor: '#1084ff', color: '#F1F3F5', alignSelf: 'flex-end', marginRight: 10}]}>{label}</Text>
+      </View>}
       </View>
     </RectButton>
   );
@@ -114,9 +119,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   text: {
-    fontSize: 15,
-    alignSelf: 'flex-start',
-    marginTop: 1,
+    maxWidth: 250,
+   paddingHorizontal: 10,
+   paddingTop: 10,
+   paddingBottom: 10,
+   borderRadius: 15,
   },
   input: {
     borderWidth: 1,

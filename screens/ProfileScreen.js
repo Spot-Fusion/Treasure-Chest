@@ -8,11 +8,11 @@ import axios from 'axios';
 
  const ProfileScreen = ({navigation, route}) => {
    const [userName, setUserName] = React.useState(global.name);
-  //  const [email, setEmail] = React.useState(global.email);
    const [description, setDescription] = React.useState(global.image);
    const [image, setImage] = React.useState('');
    const [edit, setEdit] = React.useState(false);
    const [listings, setListings] = React.useState([]);
+   const [show, setShow] = React.useState(0)
 
    let url = '10.0.2.2'; 
   
@@ -21,7 +21,6 @@ import axios from 'axios';
       .then(post => {
         console.log(post);
         setUserName(post.data.name)
-        // setEmail(post.data.email)
         setDescription(post.data.bio)
         setImage(post.data.icon)
       })
@@ -30,7 +29,6 @@ import axios from 'axios';
   const patchProfile = async (id, name, bio, icon) => {
    let post = await axios.post(`http://${url}:8080/user/update/${id}`, { name, bio, icon, id})
    setUserName(post.data.name)
-  //  setEmail(post.data.email)
    setDescription(post.data.bio)
    setImage(post.data.icon)
   }
@@ -46,13 +44,16 @@ import axios from 'axios';
     console.log(`This is chosen: ${img}`);
   };
 
-  let idUser = route.params === undefined ? global.id : route.params.id;
+  let idUser = route.params === undefined ? global.id || 1 : route.params.id;
   React.useEffect(() =>{
     getProfile(idUser)
     getAllListings()
   }, [])
 
-  let sellList = listings.filter((e, i, a) => e.seller === userName); 
+  let sellList = listings.filter((e) => e.seller === userName && e.archived === 0); 
+  let soldList = listings.filter(e => e.seller === userName && e.archived === 1);
+  let DATA = listings.filter(e => e.seller !== userName);
+
    
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -73,13 +74,6 @@ import axios from 'axios';
             onChangeText={(text) => setUserName(text)}
             placeholder='Input User Name...'
           /> : null}
-          {/* <Text>Email: {email}</Text> */}
-          {/* { edit ? <TextInput
-            value={email}
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            onChangeText={(text) => setEmail(text)}
-            placeholder='Input Email...'
-          /> : null} */}
           <Text>Description: {description}</Text>
           { edit ? <TextInput
             multiline
@@ -97,11 +91,11 @@ import axios from 'axios';
           </TouchableOpacity> : null}
       </View>
       <View style={{marginHorizontal: '10%', flexDirection: 'row',}}>
-        <TouchableOpacity onPress={() => Alert.alert('todo')} style={{padding: 20}}><Text>Selling</Text></TouchableOpacity>
-        <TouchableOpacity onPress={() => Alert.alert('todo')} style={{padding: 20}}><Text>Sold</Text></TouchableOpacity>
-        <TouchableOpacity onPress={() => Alert.alert('todo')} style={{padding: 20}}><Text>Favorites</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => setShow(0)} style={{padding: 20}}><Text>Selling</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => setShow(1)} style={{padding: 20}}><Text>Sold</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => setShow(2)} style={{padding: 20}}><Text>Favorites</Text></TouchableOpacity>
       </View>
-      <FlatList
+      { show === 0 ? <FlatList
           data={sellList}
           renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center'}} 
           onPress={() => navigation.navigate('ShowListing', { idListing: item.id })}>
@@ -111,7 +105,29 @@ import axios from 'axios';
             </ImageBackground>
             </TouchableOpacity>}
           keyExtractor={item => item.id.toString()}
-        />
+        /> : null}
+        {show === 1 ? <FlatList
+          data={soldList}
+          renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center'}} 
+          onPress={() => navigation.navigate('ShowListing', { idListing: item.id })}>
+            {/* <Ionicons name="md-image" size={50} color='gray' /> */}
+            <ImageBackground style={{padding: 10, height: 100, width: 100, position: 'relative'}} source={{ uri: item.image }}>
+              <Text style={{ position: 'absolute', bottom: 0, left: 0, backgroundColor: 'gray', color: '#F1F3F5', }}>{`$${item.price}`}</Text>
+            </ImageBackground>
+            </TouchableOpacity>}
+          keyExtractor={item => item.id.toString()}
+        /> : null}
+        {show === 2 ? <FlatList
+          data={DATA}
+          renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center'}} 
+          onPress={() => navigation.navigate('ShowListing', { idListing: item.id })}>
+            {/* <Ionicons name="md-image" size={50} color='gray' /> */}
+            <ImageBackground style={{padding: 10, height: 100, width: 100, position: 'relative'}} source={{ uri: item.image }}>
+              <Text style={{ position: 'absolute', bottom: 0, left: 0, backgroundColor: 'gray', color: '#F1F3F5', }}>{`$${item.price}`}</Text>
+            </ImageBackground>
+            </TouchableOpacity>}
+          keyExtractor={item => item.id.toString()}
+        /> : null}
     </ScrollView>
   );
 }

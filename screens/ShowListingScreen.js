@@ -14,6 +14,7 @@ import CustomHeader from '../components/CustomHeader';
    const [favBtnText, setBtnText] = React.useState('Favorite');
 
    let url = '10.0.2.2';
+   let idUser = global.id || 1;
   const getListing = async (id) => {
     await axios.get(`http://${url}:8080/listing/${id}`)
       .then(post => setPost(post.data))
@@ -29,7 +30,7 @@ import CustomHeader from '../components/CustomHeader';
   }
 
   const checkFavoriteListing = async (id) => {
-    await axios.get(`http://${url}:8080/favorite/${global.id}/${id}`)
+    await axios.get(`http://${url}:8080/favorite/${idUser}/${id}`)
       .then(res => {
           setFavorited(res.data);
           if(res.data){
@@ -45,7 +46,7 @@ import CustomHeader from '../components/CustomHeader';
 
   const favoriteListing = async (id) => {
     if(favorited){
-      await axios.delete(`http://${url}:8080/favorite/${global.id}/${id}`)
+      await axios.delete(`http://${url}:8080/favorite/${idUser}/${id}`)
       .then(res => {
           setBtnColor('#3FC184');
           setBtnText('Favorite');
@@ -53,7 +54,7 @@ import CustomHeader from '../components/CustomHeader';
       })
       .catch(e => console.log(e));
     }else{
-      await axios.post(`http://${url}:8080/favorite/${global.id}/${id}`)
+      await axios.post(`http://${url}:8080/favorite/${idUser}/${id}`)
       .then(res => {
           setBtnColor('#ff5959');
           setBtnText('Unfavorite');

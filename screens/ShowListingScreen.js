@@ -112,8 +112,8 @@ if(zipcode){
     <ScrollView style={styles.compartment}>
       <Image style={styles.image} source={{ uri: image }}/>
       <View style={{marginVertical: 15, marginHorizontal: 15, flexDirection: 'row'}}>
-        <Text style={styles.info}>{name}</Text>
-        <Text style={styles.info}>{`$${price}`}</Text>
+        <Text style={styles.info}>{name || 'TITLE'}</Text>
+        <Text style={styles.info}>{`$${price || '0'}`}</Text>
       </View>
       <View style={{marginHorizontal: '15%', flexDirection: 'row',}}>
         <TouchableOpacity onPress={() => {favoriteListing(idListing)}} style={styles.button1}>

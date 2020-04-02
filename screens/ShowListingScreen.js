@@ -64,6 +64,10 @@ import CustomHeader from '../components/CustomHeader';
     }
   }
 
+  const navigate = async (email) => {
+    await navigation.navigate('ChatScreen', { id_recipient: post.id_seller })
+  }
+
 React.useEffect(() =>{
   getListing(idListing)
   getImage(idListing)
@@ -115,7 +119,7 @@ if(zipcode){
         <TouchableOpacity onPress={() => {favoriteListing(idListing)}} style={styles.button1}>
           <Text style={{alignSelf:'center', marginTop:6 }}>{favBtnText}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button2}>
+        <TouchableOpacity onPress={() => {navigate()}} style={styles.button2}>
           <Text style={{alignSelf:'center', marginTop:6 }}>Message</Text>
         </TouchableOpacity>
       </View>

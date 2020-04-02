@@ -12,11 +12,15 @@ const ExpoImagePicker = ({ chooseImage }) => {
 
 
   const  getPermissionAsync = async () => {
-      if (Constants.platform.ios) {
-        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-        if (status !== 'granted') {
-          alert('Sorry, we need camera roll permissions to make this work!');
-        }
+    let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
+      if (permissionResult.granted === false) {
+        alert('Permission to access camera roll is required!');
+        return;
+      // if (Constants.platform.ios) {
+      //   const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      //   if (status !== 'granted') {
+      //     alert('Sorry, we need camera roll permissions to make this work!');
+      //   }
       }
     }
 

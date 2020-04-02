@@ -62,6 +62,7 @@ const _pickImage = async () => {
         {/* {image &&
           <Image source={{ uri: image }} style={{ width: 100, height: 100, borderRadius: 50 }} />} */}
           <Button
+            color={'#3FC184'}
             title="Pick an image"
             onPress={_pickImage}
           />

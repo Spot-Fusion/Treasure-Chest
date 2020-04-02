@@ -11,7 +11,9 @@ import axios from 'axios';
    const [description, setDescription] = React.useState(global.image);
    const [image, setImage] = React.useState('');
    const [edit, setEdit] = React.useState(false);
-   const [listings, setListings] = React.useState([]);
+   const [sellList, setSellList] = React.useState([]);
+   const [soldList, setSoldList] = React.useState([]);
+   const [favList, setFavList] = React.useState([]);
    const [show, setShow] = React.useState(0)
 
    let url = '10.0.2.2'; 
@@ -33,9 +35,21 @@ import axios from 'axios';
    setImage(post.data.icon)
   }
 
-  const getAllListings = async () => {
-    await axios.get(`http://${url}:8080/listing/`)
-      .then(post => setListings(post.data))
+  const getSellListings = async (id) => {
+    await axios.get(`http://${url}:8080/listing/user/${id}/0`)
+      .then(post => setSellList(post.data))
+      .catch(e => console.error(e));
+   }
+
+   const getSoldListings = async (id) => {
+    await axios.get(`http://${url}:8080/listing/user/${id}/1`)
+      .then(post => setSoldList(post.data))
+      .catch(e => console.error(e));
+   }
+
+   const getFavListings = async (id) => {
+    await axios.get(`http://${url}:8080/favorite/${id}`)
+      .then(post => setFavList(post.data))
       .catch(e => console.error(e));
    }
 
@@ -47,12 +61,14 @@ import axios from 'axios';
   let idUser = route.params === undefined ? global.id || 1 : route.params.id;
   React.useEffect(() =>{
     getProfile(idUser)
-    getAllListings()
+    getSellListings(idUser)
+    getSoldListings(idUser)
+    getFavListings(idUser)
   }, [])
 
-  let sellList = listings.filter((e) => e.seller === userName && e.archived === 0); 
-  let soldList = listings.filter(e => e.seller === userName && e.archived === 1);
-  let DATA = listings.filter(e => e.seller !== userName);
+  // let sellList = listings.filter((e) => e.seller === userName && e.archived === 0); 
+  // let soldList = listings.filter(e => e.seller === userName && e.archived === 1);
+  // let DATA = listings.filter(e => e.seller !== userName);
 
    
   return (
@@ -144,7 +160,7 @@ import axios from 'axios';
           keyExtractor={item => item.id.toString()}
         /> : null}
         {show === 2 ? <FlatList
-          data={DATA}
+          data={favList}
           renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center'}} 
           onPress={() => navigation.navigate('ShowListing', { idListing: item.id })}>
             {/* <Ionicons name="md-image" size={50} color='gray' /> */}

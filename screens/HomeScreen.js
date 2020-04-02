@@ -40,7 +40,7 @@ const HomeScreen = ({ route, navigation }) => {
           renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center'}} 
           onPress={() => navigation.navigate('ShowListing', { idListing: item.id })}>
             {/* <Ionicons name="md-image" size={50} color='gray' /> */}
-            <ImageBackground style={{padding: 10, height: 100, width: 100, position: 'relative'}} source={{ uri: item.image }}>
+            <ImageBackground style={{padding: 10, height: 125, width: 125, position: 'relative'}} source={{ uri: item.image }}>
               <Text style={{ position: 'absolute', bottom: 0, left: 0, backgroundColor: 'gray', color: '#F1F3F5', }}>{`$${item.price}`}</Text>
             </ImageBackground>
             </TouchableOpacity>}

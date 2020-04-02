@@ -12,11 +12,15 @@ const ExpoImagePicker = ({ chooseImage }) => {
 
 
   const  getPermissionAsync = async () => {
-      if (Constants.platform.ios) {
-        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-        if (status !== 'granted') {
-          alert('Sorry, we need camera roll permissions to make this work!');
-        }
+    let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
+      if (permissionResult.granted === false) {
+        alert('Permission to access camera roll is required!');
+        return;
+      // if (Constants.platform.ios) {
+      //   const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      //   if (status !== 'granted') {
+      //     alert('Sorry, we need camera roll permissions to make this work!');
+      //   }
       }
     }
 
@@ -62,6 +66,7 @@ const _pickImage = async () => {
         {/* {image &&
           <Image source={{ uri: image }} style={{ width: 100, height: 100, borderRadius: 50 }} />} */}
           <Button
+            color={'#3FC184'}
             title="Pick an image"
             onPress={_pickImage}
           />

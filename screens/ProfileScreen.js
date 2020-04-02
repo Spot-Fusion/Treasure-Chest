@@ -58,13 +58,39 @@ import axios from 'axios';
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
     <CustomHeader navigation={navigation} title="Profile" />
-      <Button title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} />
+      <TouchableOpacity style={{width: 125,
+        height: 35,
+        borderRadius: 5,
+        backgroundColor: '#3FC184',
+        marginRight: 15,}} 
+        onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()}>
+      <Text style={{alignSelf:'center', marginTop:6 }}>Go Back</Text>
+      </TouchableOpacity>
+      {/* <Button title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} /> */}
       <Image
           style={{padding: 10, height: 70, width: 70, borderRadius: 35, resizeMode: "contain" }}
           source={{ uri: image === '' ? "http://pngimg.com/uploads/tiger/tiger_PNG23245.png" : image }} />
       <View style={styles.view}>
-      {route.params ? <Button title="Message" onPress={() => navigation.navigate('ChatScreen', { id_recipient: route.params.id })} /> : 
-      <Button title="Edit Profile" onPress={() => setEdit(!edit)} />}
+      {route.params ? 
+      <TouchableOpacity style={{width: 125,
+        height: 35,
+        borderRadius: 5,
+        backgroundColor: '#3FC184',
+        marginRight: 15,}} 
+        onPress={() => navigation.navigate('ChatScreen', { id_recipient: route.params.id })}>
+          <Text style={{alignSelf:'center', marginTop:6 }}>Message</Text>
+          </TouchableOpacity>
+      // <Button title="Message" onPress={() => navigation.navigate('ChatScreen', { id_recipient: route.params.id })} />
+       : 
+       <TouchableOpacity style={{width: 125,
+        height: 35,
+        borderRadius: 5,
+        backgroundColor: '#3FC184',
+        marginRight: 15,}} 
+        onPress={() => setEdit(!edit)}>
+          <Text style={{alignSelf:'center', marginTop:6 }}>Edit Profile</Text>
+       </TouchableOpacity> }
+       {/* <Button title="Edit Profile" onPress={() => setEdit(!edit)} />} */}
         {edit ? <ExpoImagePicker chooseImage={chooseImage}/> : null}
           <Text style={styles.text}>Profile</Text>
           <Text>User Name: {userName}</Text>

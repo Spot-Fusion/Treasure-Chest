@@ -33,7 +33,7 @@ const ChatScreen = ({ route, navigation }) => {
     setInput('');
   }
   
-  let idUser = global.id;
+  let idUser = global.id || 1;
   React.useEffect(() => {
     getMessages(idUser, id_recipient);
     getRecipient(id_recipient);
@@ -78,7 +78,7 @@ function OptionButton({ icon, label, onPress, isLastOption, idRecipient, idSende
       <View style={{ flexDirection: 'row' }}>        
           {/* <Ionicons name={icon} size={22} color="rgba(0,0,0,0.35)" /> */}
           {idRecipient === idSender ? 
-          <View style={styles.optionIconContainer} >
+          <View style={[styles.optionIconContainer, {flex: 1, flexDirection: 'row'}]} >
             <TouchableOpacity onPress={() => navigation.navigate('Profile', {id: idRecipient})} >
               <Image
               style={{padding: 10, height: 30, width: 30, borderRadius: 15, resizeMode: "contain" }}

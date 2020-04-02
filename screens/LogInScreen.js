@@ -12,7 +12,7 @@ import { setWorldOriginAsync } from 'expo/build/AR';
         {/* <Ionicons name="md-cart" size={60} style={{justifyContent: 'flex-start', alignContent: 'center'}} /> */}
         <Image source={require("./assets/icons8-treasure-chest-100.png")} style={{padding: 10, height: 100, width: 100, resizeMode: "contain" }}/>
         <Text style={styles.text}>Treasure-Chest</Text>
-        <Button title="Sign in with Google" onPress={() => navigation.navigate('GoogleAuth')} style={{justifyContent: 'flex-end'}} />
+        <Button color={'#3FC184'} title="Sign in with Google" onPress={() => navigation.navigate('GoogleAuth')} style={{justifyContent: 'flex-end'}} />
       </View>
   );
 }

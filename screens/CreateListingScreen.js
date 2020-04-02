@@ -47,9 +47,9 @@ import axios from 'axios';
   };
 
   return (    
-      <View style={styles.view} /*style={styles.container} contentContainerStyle={styles.contentContainer}*/>
+      <ScrollView style={styles.view} /*style={styles.container} contentContainerStyle={styles.contentContainer}*/>
         <CustomHeader navigation={navigation} title="Create Listing" />
-      <Button title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} />
+      <Button color={'#3FC184'} title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} />
         {/* <ExpoCamera /> */}
         <Image
           style={{padding: 10, height: 70, width: 70, borderRadius: 35, resizeMode: "contain" }}
@@ -95,7 +95,7 @@ import axios from 'axios';
             isChecked={negotiable}
             leftText={"Negotiable?"}
           />
-          <Button title="Create Listing" onPress={() => {
+          <Button color={'#3FC184'} title="Create Listing" onPress={() => {
             addPost(name, description, price, zipcode, negotiable)
             setName('');
             setDescription('');
@@ -106,7 +106,7 @@ import axios from 'axios';
             console.log("listing created")}}
             />
           {/* <Button title="Show Listing" onPress={() => navigation.navigate('ShowListing', { idListing })} /> */}
-      </View>
+      </ScrollView>
   );
 }
 

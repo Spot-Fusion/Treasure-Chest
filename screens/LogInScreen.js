@@ -10,7 +10,7 @@ import { setWorldOriginAsync } from 'expo/build/AR';
   return (    
       <View style={styles.view}>
         {/* <Ionicons name="md-cart" size={60} style={{justifyContent: 'flex-start', alignContent: 'center'}} /> */}
-        <Image source={require("./assets/icons8-treasure-chest-100.png")} style={{padding: 10, height: 100, width: 100, resizeMode: "contain" }}/>
+        <Image source={require("./assets/icons8-treasure-chest-100.png")} style={{padding: 10, height: 100, width: 100, resizeMode: "contain", marginBottom: 25 }}/>
         <Text style={styles.text}>Treasure-Chest</Text>
         <Button color={'#3FC184'} title="Sign in with Google" onPress={() => navigation.navigate('GoogleAuth')} style={{justifyContent: 'flex-end'}} />
       </View>
@@ -30,22 +30,25 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   view: {
-    backgroundColor: '#fdfdfd',
-    paddingHorizontal: 15,
-    paddingVertical: 15,
+    backgroundColor: '#dfedf5',
+    height: '100%',
+    width: '100%',
     borderWidth: StyleSheet.hairlineWidth,
     borderBottomWidth: 0,
     borderColor: '#ededed',
     justifyContent: 'center',
-    alignContent: 'center'
+    alignContent: 'center',
+    alignItems: 'center'
   },
   lastOption: {
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   text: {
     fontSize: 15,
-    alignSelf: 'flex-start',
     marginTop: 1,
+    marginBottom: 100,
+    fontSize: 25,
+    fontWeight: 'bold'
   },
 });
 

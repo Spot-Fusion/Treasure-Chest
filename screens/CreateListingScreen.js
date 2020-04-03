@@ -90,8 +90,8 @@ import axios from 'axios';
           />
           <Text>Negotiable: {negotiable === 1 ? 'yes' : 'no'}</Text>
           <CheckBox style={{flex: 1, padding: 10}}
-            value={negotiable}
-            onClick={()=> setNegotialbe(1)}
+            value={negotiable > 0 ? true : false}
+            onClick={()=> setNegotialbe(negotiable > 0 ? 0 : 1)}
             isChecked={negotiable}
             leftText={"Negotiable?"}
           />

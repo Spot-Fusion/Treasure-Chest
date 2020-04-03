@@ -21,7 +21,7 @@ import axios from 'axios';
    const getProfile = async (id) => {
     await axios.get(`http://${url}:8080/user/id/${id}`)
       .then(post => {
-        console.log(post);
+        // console.log(post);
         setUserName(post.data.name)
         setDescription(post.data.bio)
         setImage(post.data.icon)
@@ -49,7 +49,10 @@ import axios from 'axios';
 
    const getFavListings = async (id) => {
     await axios.get(`http://${url}:8080/favorite/${id}`)
-      .then(post => setFavList(post.data))
+      .then(post => {
+        console.log(post.data)
+        setFavList(post.data)
+      })
       .catch(e => console.error(e));
    }
 
@@ -162,13 +165,13 @@ import axios from 'axios';
         {show === 2 ? <FlatList
           data={favList}
           renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center'}} 
-          onPress={() => navigation.navigate('ShowListing', { idListing: item.id })}>
+          onPress={() => navigation.navigate('ShowListing', { idListing: item.id_listing })}>
             {/* <Ionicons name="md-image" size={50} color='gray' /> */}
             <ImageBackground style={{padding: 10, height: 100, width: 100, position: 'relative'}} source={{ uri: item.image }}>
               <Text style={{ position: 'absolute', bottom: 0, left: 0, backgroundColor: 'gray', color: '#F1F3F5', }}>{`$${item.price}`}</Text>
             </ImageBackground>
             </TouchableOpacity>}
-          keyExtractor={item => item.id.toString()}
+          keyExtractor={item => item.id_listing.toString()}
         /> : null}
     </ScrollView>
   );

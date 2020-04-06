@@ -1,10 +1,6 @@
 import * as React from 'react';
 import { Image, Platform, StyleSheet, TouchableOpacity, View, Text, Button, FlatList, ImageBackground } from 'react-native';
-import * as WebBrowser from 'expo-web-browser';
 import { NavigationContainer } from '@react-navigation/native';
-import TabBarIcon from '../components/TabBarIcon'
-import BottomTabNavigator from '../navigation/BottomTabNavigator';
-import Expo from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import CustomHeader from '../components/CustomHeader';
 import axios from 'axios';
@@ -33,21 +29,20 @@ const HomeScreen = ({ route, navigation }) => {
       <TouchableOpacity onPress={() => navigation.navigate('Create Listing')}>
         <Text style={{fontSize: 20, alignContent: 'center'}}>Go to Create Listing</Text>
       </TouchableOpacity>
-        {/* <Button title="Go to Create Listings" onPress={() => navigation.navigate('Create Listing')} /> */}
       <View style={styles.container}>
         <FlatList
+          style={{padding: 3}}
+          numColumns={2}
           data={listings}
           renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center'}} 
           onPress={() => navigation.navigate('ShowListing', { idListing: item.id })}>
-            {/* <Ionicons name="md-image" size={50} color='gray' /> */}
-            <ImageBackground style={{padding: 10, height: 125, width: 125, position: 'relative'}} source={{ uri: item.image }}>
+            <ImageBackground style={{height: 150, width: 150, border: 'solid 5px white'}} source={{ uri: item.image }}>
               <Text style={{ position: 'absolute', bottom: 0, left: 0, backgroundColor: 'gray', color: '#F1F3F5', }}>{`$${item.price}`}</Text>
             </ImageBackground>
             </TouchableOpacity>}
           keyExtractor={item => item.id.toString()}
         />
       </View>
-      {/* <BottomTabNavigator /> */}
     </View>
   );
 }

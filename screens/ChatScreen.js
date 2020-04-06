@@ -43,9 +43,25 @@ const ChatScreen = ({ route, navigation }) => {
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      <TouchableOpacity onPress={() => navigation.goBack()}>
+       <View style={{flexDirection: 'row', height: 50, backgroundColor: '#223843'}}>
+        <View style={{flex: 1, justifyContent: 'center'}}>
+            <TouchableOpacity  onPress={() => navigation.goBack()} >
+                <Ionicons
+                    name="md-menu"
+                    color="white"
+                    size={30}
+                    style={{marginLeft: 10}}                   
+                />
+            </TouchableOpacity>
+        </View>
+        <View style={{flex: 1.5, justifyContent: 'center'}}>
+            <Text style={{textAlign: 'center', color: "white" }}>Messages</Text>
+        </View>
+        <View style={{flex: 1}}></View>
+    </View>
+      {/* <TouchableOpacity onPress={() => navigation.goBack()}>
         <Text style={{fontSize: 20}}>Go Back</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       {/* <Button title="Go back" onPress={() => navigation.goBack()} /> */}
       <View style={styles.view}>
         {messages.map((message) => (<OptionButton

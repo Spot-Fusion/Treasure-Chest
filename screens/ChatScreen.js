@@ -3,6 +3,7 @@ import axios from 'axios';
 import { StyleSheet, Text, TextInput, View, Button, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { RectButton, ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import CustomHeader from '../components/CustomHeader';
 
 const ChatScreen = ({ route, navigation }) => {
   const { id_recipient } = route.params;
@@ -43,26 +44,7 @@ const ChatScreen = ({ route, navigation }) => {
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-       <View style={{flexDirection: 'row', height: 50, backgroundColor: '#223843'}}>
-        <View style={{flex: 1, justifyContent: 'center'}}>
-            <TouchableOpacity  onPress={() => navigation.goBack()} >
-                <Ionicons
-                    name="md-menu"
-                    color="white"
-                    size={30}
-                    style={{marginLeft: 10}}                   
-                />
-            </TouchableOpacity>
-        </View>
-        <View style={{flex: 1.5, justifyContent: 'center'}}>
-            <Text style={{textAlign: 'center', color: "white" }}>Messages</Text>
-        </View>
-        <View style={{flex: 1}}></View>
-    </View>
-      {/* <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Text style={{fontSize: 20}}>Go Back</Text>
-      </TouchableOpacity> */}
-      {/* <Button title="Go back" onPress={() => navigation.goBack()} /> */}
+      <CustomHeader navigation={navigation} title="Messages" />
       <View style={styles.view}>
         {messages.map((message) => (<OptionButton
           key={message.id_message}
@@ -91,7 +73,7 @@ const ChatScreen = ({ route, navigation }) => {
 function OptionButton({ icon, label, onPress, isLastOption, idRecipient, idSender, navigation }) {
   return (
     <RectButton style={[styles.option, isLastOption && styles.lastOption]} onPress={onPress}>
-      <View style={{ flexDirection: 'row' }}>        
+      <View style={{ flexDirection: 'row', padding: 5 }}>        
           {/* <Ionicons name={icon} size={22} color="rgba(0,0,0,0.35)" /> */}
           {idRecipient === idSender ? 
           <View style={[styles.optionIconContainer, {flex: 1, flexDirection: 'row'}]} >
@@ -102,20 +84,21 @@ function OptionButton({ icon, label, onPress, isLastOption, idRecipient, idSende
             </TouchableOpacity> 
           {/* </View>
           <View style={styles.optionTextContainer}> */}
-            <Text style={[styles.text, {backgroundColor: '#B4EDD2', marginLeft: 10}]}>{label}</Text>
+            <Text style={[styles.text, {backgroundColor: '#D3D3D3', marginLeft: 10}]}>{label}</Text>
           </View> 
           : <View style={[styles.optionTextContainer, {flex: 1, flexDirection: 'row-reverse'}]}>
-        <Text style={[styles.text, {backgroundColor: '#1084ff', color: '#F1F3F5', alignSelf: 'flex-end', marginRight: 10}]}>{label}</Text>
+        <Text style={[styles.text, {backgroundColor: '#3FC184', color: '#F1F3F5', alignSelf: 'flex-end', marginRight: 10}]}>{label}</Text>
       </View>}
       </View>
     </RectButton>
-  );
+  );	
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fafafa',
+    // marginTop: 20
   },
   contentContainer: {
     paddingTop: 15,
@@ -135,11 +118,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   text: {
-    maxWidth: 250,
-   paddingHorizontal: 10,
-   paddingTop: 10,
-   paddingBottom: 10,
-   borderRadius: 15,
+   maxWidth: 250,
+   paddingHorizontal: 5,
+   paddingTop: 5,
+   paddingBottom: 5,
+   borderRadius: 10,
   },
   input: {
     borderWidth: 1,

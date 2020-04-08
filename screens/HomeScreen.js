@@ -24,10 +24,10 @@ const HomeScreen = ({ route, navigation }) => {
    console.log(listings);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {marginTop: 20}]}>
       <CustomHeader navigation={navigation} title="Home"/>
       <TouchableOpacity onPress={() => navigation.navigate('Create Listing')}>
-        <Text style={{fontSize: 20, alignContent: 'center'}}>Go to Create Listing</Text>
+        <Text style={{fontSize: 15, alignContent: 'center'}}>Create Listing</Text>
       </TouchableOpacity>
       <View style={styles.container}>
         <FlatList
@@ -36,7 +36,7 @@ const HomeScreen = ({ route, navigation }) => {
           data={listings}
           renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center'}} 
           onPress={() => navigation.navigate('ShowListing', { idListing: item.id })}>
-            <ImageBackground style={{height: 150, width: 150, border: 'solid 5px white'}} source={{ uri: item.image }}>
+            <ImageBackground style={{height: 175, width: 175, border: 'solid 5px white'}} source={{ uri: item.image }}>
               <Text style={{ position: 'absolute', bottom: 0, left: 0, backgroundColor: 'gray', color: '#F1F3F5', }}>{`$${item.price}`}</Text>
             </ImageBackground>
             </TouchableOpacity>}

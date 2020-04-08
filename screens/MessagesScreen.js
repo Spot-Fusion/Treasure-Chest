@@ -36,20 +36,21 @@ const MessagesScreen = ({ navigation }) => {
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       <CustomHeader navigation={navigation} title="Messages"/>
-      <Button color={'#3FC184'} title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} />
+      {/* <Button color={'#3FC184'} title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} /> */}
       {!!users.length && users.map((user) => (<OptionButton
         navigation={navigation}
         key={user.id_message}
         idUser={user.id}
         icon={user.icon}
-        label={`${user.name} ${user.text}`}
+        name={`${user.name}`}
+        text={`${user.text}`}
         onPress={() => navigate(user.email)}
       />))}
     </ScrollView>
   );
 }
 
-function OptionButton({ icon, label, onPress, isLastOption, idUser, navigation }) {
+function OptionButton({ icon, label, onPress, isLastOption, idUser, navigation, name, text }) {
   return (
     <RectButton style={[styles.option, isLastOption && styles.lastOption]} onPress={onPress}>
       <View style={{ flexDirection: 'row' }}>
@@ -57,12 +58,13 @@ function OptionButton({ icon, label, onPress, isLastOption, idUser, navigation }
           {/* <Ionicons name={icon} size={22} color="rgba(0,0,0,0.35)" /> */}
           {/* <TouchableOpacity onPress={() => navigation.navigate('Profile', {id: idUser})}> */}
           <Image
-          style={{padding: 10, height: 30, width: 30, borderRadius: 15, resizeMode: "contain" }}
+          style={{padding: 10, height: 36, width: 36, borderRadius: 18, resizeMode: "contain" }}
           source={{ uri: icon === '' ? "http://pngimg.com/uploads/tiger/tiger_PNG23245.png" : icon }} />
           {/* </TouchableOpacity> */}
         </View>
         <View style={styles.optionTextContainer}>
-          <Text style={styles.optionText}>{label}</Text>
+          <Text style={[styles.optionText, {fontWeight: 'bold'}]}>{name}</Text>
+          <Text style={styles.optionText}>{text}</Text>
         </View>
       </View>
     </RectButton>

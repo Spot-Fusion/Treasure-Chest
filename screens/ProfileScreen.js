@@ -73,53 +73,45 @@ import axios from 'axios';
   // let soldList = listings.filter(e => e.seller === userName && e.archived === 1);
   // let DATA = listings.filter(e => e.seller !== userName);
 
-   
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
     <CustomHeader navigation={navigation} title="Profile" />
-      <TouchableOpacity style={{width: 125,
-        height: 35,
-        borderRadius: 5,
-        backgroundColor: '#3FC184',
-        marginRight: 15,}} 
-        onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()}>
-      <Text style={{alignSelf:'center', marginTop:6 }}>Go Back</Text>
-      </TouchableOpacity>
-      {/* <Button title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} /> */}
-      <Image
-          style={{padding: 10, height: 70, width: 70, borderRadius: 35, resizeMode: "contain" }}
-          source={{ uri: image === '' ? "http://pngimg.com/uploads/tiger/tiger_PNG23245.png" : image }} />
-      <View style={styles.view}>
-      {route.params ? 
-      <TouchableOpacity style={{width: 125,
-        height: 35,
-        borderRadius: 5,
-        backgroundColor: '#3FC184',
-        marginRight: 15,}} 
-        onPress={() => navigation.navigate('ChatScreen', { id_recipient: route.params.id })}>
-          <Text style={{alignSelf:'center', marginTop:6 }}>Message</Text>
-          </TouchableOpacity>
-      // <Button title="Message" onPress={() => navigation.navigate('ChatScreen', { id_recipient: route.params.id })} />
-       : 
-       <TouchableOpacity style={{width: 125,
-        height: 35,
-        borderRadius: 5,
-        backgroundColor: '#3FC184',
-        marginRight: 15,}} 
-        onPress={() => setEdit(!edit)}>
-          <Text style={{alignSelf:'center', marginTop:6 }}>Edit Profile</Text>
-       </TouchableOpacity> }
-       {/* <Button title="Edit Profile" onPress={() => setEdit(!edit)} />} */}
-        {edit ? <ExpoImagePicker chooseImage={chooseImage}/> : null}
-          <Text style={styles.text}>Profile</Text>
-          <Text>User Name: {userName}</Text>
+      <View style={{flexDirection: 'row'}}>
+        <Image
+          style={{ margin: 30, height: 150, width: 150, borderRadius: 35, resizeMode: "contain" }}
+          source={{ uri: image === '' ? "http://pngimg.com/uploads/tiger/tiger_PNG23245.png" : image }}
+        />
+        <View>
+          {edit ? <ExpoImagePicker chooseImage={chooseImage}/> : null}
+          <Text style={{marginVertical: 25 ,fontSize: 24}} >{userName}</Text>
           { edit ? <TextInput
             value={userName}
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
             onChangeText={(text) => setUserName(text)}
             placeholder='Input User Name...'
           /> : null}
-          <Text>Description: {description}</Text>
+          {route.params ? 
+            <TouchableOpacity style={{width: 125,
+              height: 35,
+              borderRadius: 5,
+              backgroundColor: '#3FC184',
+              marginRight: 15,}} 
+              onPress={() => navigation.navigate('ChatScreen', { id_recipient: route.params.id })}>
+                <Text style={{alignSelf:'center', marginTop:6 }}>Message</Text>
+                </TouchableOpacity>
+              : 
+            <TouchableOpacity style={{width: 125,
+              height: 35,
+              borderRadius: 5,
+              backgroundColor: '#3FC184',
+              marginRight: 15,}} 
+              onPress={() => setEdit(!edit)}>
+                <Text style={{alignSelf:'center', marginTop:6 }}>Edit Profile</Text>
+            </TouchableOpacity> }
+        </View>
+      </View>
+      <View style={{marginHorizontal: 30}}>
+          <Text style={{fontSize: 18}}>{description || 'no bio'}</Text>
           { edit ? <TextInput
             multiline
             value={description}

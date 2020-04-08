@@ -3,6 +3,7 @@ import { StyleSheet, View, TextInput, Text, Button, Image, TouchableOpacity, Scr
 import axios from 'axios'
 import StaticMap from './StaticMap';
 import CustomHeader from '../components/CustomHeader';
+import { Ionicons } from '@expo/vector-icons';
 
  const ShowListingScreen = ({ navigation, route }) => {
    const defaultParams = {name: 'Jordans', description: 'Gunmetal Blue\nSize 13', price: 200.00, zipcode: 70116, negotiable: true, id: 14 }
@@ -110,6 +111,7 @@ if(zipcode){
 
   return (
     <ScrollView style={styles.compartment}>
+      <CustomHeader navigation={navigation} title="Listing" />
       <Image style={styles.image} source={{ uri: image }}/>
       <View style={{marginVertical: 15, marginHorizontal: 15, flexDirection: 'row'}}>
         <Text style={styles.info}>{name || 'TITLE'}</Text>

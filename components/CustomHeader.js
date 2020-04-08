@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 const CustomHeader = ({ navigation, title }) => (
-    <View style={style.container}>
+    <SafeAreaView style={style.container}>
         <View style={style.view}>
-            <TouchableOpacity  onPress={() => navigation.toggleDrawer()} >
+           {navigation.toggleDrawer instanceof Function ? 
+           <TouchableOpacity  onPress={() => navigation.toggleDrawer()} >
                 <Ionicons
                     name="md-menu"
                     color="white"
@@ -13,12 +14,21 @@ const CustomHeader = ({ navigation, title }) => (
                     style={style.menuIcon}                   
                 />
             </TouchableOpacity>
+            : 
+            <TouchableOpacity  onPress={() => navigation.goBack()} >
+                <Ionicons
+                    name="ios-arrow-back"
+                    color="white"
+                    size={30}
+                    style={style.menuIcon}                   
+                />
+            </TouchableOpacity>}
         </View>
         <View style={{flex: 1.5, justifyContent: 'center'}}>
             <Text style={{textAlign: 'center', color: "white" }}>{title}</Text>
         </View>
         <View style={{flex: 1}}></View>
-    </View>
+    </SafeAreaView>
 );
 
 const style = StyleSheet.create({

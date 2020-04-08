@@ -67,7 +67,7 @@ const _pickImage = async () => {
           <Image source={{ uri: image }} style={{ width: 100, height: 100, borderRadius: 50 }} />} */}
           <Button
             color={'#3FC184'}
-            title="Pick an image"
+            title="Upload Image"
             onPress={_pickImage}
           />
       </View>

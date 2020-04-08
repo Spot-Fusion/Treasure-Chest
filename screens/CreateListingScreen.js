@@ -47,28 +47,28 @@ import axios from 'axios';
   };
 
   return (    
-      <ScrollView style={styles.view} /*style={styles.container} contentContainerStyle={styles.contentContainer}*/>
+      <ScrollView style={[styles.view, { marginTop: 20, marginHorizontal: 10 }]} /*style={styles.container} contentContainerStyle={styles.contentContainer}*/>
         <CustomHeader navigation={navigation} title="Create Listing" />
-      <Button color={'#3FC184'} title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} />
+      {/* <Button color={'#3FC184'} title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} /> */}
         {/* <ExpoCamera /> */}
         <Image
-          style={{padding: 10, height: 70, width: 70, borderRadius: 35, resizeMode: "contain" }}
-          source={{ uri: image === '' ? "http://pngimg.com/uploads/tiger/tiger_PNG23245.png" : image }} />
+          style={{ alignSelf: 'center', height: 200, width: 200 }}
+          source={{ uri: image === '' ? "http://pngimg.com/uploads/treasure_chest/treasure_chest_PNG108.png" : image }} />
         <ExpoImagePicker chooseImage={chooseImage}/>
-          <Text style={styles.text}>Create Listing Screen Here</Text>
+          {/* <Text style={styles.text}>Create Listing Screen Here</Text> */}
           {/* <CategoryPicker onClick={(v) => setIdCategory(v.id)}/> */}
-          <Text>Name</Text>
+          <Text>Item Name</Text>
           <TextInput
             value={name}
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            style={{height: 40, borderColor: 'gray', borderWidth: 1, borderRadius: 5, backgroundColor: '#D3D3D3'}}
             onChangeText={(text) => setName(text)}
-            placeholder='Input Title...'
+            placeholder='Input Name...'
           />
           <Text>Description</Text>
           <TextInput
             multiline
             value={description}
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            style={{height: 40, borderColor: 'gray', borderWidth: 1, borderRadius: 5, backgroundColor: '#D3D3D3'}}
             onChangeText={(text) => setDescription(text)}
             placeholder='Input Description...'
           />
@@ -76,7 +76,7 @@ import axios from 'axios';
           <TextInput
             keyboardType={"number-pad"}
             value={price}
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            style={{height: 40, borderColor: 'gray', borderWidth: 1, borderRadius: 5, backgroundColor: '#D3D3D3'}}
             onChangeText={(num) => setPrice(num)}
             placeholder='Input Price...'
           />
@@ -84,7 +84,7 @@ import axios from 'axios';
           <TextInput
             keyboardType={"number-pad"}
             value={zipcode}
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            style={{height: 40, borderColor: 'gray', borderWidth: 1, borderRadius: 5, backgroundColor: '#D3D3D3'}}
             onChangeText={(num) => setZipcode(num)}
             placeholder='Input Price...'
           />

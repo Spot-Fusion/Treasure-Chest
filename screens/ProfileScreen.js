@@ -73,53 +73,45 @@ import axios from 'axios';
   // let soldList = listings.filter(e => e.seller === userName && e.archived === 1);
   // let DATA = listings.filter(e => e.seller !== userName);
 
-   
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
     <CustomHeader navigation={navigation} title="Profile" />
-      <TouchableOpacity style={{width: 125,
-        height: 35,
-        borderRadius: 5,
-        backgroundColor: '#3FC184',
-        marginRight: 15,}} 
-        onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()}>
-      <Text style={{alignSelf:'center', marginTop:6 }}>Go Back</Text>
-      </TouchableOpacity>
-      {/* <Button title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} /> */}
-      <Image
-          style={{padding: 10, height: 70, width: 70, borderRadius: 35, resizeMode: "contain" }}
-          source={{ uri: image === '' ? "http://pngimg.com/uploads/tiger/tiger_PNG23245.png" : image }} />
-      <View style={styles.view}>
-      {route.params ? 
-      <TouchableOpacity style={{width: 125,
-        height: 35,
-        borderRadius: 5,
-        backgroundColor: '#3FC184',
-        marginRight: 15,}} 
-        onPress={() => navigation.navigate('ChatScreen', { id_recipient: route.params.id })}>
-          <Text style={{alignSelf:'center', marginTop:6 }}>Message</Text>
-          </TouchableOpacity>
-      // <Button title="Message" onPress={() => navigation.navigate('ChatScreen', { id_recipient: route.params.id })} />
-       : 
-       <TouchableOpacity style={{width: 125,
-        height: 35,
-        borderRadius: 5,
-        backgroundColor: '#3FC184',
-        marginRight: 15,}} 
-        onPress={() => setEdit(!edit)}>
-          <Text style={{alignSelf:'center', marginTop:6 }}>Edit Profile</Text>
-       </TouchableOpacity> }
-       {/* <Button title="Edit Profile" onPress={() => setEdit(!edit)} />} */}
-        {edit ? <ExpoImagePicker chooseImage={chooseImage}/> : null}
-          <Text style={styles.text}>Profile</Text>
-          <Text>User Name: {userName}</Text>
+      <View style={{flexDirection: 'row'}}>
+        <Image
+          style={{ margin: 30, height: 150, width: 150, borderRadius: 35, resizeMode: "contain" }}
+          source={{ uri: image === '' ? "http://pngimg.com/uploads/tiger/tiger_PNG23245.png" : image }}
+        />
+        <View>
+          {edit ? <ExpoImagePicker chooseImage={chooseImage}/> : null}
+          <Text style={{marginVertical: 25 ,fontSize: 24}} >{userName}</Text>
           { edit ? <TextInput
             value={userName}
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
             onChangeText={(text) => setUserName(text)}
             placeholder='Input User Name...'
           /> : null}
-          <Text>Description: {description}</Text>
+          {route.params ? 
+            <TouchableOpacity style={{width: 125,
+              height: 35,
+              borderRadius: 5,
+              backgroundColor: '#3FC184',
+              marginRight: 15,}} 
+              onPress={() => navigation.navigate('ChatScreen', { id_recipient: route.params.id })}>
+                <Text style={{alignSelf:'center', marginTop:6 }}>Message</Text>
+                </TouchableOpacity>
+              : 
+            <TouchableOpacity style={{width: 125,
+              height: 35,
+              borderRadius: 5,
+              backgroundColor: '#3FC184',
+              marginRight: 15,}} 
+              onPress={() => setEdit(!edit)}>
+                <Text style={{alignSelf:'center', marginTop:6 }}>Edit Profile</Text>
+            </TouchableOpacity> }
+        </View>
+      </View>
+      <View style={{marginHorizontal: 30}}>
+          <Text style={{fontSize: 18}}>{description || 'no bio'}</Text>
           { edit ? <TextInput
             multiline
             value={description}
@@ -135,17 +127,18 @@ import axios from 'axios';
             <Text>Update Profile</Text>
           </TouchableOpacity> : null}
       </View>
-      <View style={{marginHorizontal: '10%', flexDirection: 'row',}}>
-        <TouchableOpacity onPress={() => setShow(0)} style={{padding: 20}}><Text>Selling</Text></TouchableOpacity>
-        <TouchableOpacity onPress={() => setShow(1)} style={{padding: 20}}><Text>Sold</Text></TouchableOpacity>
-        <TouchableOpacity onPress={() => setShow(2)} style={{padding: 20}}><Text>Favorites</Text></TouchableOpacity>
+      <View style={{marginVertical: 25, marginHorizontal: 50, flexDirection: 'row',}}>
+        <TouchableOpacity onPress={() => setShow(0)} style={{marginRight: 55}}><Text style={{fontSize: 24}}>Selling</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => setShow(1)} style={{marginRight: 55}}><Text style={{fontSize: 24}}>Sold</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => setShow(2)} style={{}}><Text style={{fontSize: 24}}>Favorites</Text></TouchableOpacity>
       </View>
+      <View style={{backgroundColor: '#F1F3F5', alignItems: 'center', paddingBottom: 25}}>
       { show === 0 ? <FlatList
           data={sellList}
-          renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center'}} 
+          renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center', marginVertical: 25}} 
           onPress={() => navigation.navigate('ShowListing', { idListing: item.id })}>
             {/* <Ionicons name="md-image" size={50} color='gray' /> */}
-            <ImageBackground style={{padding: 10, height: 100, width: 100, position: 'relative'}} source={{ uri: item.image }}>
+            <ImageBackground style={{padding: 10, height: 300, width: 300, position: 'relative'}} source={{ uri: item.image }}>
               <Text style={{ position: 'absolute', bottom: 0, left: 0, backgroundColor: 'gray', color: '#F1F3F5', }}>{`$${item.price}`}</Text>
             </ImageBackground>
             </TouchableOpacity>}
@@ -153,10 +146,10 @@ import axios from 'axios';
         /> : null}
         {show === 1 ? <FlatList
           data={soldList}
-          renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center'}} 
+          renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center', marginVertical: 25}} 
           onPress={() => navigation.navigate('ShowListing', { idListing: item.id })}>
             {/* <Ionicons name="md-image" size={50} color='gray' /> */}
-            <ImageBackground style={{padding: 10, height: 100, width: 100, position: 'relative'}} source={{ uri: item.image }}>
+            <ImageBackground style={{padding: 10, height: 300, width: 300, position: 'relative'}} source={{ uri: item.image }}>
               <Text style={{ position: 'absolute', bottom: 0, left: 0, backgroundColor: 'gray', color: '#F1F3F5', }}>{`$${item.price}`}</Text>
             </ImageBackground>
             </TouchableOpacity>}
@@ -164,16 +157,18 @@ import axios from 'axios';
         /> : null}
         {show === 2 ? <FlatList
           data={favList}
-          renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center'}} 
+          renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center', marginVertical: 25}} 
           onPress={() => navigation.navigate('ShowListing', { idListing: item.id_listing })}>
             {/* <Ionicons name="md-image" size={50} color='gray' /> */}
-            <ImageBackground style={{padding: 10, height: 100, width: 100, position: 'relative'}} source={{ uri: item.image }}>
+            <ImageBackground style={{padding: 10, height: 300, width: 300, position: 'relative'}} source={{ uri: item.image }}>
               <Text style={{ position: 'absolute', bottom: 0, left: 0, backgroundColor: 'gray', color: '#F1F3F5', }}>{`$${item.price}`}</Text>
             </ImageBackground>
             </TouchableOpacity>}
           keyExtractor={item => item.id_listing.toString()}
         /> : null}
+      </View>
     </ScrollView>
+        
   );
 }
 

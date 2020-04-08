@@ -132,13 +132,13 @@ import axios from 'axios';
         <TouchableOpacity onPress={() => setShow(1)} style={{marginRight: 55}}><Text style={{fontSize: 24}}>Sold</Text></TouchableOpacity>
         <TouchableOpacity onPress={() => setShow(2)} style={{}}><Text style={{fontSize: 24}}>Favorites</Text></TouchableOpacity>
       </View>
-      <View style={{backgroundColor: '#F1F3F5'}}>
+      <View style={{backgroundColor: '#F1F3F5', alignItems: 'center', paddingBottom: 25}}>
       { show === 0 ? <FlatList
           data={sellList}
-          renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center'}} 
+          renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center', marginVertical: 25}} 
           onPress={() => navigation.navigate('ShowListing', { idListing: item.id })}>
             {/* <Ionicons name="md-image" size={50} color='gray' /> */}
-            <ImageBackground style={{padding: 10, height: 100, width: 100, position: 'relative'}} source={{ uri: item.image }}>
+            <ImageBackground style={{padding: 10, height: 300, width: 300, position: 'relative'}} source={{ uri: item.image }}>
               <Text style={{ position: 'absolute', bottom: 0, left: 0, backgroundColor: 'gray', color: '#F1F3F5', }}>{`$${item.price}`}</Text>
             </ImageBackground>
             </TouchableOpacity>}
@@ -146,10 +146,10 @@ import axios from 'axios';
         /> : null}
         {show === 1 ? <FlatList
           data={soldList}
-          renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center'}} 
+          renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center', marginVertical: 25}} 
           onPress={() => navigation.navigate('ShowListing', { idListing: item.id })}>
             {/* <Ionicons name="md-image" size={50} color='gray' /> */}
-            <ImageBackground style={{padding: 10, height: 100, width: 100, position: 'relative'}} source={{ uri: item.image }}>
+            <ImageBackground style={{padding: 10, height: 300, width: 300, position: 'relative'}} source={{ uri: item.image }}>
               <Text style={{ position: 'absolute', bottom: 0, left: 0, backgroundColor: 'gray', color: '#F1F3F5', }}>{`$${item.price}`}</Text>
             </ImageBackground>
             </TouchableOpacity>}
@@ -157,10 +157,10 @@ import axios from 'axios';
         /> : null}
         {show === 2 ? <FlatList
           data={favList}
-          renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center'}} 
+          renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center', marginVertical: 25}} 
           onPress={() => navigation.navigate('ShowListing', { idListing: item.id_listing })}>
             {/* <Ionicons name="md-image" size={50} color='gray' /> */}
-            <ImageBackground style={{padding: 10, height: 100, width: 100, position: 'relative'}} source={{ uri: item.image }}>
+            <ImageBackground style={{padding: 10, height: 300, width: 300, position: 'relative'}} source={{ uri: item.image }}>
               <Text style={{ position: 'absolute', bottom: 0, left: 0, backgroundColor: 'gray', color: '#F1F3F5', }}>{`$${item.price}`}</Text>
             </ImageBackground>
             </TouchableOpacity>}

@@ -111,22 +111,7 @@ if(zipcode){
 
   return (
     <ScrollView style={styles.compartment}>
-      <View style={{flexDirection: 'row', height: 50, backgroundColor: '#223843'}}>
-        <View style={{flex: 1, justifyContent: 'center'}}>
-            <TouchableOpacity  onPress={() => navigation.goBack()} >
-                <Ionicons
-                    name="md-menu"
-                    color="white"
-                    size={30}
-                    style={{marginLeft: 10}}                   
-                />
-            </TouchableOpacity>
-        </View>
-        <View style={{flex: 1.5, justifyContent: 'center'}}>
-            <Text style={{textAlign: 'center', color: "white" }}>Listing</Text>
-        </View>
-        <View style={{flex: 1}}></View>
-    </View>
+      <CustomHeader navigation={navigation} title="Listing" />
       <Image style={styles.image} source={{ uri: image }}/>
       <View style={{marginVertical: 15, marginHorizontal: 15, flexDirection: 'row'}}>
         <Text style={styles.info}>{name || 'TITLE'}</Text>

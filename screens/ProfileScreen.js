@@ -127,11 +127,12 @@ import axios from 'axios';
             <Text>Update Profile</Text>
           </TouchableOpacity> : null}
       </View>
-      <View style={{marginHorizontal: '10%', flexDirection: 'row',}}>
-        <TouchableOpacity onPress={() => setShow(0)} style={{padding: 20}}><Text>Selling</Text></TouchableOpacity>
-        <TouchableOpacity onPress={() => setShow(1)} style={{padding: 20}}><Text>Sold</Text></TouchableOpacity>
-        <TouchableOpacity onPress={() => setShow(2)} style={{padding: 20}}><Text>Favorites</Text></TouchableOpacity>
+      <View style={{marginVertical: 25, marginHorizontal: 50, flexDirection: 'row',}}>
+        <TouchableOpacity onPress={() => setShow(0)} style={{marginRight: 55}}><Text style={{fontSize: 24}}>Selling</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => setShow(1)} style={{marginRight: 55}}><Text style={{fontSize: 24}}>Sold</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => setShow(2)} style={{}}><Text style={{fontSize: 24}}>Favorites</Text></TouchableOpacity>
       </View>
+      <View style={{backgroundColor: '#F1F3F5'}}>
       { show === 0 ? <FlatList
           data={sellList}
           renderItem={({ item }) => <TouchableOpacity style={{alignContent: 'center'}} 
@@ -165,7 +166,9 @@ import axios from 'axios';
             </TouchableOpacity>}
           keyExtractor={item => item.id_listing.toString()}
         /> : null}
+      </View>
     </ScrollView>
+        
   );
 }
 

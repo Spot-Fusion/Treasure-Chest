@@ -38,6 +38,7 @@ const GoogleAuthScreen = ({ navigation }) => {
         console.log(result);
         adduser(result.user.name, result.user.email, result.user.photoUrl);
         getUser(result.user.name, result.user.email, result.user.photoUrl)
+        navigation.navigate('Drawer', { name, photoUrl, id });
         // return result.accessToken;
       } else {
         return { cancelled: true };
@@ -50,7 +51,6 @@ const GoogleAuthScreen = ({ navigation }) => {
   }
   
   React.useEffect(() => { signInWithGoogleAsync() }, []);
-  navigation.navigate('Drawer', { name, photoUrl, id });
   return null;
 }
 

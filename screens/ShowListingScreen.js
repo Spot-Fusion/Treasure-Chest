@@ -77,7 +77,7 @@ React.useEffect(() =>{
 }, [])
 const styles = StyleSheet.create({
   compartment:{
-    marginVertical: 25,
+    marginVertical: 23,
   },
   image:{
     alignSelf: 'center',

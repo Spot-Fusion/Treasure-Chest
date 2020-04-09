@@ -40,7 +40,7 @@ const _pickImage = async () => {
 
     if (!result.cancelled) {
       setImage(result.uri);
-      let base64Img = result.uri; //`data:image/jpg;base64,${result.base64}`;
+      let base64Img = `data:image/jpg;base64,${result.base64}`;//result.uri; `data:image/jpg;base64,${result.base64}`;
       let data = {
         "file": base64Img,
         "upload_preset": "ml_default",

@@ -26,7 +26,7 @@ import axios from 'axios';
     await axios.post(`http://${url}:8080/listing/${id}`, { image })
     .then(body => {
       console.log(body.data);
-      navigation.navigate('ShowListing', { idListing });
+      navigation.navigate('ShowListing', { idListing: id });
     })
     .catch(e => console.error(e))
    }
@@ -34,8 +34,8 @@ import axios from 'axios';
    const addPost = async (name, description, price, zipcode, negotiable) => {
     await axios.post(`http://${url}:8080/listing/`, {id_seller: idSeller, id_category: 1, name, description, price, zipcode, negotiable })
     .then(body => {
-      addImage(body.data, image)
       setIdListing(body.data);
+      addImage(body.data, image)
     })
     .catch(e => console.error(e));
   }
@@ -47,7 +47,7 @@ import axios from 'axios';
   };
 
   return (    
-      <ScrollView style={[styles.view, { marginTop: 20, marginHorizontal: 10 }]} /*style={styles.container} contentContainerStyle={styles.contentContainer}*/>
+      <ScrollView style={[styles.view, { marginTop: 23,}]} /*style={styles.container} contentContainerStyle={styles.contentContainer}*/>
         <CustomHeader navigation={navigation} title="Create Listing" />
       {/* <Button color={'#3FC184'} title="Go back" onPress={() => !navigation.goBack() ? navigation.navigate('Home') : navigation.goBack()} /> */}
         {/* <ExpoCamera /> */}

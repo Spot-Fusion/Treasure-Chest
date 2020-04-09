@@ -62,7 +62,7 @@ const DrawerNavigator = ({ navigation }) =>  {
       .catch(e => console.error(e));
   }
 
-  let idUser = global.id || 1;
+  let idUser = 5;
   React.useEffect(() =>{
     getProfile(idUser)
   }, [])

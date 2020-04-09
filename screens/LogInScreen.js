@@ -5,8 +5,8 @@ import { RectButton, ScrollView } from 'react-native-gesture-handler';
 import GoogleAuthScreen from './GoogleAuthScreen'
 import { setWorldOriginAsync } from 'expo/build/AR';
 
- const LogInScreen = ({navigation, auth, changeAuth}) => {
-   const [login, setLogin] = React.useState(false) 
+const LogInScreen = ({navigation, auth, changeAuth}) => {
+  const [login, setLogin] = React.useState(false) 
   return (    
       <View style={styles.view}>
         {/* <Ionicons name="md-cart" size={60} style={{justifyContent: 'flex-start', alignContent: 'center'}} /> */}
